@@ -2,7 +2,7 @@ import { existsSync } from "node:fs";
 import { basename, extname, resolve } from "node:path";
 import { intro, outro, select, spinner, text } from "@clack/prompts";
 import { Command } from "commander";
-import { ensureDir, pathExists, readJson, writeFile } from "fs-extra";
+import fsExtra from "fs-extra";
 import pc from "picocolors";
 
 const ITEM_TYPES = [
@@ -30,7 +30,7 @@ export const registryAddCommand = new Command("add")
       const itemsDir = resolve(cwd, opts.input);
       const registryJsonPath = resolve(cwd, "registry.json");
 
-      if (!(await pathExists(itemsDir))) {
+      if (!(await fsExtra.pathExists(itemsDir))) {
         console.error(
           pc.red(
             `Items directory not found: ${itemsDir}\n` +
@@ -79,7 +79,7 @@ export const registryAddCommand = new Command("add")
       if (!sourcePath) {
         // Create a placeholder file
         s.start(`Creating ${name}.tsx`);
-        await ensureDir(itemsDir);
+        await fsExtra.ensureDir(itemsDir);
         const placeholder = `import type { Component } from "solid-js";
 import { cn } from "~/lib/utils";
 
@@ -96,7 +96,7 @@ export const ${toPascalCase(name)}: Component<${toPascalCase(name)}Props> = (pro
 };
 `;
         sourcePath = resolve(itemsDir, `${name}.tsx`);
-        await writeFile(sourcePath, placeholder, "utf-8");
+        await fsExtra.writeFile(sourcePath, placeholder, "utf-8");
         s.stop(`Created ${opts.input}/${name}.tsx`);
       } else {
         s.message(`Found existing source: ${opts.input}/${basename(sourcePath)}`);
@@ -116,14 +116,18 @@ export const ${toPascalCase(name)}: Component<${toPascalCase(name)}Props> = (pro
         items: [],
       };
 
-      if (await pathExists(registryJsonPath)) {
-        registryMeta = await readJson(registryJsonPath);
+      if (await fsExtra.pathExists(registryJsonPath)) {
+        registryMeta = await fsExtra.readJson(registryJsonPath);
       }
 
       const alreadyListed = registryMeta.items.some((i) => i.name === name);
       if (!alreadyListed) {
         registryMeta.items.push({ name, type });
-        await writeFile(registryJsonPath, `${JSON.stringify(registryMeta, null, 2)}\n`, "utf-8");
+        await fsExtra.writeFile(
+          registryJsonPath,
+          `${JSON.stringify(registryMeta, null, 2)}\n`,
+          "utf-8",
+        );
         console.log(pc.green(`  ✓ Added "${name}" to registry.json`));
       } else {
         console.log(pc.yellow(`  ⚠ "${name}" is already listed in registry.json`));

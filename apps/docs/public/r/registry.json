@@ -1,15 +1,6 @@
 {
   "$schema": "https://solidcn.dev/schema/registry.json",
-  "name": "solidcn",
-  "homepage": "https://solidcn.dev",
-  "items": [
-    { "name": "button", "type": "registry:ui", "description": "A button component." },
-    { "name": "badge", "type": "registry:ui", "description": "A badge component." },
-    { "name": "dialog", "type": "registry:ui", "description": "A dialog component." },
-    {
-      "name": "toast",
-      "type": "registry:ui",
-      "description": "Dual toast system — standard + sileo physics mode."
-    }
-  ]
+  "name": "docs",
+  "homepage": "",
+  "items": []
 }

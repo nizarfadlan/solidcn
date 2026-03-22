@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
 import { intro, outro, spinner, text } from "@clack/prompts";
 import { Command } from "commander";
-import { ensureDir, writeFile } from "fs-extra";
+import fsExtra from "fs-extra";
 import pc from "picocolors";
 
 export const registryCreateCommand = new Command("create")
@@ -24,10 +24,10 @@ export const registryCreateCommand = new Command("create")
     const s = spinner();
     s.start(`Scaffolding ${name}`);
 
-    await ensureDir(`${dir}/registry/items`);
-    await ensureDir(`${dir}/public/r`);
+    await fsExtra.ensureDir(`${dir}/registry/items`);
+    await fsExtra.ensureDir(`${dir}/public/r`);
 
-    await writeFile(
+    await fsExtra.writeFile(
       `${dir}/registry.json`,
       `${JSON.stringify(
         {
@@ -41,7 +41,7 @@ export const registryCreateCommand = new Command("create")
       )}\n`,
     );
 
-    await writeFile(
+    await fsExtra.writeFile(
       `${dir}/package.json`,
       `${JSON.stringify(
         {
@@ -60,7 +60,7 @@ export const registryCreateCommand = new Command("create")
       )}\n`,
     );
 
-    await writeFile(
+    await fsExtra.writeFile(
       `${dir}/registry/items/example.tsx`,
       `// Example component — replace with your own\nimport type { Component } from "solid-js";\n\nexport const Example: Component = () => {\n  return <div class="rounded-md bg-card p-4">Hello from your registry!</div>;\n};\n`,
     );

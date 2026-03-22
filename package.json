@@ -10,8 +10,8 @@
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
     "clean": "pnpm -r exec rm -rf dist node_modules .turbo",
-    "registry:build": "pnpm --filter @solidcn/cli registry:build",
-    "registry:validate": "pnpm --filter @solidcn/cli registry:validate"
+    "registry:build": "pnpm --filter @solidcn/docs registry:build",
+    "registry:validate": "node scripts/validate-registry.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",

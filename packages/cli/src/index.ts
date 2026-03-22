@@ -7,6 +7,7 @@ import { mcpCommand } from "./commands/mcp.js";
 import { registryAddCommand } from "./commands/registry/add.js";
 import { registryBuildCommand } from "./commands/registry/build.js";
 import { registryCreateCommand } from "./commands/registry/create.js";
+import { registryValidateCommand } from "./commands/registry/validate.js";
 import { searchCommand } from "./commands/search.js";
 import { viewCommand } from "./commands/view.js";
 
@@ -25,6 +26,7 @@ const registry = new Command("registry").description("Manage component registrie
 registry.addCommand(registryAddCommand);
 registry.addCommand(registryBuildCommand);
 registry.addCommand(registryCreateCommand);
+registry.addCommand(registryValidateCommand);
 program.addCommand(registry);
 
 program.parse();

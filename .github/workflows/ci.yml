@@ -69,18 +69,7 @@ jobs:
         run: pnpm --filter solidcn build
 
       - name: Build registry
-        run: pnpm --filter solidcn registry:build
+        run: pnpm --filter @solidcn/docs registry:build
 
       - name: Validate registry
-        run: |
-          node -e "
-            import('./packages/cli/dist/registry/validator.js').then(({ isValidRegistryIndex }) => {
-              const fs = await import('fs');
-              const registry = JSON.parse(fs.readFileSync('apps/docs/public/r/registry.json', 'utf-8'));
-              if (!isValidRegistryIndex(registry)) {
-                console.error('registry.json is invalid');
-                process.exit(1);
-              }
-              console.log('registry.json is valid');
-            });
-          "
+        run: pnpm registry:validate

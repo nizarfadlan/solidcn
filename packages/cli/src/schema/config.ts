@@ -1,5 +1,5 @@
 import { resolve } from "node:path";
-import { pathExists, readJson } from "fs-extra";
+import fsExtra from "fs-extra";
 import { z } from "zod";
 
 export const ConfigSchema = z.object({
@@ -50,11 +50,11 @@ const DEFAULT_INDEX_URL = "https://solidcn.dev/r/registry.json";
 export async function loadConfig(cwd: string): Promise<SolidcnConfig> {
   const configPath = resolve(cwd, "solidcn.json");
 
-  if (!(await pathExists(configPath))) {
+  if (!(await fsExtra.pathExists(configPath))) {
     return DEFAULT_CONFIG;
   }
 
-  const raw = await readJson(configPath);
+  const raw = await fsExtra.readJson(configPath);
   return ConfigSchema.parse(raw);
 }
 

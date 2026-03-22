@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
 import { cancel, confirm, intro, outro, select, spinner, text } from "@clack/prompts";
 import { Command } from "commander";
-import { pathExists, writeFile } from "fs-extra";
+import fsExtra from "fs-extra";
 import type { SolidcnConfig } from "../schema/config.js";
 import { DEFAULT_CONFIG } from "../schema/config.js";
 
@@ -15,7 +15,7 @@ export const initCommand = new Command("init")
 
     intro("solidcn init");
 
-    if (await pathExists(configPath)) {
+    if (await fsExtra.pathExists(configPath)) {
       const overwrite = opts.yes
         ? true
         : await confirm({ message: "solidcn.json already exists. Overwrite?" });
@@ -80,7 +80,7 @@ export const initCommand = new Command("init")
 
     const s = spinner();
     s.start("Writing solidcn.json");
-    await writeFile(configPath, `${JSON.stringify(config, null, 2)}\n`);
+    await fsExtra.writeFile(configPath, `${JSON.stringify(config, null, 2)}\n`);
     s.stop("solidcn.json created");
 
     outro("Done! You can now run `solidcn add <component>` to add components.");

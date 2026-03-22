@@ -1,5 +1,5 @@
 import { dirname, resolve } from "node:path";
-import { ensureDir, pathExists, writeFile } from "fs-extra";
+import fsExtra from "fs-extra";
 import pc from "picocolors";
 import type { SolidcnConfig } from "../schema/config.js";
 import type { RegistryItem } from "../schema/registry.js";
@@ -50,14 +50,14 @@ export class Installer {
       const targetPath = this.resolveAlias(file.path);
       const dir = dirname(targetPath);
 
-      await ensureDir(dir);
+      await fsExtra.ensureDir(dir);
 
-      if (!this.overwrite && (await pathExists(targetPath))) {
+      if (!this.overwrite && (await fsExtra.pathExists(targetPath))) {
         console.log(pc.yellow(`  skip  ${file.path} (already exists)`));
         continue;
       }
 
-      await writeFile(targetPath, file.content);
+      await fsExtra.writeFile(targetPath, file.content);
       console.log(pc.green(`  write ${file.path}`));
     }
   }
