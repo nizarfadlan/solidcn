@@ -63,6 +63,9 @@ importers:
       typescript:
         specifier: ^5.7.3
         version: 5.9.3
+      vinxi:
+        specifier: ^0.5.7
+        version: 0.5.11(@types/node@22.19.15)(db0@0.3.4)(ioredis@5.10.1)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1)
       vite:
         specifier: ^6.0.11
         version: 6.4.1(@types/node@22.19.15)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1)

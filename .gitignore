@@ -2,6 +2,7 @@ node_modules
 dist
 .turbo
 *.tsbuildinfo
+.pnpm-store/
 
 # SolidStart
 apps/docs/.solid
