@@ -24,11 +24,17 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Build workspace libraries
+        run: |
+          pnpm --filter @solidcn/core build
+          pnpm --filter @solidcn/toast build
+          pnpm --filter @solidcn/themes build
 
       - name: Typecheck
         run: pnpm typecheck
@@ -53,7 +59,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
       - name: Install dependencies

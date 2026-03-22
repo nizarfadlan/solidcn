@@ -1,3 +1,4 @@
+import type { CollectionNode } from "@kobalte/core";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@solidcn/core";
 import { DocPage } from "../../../components/ui/DocPage.js";
 
@@ -19,7 +20,7 @@ export default function SelectPage() {
               <Select<string>
                 options={frameworks}
                 placeholder="Select a framework"
-                itemComponent={(props) => (
+                itemComponent={(props: { item: CollectionNode<string> }) => (
                   <SelectItem item={props.item}>{props.item.rawValue}</SelectItem>
                 )}
               >
