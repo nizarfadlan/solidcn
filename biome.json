@@ -37,10 +37,13 @@
   "files": {
     "ignore": [
       "node_modules",
+      ".pnpm-store",
       "dist",
       ".turbo",
       "apps/docs/.solid",
       "apps/docs/.output",
+      "apps/docs/.vinxi",
+      "**/storybook-static",
       "packages/*/dist"
     ]
   }

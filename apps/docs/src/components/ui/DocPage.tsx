@@ -149,11 +149,7 @@ export const DocPage: Component<DocPageProps> = (props) => {
     <DocLayout toc={toc}>
       <Show when={props.docPath} keyed>
         {(path) => (
-          <DocsSeo
-            title={`${props.title} — solidcn`}
-            description={props.description}
-            path={path}
-          />
+          <DocsSeo title={`${props.title} — solidcn`} description={props.description} path={path} />
         )}
       </Show>
       <div class="space-y-10 pb-16">
@@ -171,7 +167,10 @@ export const DocPage: Component<DocPageProps> = (props) => {
                 onClick={() => void copyPageMarkdown()}
                 class="inline-flex items-center gap-1.5 rounded-full border border-border px-2 py-0.5 text-xs font-medium text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
               >
-                <Show when={pageCopied()} fallback={<Clipboard class="h-3.5 w-3.5" stroke-width={2} />}>
+                <Show
+                  when={pageCopied()}
+                  fallback={<Clipboard class="h-3.5 w-3.5" stroke-width={2} />}
+                >
                   <Check class="h-3.5 w-3.5 text-green-600 dark:text-green-400" stroke-width={2} />
                 </Show>
                 {pageCopied() ? "Copied" : "Copy page"}

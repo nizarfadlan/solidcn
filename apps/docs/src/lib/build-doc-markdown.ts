@@ -32,7 +32,14 @@ export function buildDocPageMarkdown(input: BuildDocMarkdownInput): string {
   if (input.componentName ?? input.manualInstall) {
     lines.push("## Installation", "");
     if (input.componentName) {
-      lines.push("### CLI", "", "```bash", `npx solidcn@latest add ${input.componentName}`, "```", "");
+      lines.push(
+        "### CLI",
+        "",
+        "```bash",
+        `npx solidcn@latest add ${input.componentName}`,
+        "```",
+        "",
+      );
     }
     if (input.manualInstall) {
       lines.push("### Manual", "", "```bash", input.manualInstall, "```", "");
@@ -67,6 +74,6 @@ export function buildDocPageMarkdown(input: BuildDocMarkdownInput): string {
     lines.push("");
   }
 
-  lines.push("---", "", `_Exported from solidcn docs._`, "");
+  lines.push("---", "", "_Exported from solidcn docs._", "");
   return lines.join("\n");
 }

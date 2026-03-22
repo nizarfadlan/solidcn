@@ -154,10 +154,7 @@ export const CodeBlock: Component<CodeBlockProps> = (props) => {
             </pre>
           }
         >
-          <div
-            class={variant() === "figure" ? shikiPreFigure : shikiPreCard}
-            innerHTML={html()}
-          />
+          <div class={variant() === "figure" ? shikiPreFigure : shikiPreCard} innerHTML={html()} />
         </Show>
 
         <Show when={!props.filename}>
@@ -175,7 +172,11 @@ export const CodeBlock: Component<CodeBlockProps> = (props) => {
                 when={copied()}
                 fallback={<Copy class="size-3.5 shrink-0" stroke-width={2} aria-hidden="true" />}
               >
-                <Check class="size-3.5 shrink-0 text-green-600 dark:text-green-400" stroke-width={2} aria-hidden="true" />
+                <Check
+                  class="size-3.5 shrink-0 text-green-600 dark:text-green-400"
+                  stroke-width={2}
+                  aria-hidden="true"
+                />
               </Show>
             </Show>
             <Show when={variant() !== "figure"}>{copied() ? "Copied!" : "Copy"}</Show>

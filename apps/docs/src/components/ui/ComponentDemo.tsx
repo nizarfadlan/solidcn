@@ -17,9 +17,7 @@ export const ComponentDemo: Component<ComponentDemoProps> = (props) => {
   const [codeOpen, setCodeOpen] = createSignal(false);
 
   return (
-    <div
-      class={`rounded-lg border border-border bg-card shadow-sm ${props.class ?? ""}`}
-    >
+    <div class={`rounded-lg border border-border bg-card shadow-sm ${props.class ?? ""}`}>
       {/* Preview — bottom border is the seam the pill straddles */}
       <div class="flex min-h-[200px] items-center justify-center rounded-t-lg border-b border-border bg-background/80 p-8">
         {props.preview}

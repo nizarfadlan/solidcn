@@ -32,17 +32,17 @@ function CardDemo() {
 export default function CardPage() {
   return (
     <DocPage
-        docPath="/docs/components/card"
-        title="Card"
-        description="A container with a header, content, and footer — the building block of most UIs."
-        phase="Layout & Form"
-        componentName="card"
-        manualInstall="npm install @solidcn/core"
-        examples={[
-          {
-            title: "Default",
-            preview: <CardDemo />,
-            code: `import {
+      docPath="/docs/components/card"
+      title="Card"
+      description="A container with a header, content, and footer — the building block of most UIs."
+      phase="Layout & Form"
+      componentName="card"
+      manualInstall="npm install @solidcn/core"
+      examples={[
+        {
+          title: "Default",
+          preview: <CardDemo />,
+          code: `import {
   Card, CardHeader, CardTitle, CardDescription,
   CardContent, CardFooter
 } from "~/components/ui/card";
@@ -62,8 +62,8 @@ export default function CardPage() {
     <Button class="flex-1">Deploy</Button>
   </CardFooter>
 </Card>`,
-          },
-        ]}
-      />
+        },
+      ]}
+    />
   );
 }

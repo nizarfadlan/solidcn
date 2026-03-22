@@ -29,17 +29,17 @@ function AccordionDemo() {
 export default function AccordionPage() {
   return (
     <DocPage
-        docPath="/docs/components/accordion"
-        title="Accordion"
-        description="A vertically stacked set of interactive headings that reveal/hide associated content. Built on Kobalte Accordion."
-        phase="Core Primitives"
-        componentName="accordion"
-        manualInstall="npm install @solidcn/core"
-        examples={[
-          {
-            title: "Single (collapsible)",
-            preview: <AccordionDemo />,
-            code: `import {
+      docPath="/docs/components/accordion"
+      title="Accordion"
+      description="A vertically stacked set of interactive headings that reveal/hide associated content. Built on Kobalte Accordion."
+      phase="Core Primitives"
+      componentName="accordion"
+      manualInstall="npm install @solidcn/core"
+      examples={[
+        {
+          title: "Single (collapsible)",
+          preview: <AccordionDemo />,
+          code: `import {
   Accordion, AccordionContent,
   AccordionItem, AccordionTrigger,
 } from "~/components/ui/accordion";
@@ -58,22 +58,22 @@ export default function AccordionPage() {
     </AccordionContent>
   </AccordionItem>
 </Accordion>`,
-          },
-          {
-            title: "Multiple open",
-            preview: (
-              <Accordion multiple class="w-full max-w-md">
-                <AccordionItem value="a">
-                  <AccordionTrigger>Section A</AccordionTrigger>
-                  <AccordionContent>Content for section A.</AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="b">
-                  <AccordionTrigger>Section B</AccordionTrigger>
-                  <AccordionContent>Content for section B.</AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            ),
-            code: `<Accordion multiple class="w-full">
+        },
+        {
+          title: "Multiple open",
+          preview: (
+            <Accordion multiple class="w-full max-w-md">
+              <AccordionItem value="a">
+                <AccordionTrigger>Section A</AccordionTrigger>
+                <AccordionContent>Content for section A.</AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="b">
+                <AccordionTrigger>Section B</AccordionTrigger>
+                <AccordionContent>Content for section B.</AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          ),
+          code: `<Accordion multiple class="w-full">
   <AccordionItem value="a">
     <AccordionTrigger>Section A</AccordionTrigger>
     <AccordionContent>Content for section A.</AccordionContent>
@@ -83,33 +83,33 @@ export default function AccordionPage() {
     <AccordionContent>Content for section B.</AccordionContent>
   </AccordionItem>
 </Accordion>`,
-          },
-        ]}
-        props={[
-          {
-            name: "collapsible",
-            type: "boolean",
-            default: "false",
-            description: "Allow closing the open item",
-          },
-          {
-            name: "multiple",
-            type: "boolean",
-            default: "false",
-            description: "Allow multiple items open simultaneously",
-          },
-          { name: "value", type: "string | string[]", description: "Controlled open item(s)" },
-          {
-            name: "defaultValue",
-            type: "string | string[]",
-            description: "Default open item(s) (uncontrolled)",
-          },
-          {
-            name: "onChange",
-            type: "(value: string | string[]) => void",
-            description: "Callback on value change",
-          },
-        ]}
-      />
+        },
+      ]}
+      props={[
+        {
+          name: "collapsible",
+          type: "boolean",
+          default: "false",
+          description: "Allow closing the open item",
+        },
+        {
+          name: "multiple",
+          type: "boolean",
+          default: "false",
+          description: "Allow multiple items open simultaneously",
+        },
+        { name: "value", type: "string | string[]", description: "Controlled open item(s)" },
+        {
+          name: "defaultValue",
+          type: "string | string[]",
+          description: "Default open item(s) (uncontrolled)",
+        },
+        {
+          name: "onChange",
+          type: "(value: string | string[]) => void",
+          description: "Callback on value change",
+        },
+      ]}
+    />
   );
 }

@@ -30,17 +30,17 @@ function DialogDemo() {
 export default function DialogPage() {
   return (
     <DocPage
-        docPath="/docs/components/dialog"
-        title="Dialog"
-        description="A modal dialog that interrupts the user with important content, built on Kobalte."
-        phase="Core Primitives"
-        componentName="dialog"
-        manualInstall="npm install @solidcn/core"
-        examples={[
-          {
-            title: "Default",
-            preview: <DialogDemo />,
-            code: `import {
+      docPath="/docs/components/dialog"
+      title="Dialog"
+      description="A modal dialog that interrupts the user with important content, built on Kobalte."
+      phase="Core Primitives"
+      componentName="dialog"
+      manualInstall="npm install @solidcn/core"
+      examples={[
+        {
+          title: "Default",
+          preview: <DialogDemo />,
+          code: `import {
   Dialog, DialogContent, DialogDescription,
   DialogFooter, DialogTitle, DialogTrigger,
 } from "~/components/ui/dialog";
@@ -59,22 +59,22 @@ import { Button } from "~/components/ui/button";
     </DialogFooter>
   </DialogContent>
 </Dialog>`,
-          },
-        ]}
-        props={[
-          { name: "open", type: "boolean", description: "Controlled open state" },
-          {
-            name: "onOpenChange",
-            type: "(open: boolean) => void",
-            description: "Callback when open state changes",
-          },
-          {
-            name: "defaultOpen",
-            type: "boolean",
-            default: "false",
-            description: "Initial open state (uncontrolled)",
-          },
-        ]}
-      />
+        },
+      ]}
+      props={[
+        { name: "open", type: "boolean", description: "Controlled open state" },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          description: "Callback when open state changes",
+        },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          default: "false",
+          description: "Initial open state (uncontrolled)",
+        },
+      ]}
+    />
   );
 }

@@ -14,9 +14,10 @@ export function getFlatNavItems(): NavItem[] {
   return navigation.flatMap((g) => g.items);
 }
 
-export function getDocNeighbors(
-  href: string,
-): { prev: NavItem | undefined; next: NavItem | undefined } {
+export function getDocNeighbors(href: string): {
+  prev: NavItem | undefined;
+  next: NavItem | undefined;
+} {
   const items = getFlatNavItems();
   const i = items.findIndex((item) => item.href === href);
   if (i < 0) {

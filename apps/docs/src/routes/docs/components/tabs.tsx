@@ -21,17 +21,17 @@ function TabsDemo() {
 export default function TabsPage() {
   return (
     <DocPage
-        docPath="/docs/components/tabs"
-        title="Tabs"
-        description="A set of layered sections (panels) displayed one at a time. Built on Kobalte Tabs."
-        phase="Core Primitives"
-        componentName="tabs"
-        manualInstall="npm install @solidcn/core"
-        examples={[
-          {
-            title: "Default",
-            preview: <TabsDemo />,
-            code: `import {
+      docPath="/docs/components/tabs"
+      title="Tabs"
+      description="A set of layered sections (panels) displayed one at a time. Built on Kobalte Tabs."
+      phase="Core Primitives"
+      componentName="tabs"
+      manualInstall="npm install @solidcn/core"
+      examples={[
+        {
+          title: "Default",
+          preview: <TabsDemo />,
+          code: `import {
   Tabs, TabsList, TabsTrigger, TabsContent
 } from "~/components/ui/tabs";
 
@@ -47,27 +47,27 @@ export default function TabsPage() {
     Change your password here.
   </TabsContent>
 </Tabs>`,
-          },
-        ]}
-        props={[
-          {
-            name: "defaultValue",
-            type: "string",
-            description: "Default active tab (uncontrolled)",
-          },
-          { name: "value", type: "string", description: "Controlled active tab" },
-          {
-            name: "onValueChange",
-            type: "(value: string) => void",
-            description: "Callback on tab change",
-          },
-          {
-            name: "orientation",
-            type: '"horizontal" | "vertical"',
-            default: '"horizontal"',
-            description: "Tab orientation",
-          },
-        ]}
-      />
+        },
+      ]}
+      props={[
+        {
+          name: "defaultValue",
+          type: "string",
+          description: "Default active tab (uncontrolled)",
+        },
+        { name: "value", type: "string", description: "Controlled active tab" },
+        {
+          name: "onValueChange",
+          type: "(value: string) => void",
+          description: "Callback on tab change",
+        },
+        {
+          name: "orientation",
+          type: '"horizontal" | "vertical"',
+          default: '"horizontal"',
+          description: "Tab orientation",
+        },
+      ]}
+    />
   );
 }

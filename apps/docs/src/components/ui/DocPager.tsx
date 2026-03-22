@@ -1,5 +1,5 @@
 import { A } from "@solidjs/router";
-import { Show, type Component } from "solid-js";
+import { type Component, Show } from "solid-js";
 import type { NavItem } from "../../lib/nav.js";
 
 export interface DocPagerProps {
@@ -21,7 +21,9 @@ export const DocPager: Component<DocPagerProps> = (props) => {
               class="group flex w-full max-w-md flex-col justify-center rounded-lg border border-border bg-card px-4 py-3 text-left transition-colors hover:bg-muted/50"
             >
               <span class="text-xs font-medium text-muted-foreground">Previous</span>
-              <span class="mt-0.5 font-medium text-foreground group-hover:underline">{p().title}</span>
+              <span class="mt-0.5 font-medium text-foreground group-hover:underline">
+                {p().title}
+              </span>
             </A>
           )}
         </Show>
@@ -34,7 +36,9 @@ export const DocPager: Component<DocPagerProps> = (props) => {
               class="group flex w-full max-w-md flex-col items-end justify-center rounded-lg border border-border bg-card px-4 py-3 text-right transition-colors hover:bg-muted/50"
             >
               <span class="text-xs font-medium text-muted-foreground">Next</span>
-              <span class="mt-0.5 font-medium text-foreground group-hover:underline">{n().title}</span>
+              <span class="mt-0.5 font-medium text-foreground group-hover:underline">
+                {n().title}
+              </span>
             </A>
           )}
         </Show>

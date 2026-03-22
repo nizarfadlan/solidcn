@@ -141,11 +141,13 @@ export default function Home() {
               </p>
               <p>
                 <span class="select-none text-muted-foreground">$ </span>
-                <span class="text-emerald-700 dark:text-green-400">npx</span> solidcn@latest add button dialog toast
+                <span class="text-emerald-700 dark:text-green-400">npx</span> solidcn@latest add
+                button dialog toast
               </p>
               <p>
                 <span class="select-none text-muted-foreground">$ </span>
-                <span class="text-emerald-700 dark:text-green-400">npx</span> solidcn@latest add @acme/data-table
+                <span class="text-emerald-700 dark:text-green-400">npx</span> solidcn@latest add
+                @acme/data-table
                 <span class="ml-2 text-muted-foreground dark:text-zinc-600">
                   # third-party registry
                 </span>
