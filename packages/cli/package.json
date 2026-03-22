@@ -1,0 +1,41 @@
+{
+  "name": "solidcn",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "CLI for solidcn — add SolidJS components to your project",
+  "keywords": ["solidjs", "cli", "ui", "components", "registry"],
+  "license": "MIT",
+  "bin": {
+    "solidcn": "./dist/index.js"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "typecheck": "tsc --noEmit",
+    "registry:build": "node dist/index.js registry build",
+    "registry:validate": "node dist/index.js registry validate"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.9.1",
+    "ajv": "^8.17.1",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "execa": "^9.5.2",
+    "fs-extra": "^11.3.0",
+    "ora": "^8.2.0",
+    "picocolors": "^1.1.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.13.4",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "solidcn",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r --parallel dev",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "clean": "pnpm -r exec rm -rf dist node_modules .turbo",
+    "registry:build": "pnpm --filter @solidcn/cli registry:build",
+    "registry:validate": "pnpm --filter @solidcn/cli registry:validate"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@9.15.4"
+}

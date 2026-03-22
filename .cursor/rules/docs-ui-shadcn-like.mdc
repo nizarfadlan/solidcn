@@ -1,0 +1,51 @@
+---
+description: Docs site UI — Phase 7/8 shadcn/ui parity (layout, CodeBlock, typography)
+globs: apps/docs/**/*
+alwaysApply: false
+---
+
+# Docs UI — shadcn/ui parity (solidcn)
+
+## Theme
+
+- **Default: light** — `:root` uses white background, dark foreground, subtle `border-border`.
+- **Dark:** `dark` class on `<html>` (see `apps/docs/src/lib/theme.ts`).
+- Font: **Inter** (linked in `entry-server.tsx`), `antialiased` on `body`.
+
+## Layout (`apps/docs/src/components/layout/`)
+
+- **Header:** `h-14`, `border-b border-border`, `bg-background/95`, backdrop blur. Only one top-nav item is “active” — check order: Components → Registry → CLI → Docs (Docs is **not** active on `/docs/cli` or `/docs/components/*`).
+- **Desktop sidebar:** `w-[220px]` / `xl:w-[240px]`, `border-r`, group titles `uppercase tracking-widest text-[11px]`, active item `bg-muted font-medium`.
+- **Mobile:** drawer + overlay; menu state in `app.tsx` (not in `DocLayout`).
+- **DocLayout:** `max-w-screen-2xl` wrapper, **no** duplicate `MobileSidebar`. Main: `article.docs-prose` + right TOC (`xl`+), **`xl:gap-16`** between columns.
+- **DocPage:** optional `docPath` → **`DocsSeo`** (title, description, OG, canonical via `lib/site.ts`), **Copy page** (markdown export), **`DocPager`** (prev/next from `getDocNeighbors` / sidebar order). Optional **`playground`** = StackBlitz iframe.
+- **404:** `routes/[...404].tsx` + prerender `/404` in `app.config.ts`.
+- **TableOfContents:** label **“On this page”**, nav with `border-l` + active indicator `border-foreground`. Active section uses **scroll spy** (`getBoundingClientRect().top <= headerOffset`), not `IntersectionObserver` alone — so at the bottom of the page the last item (e.g. **API Reference**) stays highlighted instead of sticking on **Sizes**.
+
+## CodeBlock (`components/ui/CodeBlock.tsx`)
+
+- **Shiki** follows docs theme: `docsTheme()` → `github-light` / `github-dark` (use `createEffect`, not only `onMount`).
+- **`variant="card"` (default):** bordered blocks in prose. **No `filename` (light):** `#f6f8fa`, **dark:** `zinc-950`. Do **not** use a global `.shiki { background: transparent }` on these — it breaks contrast.
+- **`variant="figure"`** (component demos): flat panel using **`--docs-code` / `--docs-code-foreground`** in `app.css`; root has `docs-code-figure` + **`pre.shiki { background: transparent !important }`** so one surface matches **ui.shadcn.com**. **Copy** = icon (`Copy` / `Check`), top-right. **`border-t`** separates preview from code.
+- **With `filename`:** header bar is theme-aware — **light:** `bg-muted/50` (card) or code surface (figure); **dark:** zinc bars. Copy text button in header row.
+
+## Component demo
+
+- `ComponentDemo` (shadcn order): **(1)** preview with bottom border → **(2)** **View code** / **Hide code** pill on the seam → **(3)** `CodeBlock variant="figure"`; collapsed: **`max-h-64`** (~shadcn `CodeCollapsibleWrapper`) + **bottom-only** fade (`linear-gradient` to `hsl(var(--docs-code))`, not a full-panel dark wash); expanded: full height. `ChevronDown` rotates when open. Outer card avoids `overflow-hidden` so the pill isn’t clipped.
+
+## Content pages (prose)
+
+- Main doc title: `text-4xl font-bold tracking-tight`.
+- Subsections: `text-xl font-semibold` (h2), `leading-7` on explanatory paragraphs.
+- Inline code: `rounded-md border border-border bg-muted px-1.5 py-0.5 font-mono text-xs` (or `text-[13px]` for short names).
+- **CLI** page: use **TOC** (`TocItem[]`) + `id` / `scroll-mt-24` on each block linked from the TOC.
+
+## Global CSS (`app.css`)
+
+- HSL tokens on `:root` and `.dark`.
+- `.docs-prose` utility — `max-width: 48rem`, `scroll-margin` for headings.
+
+## Don’ts
+
+- No emoji as icons in public docs UI — **lucide-solid** only.
+- Don’t hardcode dark zinc for normal code blocks in light mode (except dark filename bar in dark theme). **Home “Quick install”:** light = soft strip `#f6f8fa` + `bg-card` terminal; dark = `zinc-950` strip + `zinc-900` panel.

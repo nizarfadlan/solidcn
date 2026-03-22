@@ -1,0 +1,24 @@
+{
+  // Cloudflare Worker configuration for @solidcn/mcp-cloudflare
+  "name": "solidcn-mcp",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-03-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Optional: bind your registry JSON assets
+  // "assets": { "directory": "public/r" },
+
+  // Optional: KV for caching registry responses
+  // "kv_namespaces": [
+  //   { "binding": "REGISTRY_CACHE", "id": "YOUR_KV_ID" }
+  // ],
+
+  // Environment variables (set in Cloudflare dashboard or .dev.vars)
+  // REGISTRY_URL   — base URL of the registry JSON files
+  // REGISTRY_NAME  — registry namespace (default: "solidcn")
+  // API_TOKEN      — optional auth token to protect the /mcp endpoint
+  "vars": {
+    "REGISTRY_URL": "https://solidcn.dev/r",
+    "REGISTRY_NAME": "solidcn"
+  }
+}

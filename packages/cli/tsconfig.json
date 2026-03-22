@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "target": "ES2022",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  },
+  "include": ["src"]
+}

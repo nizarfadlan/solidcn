@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm test:*)",
+      "Bash(pnpm run typecheck:*)",
+      "Bash(pnpm -r typecheck:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm -r build:*)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm exec:*)",
+      "Bash(npx biome:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)"
+    ],
+    "deny": []
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "typescript.format.enable": false,
+  "javascript.format.enable": false,
+  "prettier.enable": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "explicit",
+    "quickfix.biome": "explicit"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["biome.json"],
+      "url": "https://biomejs.dev/schemas/1.9.4/schema.json"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+node_modules
+dist
+.turbo
+*.tsbuildinfo
+
+# SolidStart
+apps/docs/.solid
+apps/docs/.output
+apps/docs/.vinxi
+
+# Storybook
+apps/storybook/
+
+# env
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+
+# Cursor — commit `.cursor/rules` (like shadcn/ui); ignore other local files
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/**
+!.cursor/rules/

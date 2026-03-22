@@ -1,0 +1,20 @@
+{
+  "$schema": "https://solidcn.dev/schema/registry-item.json",
+  "name": "button",
+  "type": "registry:ui",
+  "title": "Button",
+  "description": "A SolidJS button component with Tailwind variants.",
+  "dependencies": ["tailwind-variants", "clsx", "tailwind-merge"],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "type": "registry:ui",
+      "content": ""
+    }
+  ],
+  "cssVars": {
+    "light": {},
+    "dark": {}
+  }
+}

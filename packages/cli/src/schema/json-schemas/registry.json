@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://solidcn.dev/schema/registry.json",
+  "title": "solidcn Registry Index",
+  "description": "Schema for a registry index file (registry.json). Lists all available items in the registry.",
+  "type": "object",
+  "required": ["name", "items"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "name": {
+      "type": "string",
+      "description": "Registry identifier / namespace slug",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri",
+      "description": "Registry homepage URL"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description of the registry"
+    },
+    "author": {
+      "type": "string",
+      "description": "Registry author or organization"
+    },
+    "license": {
+      "type": "string",
+      "description": "License identifier (e.g. MIT)"
+    },
+    "baseUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Base URL used to resolve item URLs. If omitted, item names are resolved relative to registry.json location."
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Item identifier matching the registry-item.json filename (without .json)",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "registry:ui",
+              "registry:block",
+              "registry:hook",
+              "registry:lib",
+              "registry:page"
+            ],
+            "description": "Item category"
+          },
+          "title": {
+            "type": "string",
+            "description": "Human-readable name (optional, for display purposes)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Short description (optional)"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Direct URL to the registry-item.json. If omitted, resolved from baseUrl or registry location."
+          },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Searchable tags for this item"
+          }
+        }
+      },
+      "description": "All items available in this registry"
+    }
+  }
+}

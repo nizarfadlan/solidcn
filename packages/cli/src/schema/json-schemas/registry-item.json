@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://solidcn.dev/schema/registry-item.json",
+  "title": "solidcn Registry Item",
+  "description": "Schema for a single registry item (component, block, hook, or utility)",
+  "type": "object",
+  "required": ["name", "type", "files"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "name": {
+      "type": "string",
+      "description": "Unique identifier for this item (slug format)",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["registry:ui", "registry:block", "registry:hook", "registry:lib", "registry:page"],
+      "description": "Item category"
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable display name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of what this item does"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "npm packages required by this item",
+      "default": []
+    },
+    "devDependencies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "npm devDependencies required (types, build tools)",
+      "default": []
+    },
+    "registryDependencies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Other registry items this item depends on. Can be bare names (from same registry) or namespaced (@acme/button)",
+      "default": []
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["path", "type", "content"],
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Relative path where the file should be written in the consumer project"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "registry:ui",
+              "registry:block",
+              "registry:hook",
+              "registry:lib",
+              "registry:page"
+            ],
+            "description": "File category"
+          },
+          "content": {
+            "type": "string",
+            "description": "Full file content as a string"
+          },
+          "target": {
+            "type": "string",
+            "description": "Optional override for the destination path (absolute or relative to project root)"
+          }
+        }
+      },
+      "description": "Source files to copy into the consumer project"
+    },
+    "cssVars": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "light": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "CSS variable values for light mode"
+        },
+        "dark": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "CSS variable values for dark mode"
+        }
+      },
+      "description": "CSS custom properties this item injects"
+    },
+    "tailwind": {
+      "type": "object",
+      "description": "Tailwind config additions required by this item",
+      "additionalProperties": false,
+      "properties": {
+        "config": {
+          "type": "object",
+          "description": "Additions to tailwind.config.js (plugins, theme extensions)"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Arbitrary metadata for tooling (docs URL, demo URL, tags, author)"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+---
+description: solidcn monorepo — stack, packages, and where to edit
+globs: "**/*"
+alwaysApply: true
+---
+
+# solidcn monorepo
+
+A **[shadcn/ui](https://ui.shadcn.com)** port for **SolidJS** — copy-paste components, not a black-box library.
+
+## Stack
+
+- **SolidJS** + **SolidStart** (`apps/docs`)
+- **@kobalte/core** — headless accessible primitives
+- **corvu** — advanced primitives (Drawer, Resizable, etc.)
+- **Tailwind CSS v4** + **tailwind-variants**
+- **Biome** — lint + format (not Prettier)
+- **pnpm** workspaces
+
+## Package map
+
+| Path | Package | Notes |
+|------|---------|--------|
+| `packages/core` | `@solidcn/core` | UI components — build before running docs dev |
+| `packages/toast` | `@solidcn/toast` | Standard + Sileo toast |
+| `packages/themes` | `@solidcn/themes` | CSS vars, ThemeProvider |
+| `packages/cli` | `solidcn` | CLI: init, add, registry, mcp |
+| `packages/create-solidcn-app` | `create-solidcn-app` | `npm create solidcn-app` |
+| `packages/mcp-cloudflare` | `@solidcn/mcp-cloudflare` | HTTP MCP Worker |
+| `apps/docs` | `@solidcn/docs` | Documentation (SolidStart) |
+| `apps/storybook` | — | Visual stories |
+
+## Before changing docs / Storybook
+
+Build workspace packages that are imported:
+
+```bash
+pnpm --filter @solidcn/core build
+pnpm --filter @solidcn/toast build
+pnpm --filter @solidcn/themes build
+```
+
+## Conventions
+
+- TypeScript **strict** + `exactOptionalPropertyTypes`
+- Use **Biome** for formatting; `biome.json` sets `semicolons: "always"`
+- UI icons: **lucide-solid**; avoid emoji in public docs UI
+- Solid: prefer `<Show>`, `<For>`; avoid React patterns (`dangerouslySetInnerHTML` — use Solid’s `innerHTML` prop when needed)
+
+## Docs site (Phase 7/8)
+
+- Follow **`docs-ui-shadcn-like.mdc`** (shadcn-like layout, CodeBlock + Shiki tied to `docsTheme`, TOC, typography).
+- `DocLayout` does not own the mobile sidebar — desktop `Sidebar` only; mobile menu state lives in `app.tsx`.

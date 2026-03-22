@@ -1,0 +1,30 @@
+{
+  "name": "create-solidcn-app",
+  "version": "0.0.1",
+  "description": "Create a new SolidJS app with solidcn pre-configured",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "create-solidcn-app": "./dist/index.js"
+  },
+  "files": ["dist", "templates"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.9.1",
+    "execa": "^9.5.2",
+    "fs-extra": "^11.3.0",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.13.4",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

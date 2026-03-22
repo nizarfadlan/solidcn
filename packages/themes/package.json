@@ -1,0 +1,46 @@
+{
+  "name": "@solidcn/themes",
+  "version": "0.0.1",
+  "description": "Theming, design tokens, and ThemeProvider for solidcn",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./tokens": {
+      "import": "./dist/tokens.js",
+      "types": "./dist/tokens.d.ts"
+    },
+    "./presets": {
+      "import": "./dist/presets/index.js",
+      "types": "./dist/presets/index.d.ts"
+    },
+    "./provider": {
+      "import": "./dist/provider.js",
+      "types": "./dist/provider.d.ts"
+    },
+    "./generator": {
+      "import": "./dist/generator.js",
+      "types": "./dist/generator.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.9"
+  },
+  "devDependencies": {
+    "solid-js": "^1.9.4",
+    "typescript": "^5.7.2",
+    "vite": "^6.2.1",
+    "vite-plugin-solid": "^2.11.6"
+  }
+}

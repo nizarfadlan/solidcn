@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://solidcn.dev/schema/config.json",
+  "title": "solidcn Config",
+  "description": "Schema for solidcn.json project configuration file",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "style": {
+      "type": "string",
+      "enum": ["default", "new-york"],
+      "default": "default",
+      "description": "Component style variant"
+    },
+    "tailwind": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "css": {
+          "type": "string",
+          "description": "Path to the main CSS file where Tailwind is imported",
+          "default": "src/app.css"
+        },
+        "baseColor": {
+          "type": "string",
+          "enum": ["default", "slate", "zinc", "rose", "blue", "green", "orange"],
+          "default": "default",
+          "description": "Base color theme"
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Tailwind CSS class prefix (if configured)",
+          "default": ""
+        }
+      }
+    },
+    "aliases": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "type": "string",
+          "description": "Path alias for components directory",
+          "default": "~/components/ui"
+        },
+        "utils": {
+          "type": "string",
+          "description": "Path alias for utilities",
+          "default": "~/lib/utils"
+        },
+        "hooks": {
+          "type": "string",
+          "description": "Path alias for hooks",
+          "default": "~/hooks"
+        },
+        "lib": {
+          "type": "string",
+          "description": "Path alias for lib directory",
+          "default": "~/lib"
+        }
+      }
+    },
+    "registries": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "string",
+            "format": "uri",
+            "description": "Registry URL template. Use {name} as placeholder for item name."
+          },
+          {
+            "type": "object",
+            "required": ["url"],
+            "additionalProperties": false,
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "description": "Registry URL template"
+              },
+              "headers": {
+                "type": "object",
+                "additionalProperties": { "type": "string" },
+                "description": "HTTP headers to send with every request (supports ${ENV_VAR} interpolation)"
+              }
+            }
+          }
+        ]
+      },
+      "description": "Named external registries. Keys are namespace prefixes (e.g. @acme)."
+    }
+  }
+}

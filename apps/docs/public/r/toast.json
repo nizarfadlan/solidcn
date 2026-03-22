@@ -1,0 +1,14 @@
+{
+  "$schema": "https://solidcn.dev/schema/registry-item.json",
+  "name": "toast",
+  "type": "registry:ui",
+  "title": "Toast",
+  "description": "Dual toast system — standard (shadcn-style) and sileo (physics-based SVG morphing).",
+  "dependencies": ["@solidcn/toast"],
+  "registryDependencies": [],
+  "files": [],
+  "cssVars": {
+    "light": {},
+    "dark": {}
+  }
+}
