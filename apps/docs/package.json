@@ -8,7 +8,7 @@
     "build": "vinxi build",
     "start": "vinxi start",
     "typecheck": "tsc --noEmit",
-    "registry:build": "solidcn registry build --input ../../packages/core/src/components --output public/r"
+    "registry:build": "pnpm --filter solidcn exec solidcn registry build --input ../../packages/core/src/components --output public/r"
   },
   "dependencies": {
     "lucide-solid": "^0.479.0",
