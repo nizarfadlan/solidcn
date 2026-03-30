@@ -156,20 +156,19 @@ importers:
         version: 5.9.3
 
   packages/core:
-    dependencies:
-      '@modular-forms/solid':
-        specifier: ^0.25.1
-        version: 0.25.1(solid-js@1.9.11)(typescript@5.9.3)
-      corvu:
-        specifier: ^0.7.2
-        version: 0.7.2(solid-js@1.9.11)
     devDependencies:
       '@kobalte/core':
         specifier: ^0.13.10
         version: 0.13.11(solid-js@1.9.11)
+      '@modular-forms/solid':
+        specifier: ^0.25.1
+        version: 0.25.1(solid-js@1.9.11)(typescript@5.9.3)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      corvu:
+        specifier: ^0.7.2
+        version: 0.7.2(solid-js@1.9.11)
       lucide-solid:
         specifier: ^0.479.0
         version: 0.479.0(solid-js@1.9.11)
@@ -249,9 +248,6 @@ importers:
 
   packages/toast:
     devDependencies:
-      '@kobalte/core':
-        specifier: ^0.13.10
-        version: 0.13.11(solid-js@1.9.11)
       solid-js:
         specifier: ^1.9.4
         version: 1.9.11
