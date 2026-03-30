@@ -68,6 +68,17 @@ npx solidcn@latest add button dialog tooltip dropdown-menu`}
             <code class="text-xs bg-muted px-1 py-0.5 rounded">src/components/ui/</code> (or
             wherever you configured).
           </p>
+          <CodeBlock
+            code={`# Preview changes before install/update
+npx solidcn@latest diff button --only-modified
+
+# Update existing components from registry
+npx solidcn@latest update button --only-modified
+
+# Dry-run update (no writes)
+npx solidcn@latest update button --dry-run --only-modified`}
+            lang="bash"
+          />
         </section>
 
         <section class="space-y-4">

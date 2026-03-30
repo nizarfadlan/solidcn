@@ -15,7 +15,7 @@ const communityRegistries = [
 ];
 
 const createRegistryCode = `# 1. Scaffold
-npx solidcn@latest create-registry my-components
+npx solidcn@latest registry create my-components
 cd my-components
 
 # 2. Add components
@@ -25,6 +25,9 @@ npx solidcn@latest registry add data-table
 # 3. Build registry JSON
 npx solidcn@latest registry build
 # → generates public/r/registry.json, public/r/button.json ...
+
+# 3b. Validate schema + consistency checks
+npx solidcn@latest registry validate
 
 # 4. Deploy (any static host)
 # Vercel, Netlify, Cloudflare Pages, GitHub Pages
@@ -120,7 +123,7 @@ export default function RegistryPage() {
 
             {/* Submit placeholder */}
             <a
-              href="https://github.com/solidcn/solidcn/blob/main/REGISTRIES.md"
+              href="https://github.com/nizarfadlan/solidcn/issues/new?template=blank.yml&title=Registry%20submission%3A%20%40your-namespace"
               target="_blank"
               rel="noreferrer"
               class="flex items-center justify-center gap-2 rounded-xl border border-dashed p-5 text-sm text-muted-foreground hover:border-primary/40 hover:text-foreground transition-colors"

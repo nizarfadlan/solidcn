@@ -86,7 +86,7 @@ export default function App() {
 | `@solidcn/core` | 42+ UI components |
 | `@solidcn/toast` | Dual toast system — Standard + physics-based Sileo mode |
 | `@solidcn/themes` | CSS variable tokens, `ThemeProvider`, `useTheme`, 7 built-in themes |
-| `solidcn` (CLI) | `init`, `add`, `search`, `list`, `view`, `registry`, `mcp` commands |
+| `solidcn` (CLI) | `init`, `add`, `diff`, `update`, `search`, `list`, `view`, `registry`, `mcp` commands |
 | `create-solidcn-app` | `npm create solidcn-app` project scaffolder |
 | `@solidcn/mcp-cloudflare` | Cloudflare Worker for HTTP MCP transport |
 
@@ -120,7 +120,7 @@ solidcn supports a decentralized registry protocol. Publish your own components,
 // solidcn.json
 {
   "registries": {
-    "@acme": "https://ui.acme.com/registry"
+    "@acme": "https://ui.acme.com/r/{name}.json"
   }
 }
 ```
@@ -131,6 +131,26 @@ npx solidcn@latest add @acme/card
 
 # Install directly from a URL
 npx solidcn@latest add https://ui.acme.com/r/card.json
+```
+
+---
+
+## Update Workflow (shadcn-like)
+
+Use this flow to safely update components you already installed:
+
+```bash
+# 1) Inspect what would change
+npx solidcn@latest diff button --only-modified
+
+# Optional: show line-level patch
+npx solidcn@latest diff button --only-modified --patch
+
+# 2) Apply updates
+npx solidcn@latest update button --only-modified
+
+# Optional: preview update without writing files
+npx solidcn@latest update button --dry-run --only-modified
 ```
 
 ---

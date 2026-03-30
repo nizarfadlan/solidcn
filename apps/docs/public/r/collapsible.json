@@ -1,0 +1,22 @@
+{
+  "$schema": "https://solidcn.dev/schema/registry-item.json",
+  "name": "collapsible",
+  "type": "registry:ui",
+  "title": "Collapsible",
+  "description": "collapsible component for SolidJS",
+  "dependencies": ["@kobalte/core"],
+  "devDependencies": [],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "components/ui/collapsible/collapsible.tsx",
+      "type": "registry:ui",
+      "content": "import { Collapsible as KobalteCollapsible } from \"@kobalte/core/collapsible\";\nimport type { Component, ComponentProps } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nconst Collapsible = KobalteCollapsible;\nconst CollapsibleTrigger = KobalteCollapsible.Trigger;\n\nconst CollapsibleContent: Component<ComponentProps<typeof KobalteCollapsible.Content>> = (\n  props,\n) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <KobalteCollapsible.Content\n      class={cn(\n        \"overflow-hidden transition-all\",\n        \"data-[expanded]:animate-collapsible-down data-[closed]:animate-collapsible-up\",\n        local.class,\n      )}\n      {...rest}\n    />\n  );\n};\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent };\n"
+    },
+    {
+      "path": "components/ui/collapsible/index.ts",
+      "type": "registry:ui",
+      "content": "export { Collapsible, CollapsibleTrigger, CollapsibleContent } from \"./collapsible\";\n"
+    }
+  ]
+}

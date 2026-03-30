@@ -1,0 +1,22 @@
+{
+  "$schema": "https://solidcn.dev/schema/registry-item.json",
+  "name": "alert-dialog",
+  "type": "registry:ui",
+  "title": "Alert Dialog",
+  "description": "alert-dialog component for SolidJS",
+  "dependencies": ["@kobalte/core"],
+  "devDependencies": [],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "components/ui/alert-dialog/alert-dialog.tsx",
+      "type": "registry:ui",
+      "content": "import { AlertDialog as KobalteAlertDialog } from \"@kobalte/core/alert-dialog\";\nimport type { Component, ComponentProps, JSX } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nconst AlertDialog = KobalteAlertDialog;\nconst AlertDialogTrigger = KobalteAlertDialog.Trigger;\n\nconst AlertDialogOverlay: Component<ComponentProps<typeof KobalteAlertDialog.Overlay>> = (\n  props,\n) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <KobalteAlertDialog.Overlay\n      class={cn(\n        \"fixed inset-0 z-50 bg-black/80\",\n        \"data-[expanded]:animate-in data-[closed]:animate-out\",\n        \"data-[closed]:fade-out-0 data-[expanded]:fade-in-0\",\n        local.class,\n      )}\n      {...rest}\n    />\n  );\n};\n\nconst AlertDialogContent: Component<ComponentProps<typeof KobalteAlertDialog.Content>> = (\n  props,\n) => {\n  const [local, rest] = splitProps(props, [\"class\", \"children\"]);\n  return (\n    <KobalteAlertDialog.Portal>\n      <AlertDialogOverlay />\n      <KobalteAlertDialog.Content\n        class={cn(\n          \"fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%]\",\n          \"gap-4 border bg-background p-6 shadow-lg duration-200 sm:rounded-lg\",\n          \"data-[expanded]:animate-in data-[closed]:animate-out\",\n          \"data-[closed]:fade-out-0 data-[expanded]:fade-in-0\",\n          \"data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95\",\n          local.class,\n        )}\n        {...rest}\n      >\n        {local.children}\n      </KobalteAlertDialog.Content>\n    </KobalteAlertDialog.Portal>\n  );\n};\n\nconst AlertDialogHeader: Component<JSX.HTMLAttributes<HTMLDivElement>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <div class={cn(\"flex flex-col space-y-2 text-center sm:text-left\", local.class)} {...rest} />\n  );\n};\n\nconst AlertDialogFooter: Component<JSX.HTMLAttributes<HTMLDivElement>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <div\n      class={cn(\"flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2\", local.class)}\n      {...rest}\n    />\n  );\n};\n\nconst AlertDialogTitle: Component<ComponentProps<typeof KobalteAlertDialog.Title>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return <KobalteAlertDialog.Title class={cn(\"text-lg font-semibold\", local.class)} {...rest} />;\n};\n\nconst AlertDialogDescription: Component<ComponentProps<typeof KobalteAlertDialog.Description>> = (\n  props,\n) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <KobalteAlertDialog.Description\n      class={cn(\"text-sm text-muted-foreground\", local.class)}\n      {...rest}\n    />\n  );\n};\n\nconst AlertDialogAction = KobalteAlertDialog.CloseButton;\nconst AlertDialogCancel = KobalteAlertDialog.CloseButton;\n\nexport {\n  AlertDialog,\n  AlertDialogTrigger,\n  AlertDialogOverlay,\n  AlertDialogContent,\n  AlertDialogHeader,\n  AlertDialogFooter,\n  AlertDialogTitle,\n  AlertDialogDescription,\n  AlertDialogAction,\n  AlertDialogCancel,\n};\n"
+    },
+    {
+      "path": "components/ui/alert-dialog/index.ts",
+      "type": "registry:ui",
+      "content": "export {\n  AlertDialog,\n  AlertDialogTrigger,\n  AlertDialogOverlay,\n  AlertDialogContent,\n  AlertDialogHeader,\n  AlertDialogFooter,\n  AlertDialogTitle,\n  AlertDialogDescription,\n  AlertDialogAction,\n  AlertDialogCancel,\n} from \"./alert-dialog\";\n"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://solidcn.dev/schema/registry-item.json",
+  "name": "popover",
+  "type": "registry:ui",
+  "title": "Popover",
+  "description": "popover component for SolidJS",
+  "dependencies": ["@kobalte/core", "lucide-solid"],
+  "devDependencies": [],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "components/ui/popover/index.ts",
+      "type": "registry:ui",
+      "content": "export {\n  Popover,\n  PopoverTrigger,\n  PopoverAnchor,\n  PopoverContent,\n  PopoverHeader,\n  PopoverTitle,\n  PopoverDescription,\n} from \"./popover\";\n"
+    },
+    {
+      "path": "components/ui/popover/popover.tsx",
+      "type": "registry:ui",
+      "content": "import { Popover as KobaltePopover } from \"@kobalte/core/popover\";\nimport { X } from \"lucide-solid\";\nimport type { Component, ComponentProps, JSX } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nconst Popover = KobaltePopover;\nconst PopoverTrigger = KobaltePopover.Trigger;\nconst PopoverAnchor = KobaltePopover.Anchor;\n\nconst PopoverContent: Component<\n  ComponentProps<typeof KobaltePopover.Content> & { showClose?: boolean }\n> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\", \"showClose\", \"children\"]);\n  return (\n    <KobaltePopover.Portal>\n      <KobaltePopover.Content\n        class={cn(\n          \"z-50 w-72 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none\",\n          \"animate-in fade-in-0 zoom-in-95\",\n          \"data-[closed]:animate-out data-[closed]:fade-out-0 data-[closed]:zoom-out-95\",\n          local.class,\n        )}\n        {...rest}\n      >\n        {local.showClose !== false && (\n          <KobaltePopover.CloseButton class=\"absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2\">\n            <X class=\"h-4 w-4\" />\n            <span class=\"sr-only\">Close</span>\n          </KobaltePopover.CloseButton>\n        )}\n        {local.children as JSX.Element}\n      </KobaltePopover.Content>\n    </KobaltePopover.Portal>\n  );\n};\n\nconst PopoverHeader: Component<JSX.HTMLAttributes<HTMLDivElement>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return <div class={cn(\"flex flex-col space-y-2\", local.class)} {...rest} />;\n};\n\nconst PopoverTitle: Component<ComponentProps<typeof KobaltePopover.Title>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return <KobaltePopover.Title class={cn(\"text-sm font-semibold\", local.class)} {...rest} />;\n};\n\nconst PopoverDescription: Component<ComponentProps<typeof KobaltePopover.Description>> = (\n  props,\n) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <KobaltePopover.Description\n      class={cn(\"text-sm text-muted-foreground\", local.class)}\n      {...rest}\n    />\n  );\n};\n\nexport {\n  Popover,\n  PopoverTrigger,\n  PopoverAnchor,\n  PopoverContent,\n  PopoverHeader,\n  PopoverTitle,\n  PopoverDescription,\n};\n"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://solidcn.dev/schema/registry-item.json",
+  "name": "textarea",
+  "type": "registry:ui",
+  "title": "Textarea",
+  "description": "textarea component for SolidJS",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "components/ui/textarea/index.ts",
+      "type": "registry:ui",
+      "content": "export { Textarea } from \"./textarea\";\nexport type { TextareaProps } from \"./textarea\";\n"
+    },
+    {
+      "path": "components/ui/textarea/textarea.tsx",
+      "type": "registry:ui",
+      "content": "import type { Component, ComponentProps } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nexport type TextareaProps = ComponentProps<\"textarea\"> & {\n  class?: string;\n};\n\nexport const Textarea: Component<TextareaProps> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <textarea\n      class={cn(\n        \"flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm\",\n        \"ring-offset-background placeholder:text-muted-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        \"resize-none\",\n        local.class,\n      )}\n      {...rest}\n    />\n  );\n};\n"
+    }
+  ]
+}

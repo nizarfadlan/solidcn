@@ -1,0 +1,22 @@
+{
+  "$schema": "https://solidcn.dev/schema/registry-item.json",
+  "name": "slider",
+  "type": "registry:ui",
+  "title": "Slider",
+  "description": "slider component for SolidJS",
+  "dependencies": ["@kobalte/core"],
+  "devDependencies": [],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "components/ui/slider/index.ts",
+      "type": "registry:ui",
+      "content": "export { Slider } from \"./slider\";\nexport type { SliderProps } from \"./slider\";\n"
+    },
+    {
+      "path": "components/ui/slider/slider.tsx",
+      "type": "registry:ui",
+      "content": "import { Slider as KobalteSlider } from \"@kobalte/core/slider\";\nimport type { Component, ComponentProps } from \"solid-js\";\nimport { For, splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nexport type SliderProps = ComponentProps<typeof KobalteSlider> & {\n  label?: string;\n  class?: string;\n};\n\nexport const Slider: Component<SliderProps> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\", \"label\", \"defaultValue\"]);\n  const values = () => (rest.value ?? local.defaultValue ?? [0]) as number[];\n\n  return (\n    <KobalteSlider\n      class={cn(\n        \"relative flex w-full touch-none select-none flex-col items-center gap-2\",\n        local.class,\n      )}\n      {...(local.defaultValue !== undefined ? { defaultValue: local.defaultValue } : {})}\n      {...rest}\n    >\n      {local.label && (\n        <div class=\"flex w-full justify-between\">\n          <KobalteSlider.Label class=\"text-sm font-medium leading-none\">\n            {local.label}\n          </KobalteSlider.Label>\n          <KobalteSlider.ValueLabel class=\"text-sm text-muted-foreground\" />\n        </div>\n      )}\n      <KobalteSlider.Track class=\"relative h-2 w-full grow overflow-hidden rounded-full bg-secondary\">\n        <KobalteSlider.Fill class=\"absolute h-full bg-primary\" />\n        <For each={values()}>\n          {(_, _i) => (\n            <KobalteSlider.Thumb\n              class={cn(\n                \"block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background\",\n                \"transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n                \"disabled:pointer-events-none disabled:opacity-50\",\n                \"top-[-6px]\",\n              )}\n            >\n              <KobalteSlider.Input />\n            </KobalteSlider.Thumb>\n          )}\n        </For>\n      </KobalteSlider.Track>\n    </KobalteSlider>\n  );\n};\n"
+    }
+  ]
+}

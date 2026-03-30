@@ -1,0 +1,22 @@
+{
+  "$schema": "https://solidcn.dev/schema/registry-item.json",
+  "name": "input",
+  "type": "registry:ui",
+  "title": "Input",
+  "description": "input component for SolidJS",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "components/ui/input/index.ts",
+      "type": "registry:ui",
+      "content": "export { Input } from \"./input\";\nexport type { InputProps } from \"./input\";\n"
+    },
+    {
+      "path": "components/ui/input/input.tsx",
+      "type": "registry:ui",
+      "content": "import type { Component, ComponentProps } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nexport type InputProps = ComponentProps<\"input\"> & {\n  class?: string;\n};\n\nexport const Input: Component<InputProps> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\", \"type\"]);\n  return (\n    <input\n      type={local.type ?? \"text\"}\n      class={cn(\n        \"flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm\",\n        \"ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium\",\n        \"placeholder:text-muted-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        local.class,\n      )}\n      {...rest}\n    />\n  );\n};\n"
+    }
+  ]
+}

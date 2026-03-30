@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { Command } from "commander";
 import { addCommand } from "./commands/add.js";
+import { diffCommand } from "./commands/diff.js";
 import { initCommand } from "./commands/init.js";
 import { listCommand } from "./commands/list.js";
 import { mcpCommand } from "./commands/mcp.js";
@@ -9,6 +10,7 @@ import { registryBuildCommand } from "./commands/registry/build.js";
 import { registryCreateCommand } from "./commands/registry/create.js";
 import { registryValidateCommand } from "./commands/registry/validate.js";
 import { searchCommand } from "./commands/search.js";
+import { updateCommand } from "./commands/update.js";
 import { viewCommand } from "./commands/view.js";
 
 const program = new Command();
@@ -17,6 +19,8 @@ program.name("solidcn").description("Add SolidJS components to your project").ve
 
 program.addCommand(initCommand);
 program.addCommand(addCommand);
+program.addCommand(diffCommand);
+program.addCommand(updateCommand);
 program.addCommand(viewCommand);
 program.addCommand(searchCommand);
 program.addCommand(listCommand);

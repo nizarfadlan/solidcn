@@ -1,0 +1,22 @@
+{
+  "$schema": "https://solidcn.dev/schema/registry-item.json",
+  "name": "radio-group",
+  "type": "registry:ui",
+  "title": "Radio Group",
+  "description": "radio-group component for SolidJS",
+  "dependencies": ["@kobalte/core"],
+  "devDependencies": [],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "components/ui/radio-group/index.ts",
+      "type": "registry:ui",
+      "content": "export { RadioGroup, RadioGroupLabel, RadioGroupItem, RadioGroupItemLabel } from \"./radio-group\";\n"
+    },
+    {
+      "path": "components/ui/radio-group/radio-group.tsx",
+      "type": "registry:ui",
+      "content": "import { RadioGroup as KobalteRadioGroup } from \"@kobalte/core/radio-group\";\nimport type { Component, ComponentProps } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nconst RadioGroup: Component<ComponentProps<typeof KobalteRadioGroup> & { class?: string }> = (\n  props,\n) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return <KobalteRadioGroup class={cn(\"grid gap-2\", local.class)} {...rest} />;\n};\n\nconst RadioGroupLabel: Component<\n  ComponentProps<typeof KobalteRadioGroup.Label> & { class?: string }\n> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <KobalteRadioGroup.Label\n      class={cn(\"text-sm font-medium leading-none\", local.class)}\n      {...rest}\n    />\n  );\n};\n\nconst RadioGroupItem: Component<\n  ComponentProps<typeof KobalteRadioGroup.Item> & { class?: string }\n> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <KobalteRadioGroup.Item class={cn(\"flex items-center space-x-2\", local.class)} {...rest}>\n      <KobalteRadioGroup.ItemInput class=\"sr-only\" />\n      <KobalteRadioGroup.ItemControl\n        class={cn(\n          \"aspect-square h-4 w-4 rounded-full border border-primary\",\n          \"text-primary ring-offset-background\",\n          \"focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          \"data-[checked]:bg-primary\",\n        )}\n      >\n        <KobalteRadioGroup.ItemIndicator class=\"flex items-center justify-center\">\n          <div class=\"h-2 w-2 rounded-full bg-background\" />\n        </KobalteRadioGroup.ItemIndicator>\n      </KobalteRadioGroup.ItemControl>\n    </KobalteRadioGroup.Item>\n  );\n};\n\nconst RadioGroupItemLabel: Component<\n  ComponentProps<typeof KobalteRadioGroup.ItemLabel> & { class?: string }\n> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <KobalteRadioGroup.ItemLabel\n      class={cn(\n        \"text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70\",\n        local.class,\n      )}\n      {...rest}\n    />\n  );\n};\n\nexport { RadioGroup, RadioGroupLabel, RadioGroupItem, RadioGroupItemLabel };\n"
+    }
+  ]
+}

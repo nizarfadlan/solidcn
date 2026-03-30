@@ -136,7 +136,7 @@ async function handleToolCall(
 
     case "install_component": {
       const name = args.name as string;
-      const installer = new Installer(cwd, config, false);
+      const installer = new Installer(cwd, config, false, false, false);
       const items = await resolver.resolve(name);
       for (const item of items) {
         await installer.install(item);

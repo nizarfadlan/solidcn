@@ -1,0 +1,22 @@
+{
+  "$schema": "https://solidcn.dev/schema/registry-item.json",
+  "name": "progress",
+  "type": "registry:ui",
+  "title": "Progress",
+  "description": "progress component for SolidJS",
+  "dependencies": ["@kobalte/core"],
+  "devDependencies": [],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "components/ui/progress/index.ts",
+      "type": "registry:ui",
+      "content": "export { Progress } from \"./progress\";\nexport type { ProgressProps } from \"./progress\";\n"
+    },
+    {
+      "path": "components/ui/progress/progress.tsx",
+      "type": "registry:ui",
+      "content": "import { Progress as KobalteProgress } from \"@kobalte/core/progress\";\nimport type { Component, ComponentProps } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nexport type ProgressProps = ComponentProps<typeof KobalteProgress> & {\n  label?: string;\n  showValue?: boolean;\n  class?: string;\n};\n\nexport const Progress: Component<ProgressProps> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\", \"label\", \"showValue\"]);\n\n  return (\n    <KobalteProgress class={cn(\"flex flex-col gap-2\", local.class)} {...rest}>\n      {(local.label || local.showValue) && (\n        <div class=\"flex justify-between text-sm\">\n          {local.label && (\n            <KobalteProgress.Label class=\"font-medium\">{local.label}</KobalteProgress.Label>\n          )}\n          {local.showValue && <KobalteProgress.ValueLabel class=\"text-muted-foreground\" />}\n        </div>\n      )}\n      <KobalteProgress.Track class=\"relative h-2 w-full overflow-hidden rounded-full bg-secondary\">\n        <KobalteProgress.Fill class=\"h-full w-[--kb-progress-fill-width] bg-primary transition-all\" />\n      </KobalteProgress.Track>\n    </KobalteProgress>\n  );\n};\n"
+    }
+  ]
+}

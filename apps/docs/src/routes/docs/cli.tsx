@@ -27,6 +27,19 @@ npx solidcn@latest add @acme/data-table          # third-party namespace
 npx solidcn@latest add https://example.com/r/button.json   # direct URL`,
   },
   {
+    cmd: "solidcn diff",
+    desc: "Preview ADD/MOD/SAME changes before installing or updating",
+    code: `npx solidcn@latest diff button
+npx solidcn@latest diff button --only-modified
+npx solidcn@latest diff button --only-modified --patch`,
+  },
+  {
+    cmd: "solidcn update",
+    desc: "Update installed components from registry",
+    code: `npx solidcn@latest update button --only-modified
+npx solidcn@latest update button --dry-run --only-modified`,
+  },
+  {
     cmd: "solidcn view",
     desc: "Preview a component's source before installing",
     code: `npx solidcn@latest view button
@@ -44,14 +57,19 @@ npx solidcn@latest view @acme/data-table`,
 npx solidcn@latest list @acme`,
   },
   {
+    cmd: "solidcn registry create",
+    desc: "Scaffold a new registry project",
+    code: "npx solidcn@latest registry create my-registry",
+  },
+  {
     cmd: "solidcn registry build",
     desc: "Build registry JSON files from source components",
     code: "npx solidcn@latest registry build --input src/components --output public/r",
   },
   {
-    cmd: "solidcn registry create",
-    desc: "Scaffold a new registry project",
-    code: "npx solidcn@latest create-registry my-registry",
+    cmd: "solidcn registry validate",
+    desc: "Validate index/item schemas and dependency/file consistency",
+    code: "npx solidcn@latest registry validate",
   },
   {
     cmd: "solidcn mcp",
@@ -76,7 +94,7 @@ export default function CLIPage() {
     <DocLayout toc={toc}>
       <DocsSeo
         title="CLI — solidcn"
-        description="solidcn CLI: init, add, view, search, list, registry build, and MCP server."
+        description="solidcn CLI: init, add, diff, update, view, search, list, registry commands, and MCP server."
         path="/docs/cli"
       />
 
@@ -126,7 +144,7 @@ export default function CLIPage() {
           </p>
           <CodeBlock
             code={`# Scaffold a registry
-npx solidcn@latest create-registry my-registry
+npx solidcn@latest registry create my-registry
 cd my-registry
 
 # Add components
@@ -134,6 +152,9 @@ npx solidcn@latest registry add button
 
 # Build → generates JSON into public/r/
 npx solidcn@latest registry build
+
+# Validate schema + consistency checks
+npx solidcn@latest registry validate
 
 # Deploy (Vercel, Netlify, Cloudflare Pages, GitHub Pages)
 # Then users can install from your registry:

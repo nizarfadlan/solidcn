@@ -1,0 +1,22 @@
+{
+  "$schema": "https://solidcn.dev/schema/registry-item.json",
+  "name": "hover-card",
+  "type": "registry:ui",
+  "title": "Hover Card",
+  "description": "hover-card component for SolidJS",
+  "dependencies": ["@kobalte/core"],
+  "devDependencies": [],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "components/ui/hover-card/hover-card.tsx",
+      "type": "registry:ui",
+      "content": "import { HoverCard as KobalteHoverCard } from \"@kobalte/core/hover-card\";\nimport type { Component, ComponentProps } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nconst HoverCard = KobalteHoverCard;\nconst HoverCardTrigger = KobalteHoverCard.Trigger;\n\nconst HoverCardContent: Component<ComponentProps<typeof KobalteHoverCard.Content>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <KobalteHoverCard.Portal>\n      <KobalteHoverCard.Content\n        class={cn(\n          \"z-50 w-64 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none\",\n          \"data-[expanded]:animate-in data-[closed]:animate-out\",\n          \"data-[closed]:fade-out-0 data-[expanded]:fade-in-0\",\n          \"data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95\",\n          local.class,\n        )}\n        {...rest}\n      />\n    </KobalteHoverCard.Portal>\n  );\n};\n\nexport { HoverCard, HoverCardTrigger, HoverCardContent };\n"
+    },
+    {
+      "path": "components/ui/hover-card/index.ts",
+      "type": "registry:ui",
+      "content": "export { HoverCard, HoverCardTrigger, HoverCardContent } from \"./hover-card\";\n"
+    }
+  ]
+}
