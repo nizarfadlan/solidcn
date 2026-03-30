@@ -22,15 +22,19 @@ export default function SkeletonPage() {
               </div>
             </div>
           ),
-          code: `import { Skeleton } from "~/components/ui/skeleton";
+          code: `import { Skeleton } from "~/components/ui/skeleton"
 
-<div class="flex items-center gap-4">
-  <Skeleton class="h-12 w-12 rounded-full" />
-  <div class="space-y-2 flex-1">
-    <Skeleton class="h-4 w-full" />
-    <Skeleton class="h-4 w-4/5" />
-  </div>
-</div>`,
+export function SkeletonDefault() {
+  return (
+    <div class="flex items-center gap-4">
+      <Skeleton class="h-12 w-12 rounded-full" />
+      <div class="space-y-2 flex-1">
+        <Skeleton class="h-4 w-full" />
+        <Skeleton class="h-4 w-4/5" />
+      </div>
+    </div>
+  )
+}`,
         },
         {
           title: "Card skeleton",
@@ -44,14 +48,20 @@ export default function SkeletonPage() {
               </div>
             </div>
           ),
-          code: `<div class="rounded-lg border p-5 space-y-4">
-  <Skeleton class="h-32 w-full rounded-md" />
-  <div class="space-y-2">
-    <Skeleton class="h-4 w-3/4" />
-    <Skeleton class="h-3 w-full" />
-    <Skeleton class="h-3 w-5/6" />
-  </div>
-</div>`,
+          code: `import { Skeleton } from "~/components/ui/skeleton"
+
+export function SkeletonCardSkeleton() {
+  return (
+    <div class="rounded-lg border p-5 space-y-4">
+      <Skeleton class="h-32 w-full rounded-md" />
+      <div class="space-y-2">
+        <Skeleton class="h-4 w-3/4" />
+        <Skeleton class="h-3 w-full" />
+        <Skeleton class="h-3 w-5/6" />
+      </div>
+    </div>
+  )
+}`,
         },
       ]}
       props={[

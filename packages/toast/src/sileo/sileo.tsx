@@ -4,6 +4,11 @@ import { SPRING_CONFIGS, isSettled, springTick } from "./animations.js";
 import { resolveStyles } from "./presets.js";
 import { sileo } from "./store.js";
 
+function prefersReducedMotion(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 interface SileoItemProps {
   toast: SileoToastItem;
   preset: SileoPreset;
@@ -21,7 +26,11 @@ export const SileoItem: Component<SileoItemProps> = (props) => {
   const styles = () =>
     resolveStyles(props.toast.preset ?? props.preset, props.toast.type, props.toast.styles);
 
-  const animation = () => props.toast.animation ?? props.globalAnimation;
+  const animation = () => {
+    // prefers-reduced-motion: auto-fallback ke "none"
+    if (prefersReducedMotion()) return "none" as ToastAnimation;
+    return props.toast.animation ?? props.globalAnimation;
+  };
   const isPhysics = () => animation() === "spring" || animation() === "bounce";
 
   onMount(() => {
@@ -32,10 +41,27 @@ export const SileoItem: Component<SileoItemProps> = (props) => {
       return;
     }
 
-    if (!isPhysics()) {
-      setTranslateY(0);
-      setOpacity(1);
-      setScale(1);
+    // fade: CSS opacity transition via rAF double-frame trick
+    if (animation() === "fade") {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setOpacity(1);
+          setTranslateY(0);
+          setScale(1);
+        });
+      });
+      return;
+    }
+
+    // slide: CSS translateY transition via rAF double-frame trick
+    if (animation() === "slide") {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setTranslateY(0);
+          setOpacity(1);
+          setScale(1);
+        });
+      });
       return;
     }
 
@@ -90,6 +116,13 @@ export const SileoItem: Component<SileoItemProps> = (props) => {
 
   const isGlass = () => props.toast.preset === "glass" || props.preset === "glass";
 
+  const transitionStyle = () => {
+    const a = animation();
+    if (a === "fade") return "opacity 220ms ease, transform 220ms ease";
+    if (a === "slide") return "opacity 200ms ease, transform 250ms cubic-bezier(0.22,1,0.36,1)";
+    return undefined;
+  };
+
   return (
     <div
       aria-live="polite"
@@ -97,6 +130,7 @@ export const SileoItem: Component<SileoItemProps> = (props) => {
       style={{
         transform: `translateY(${translateY()}px) scale(${scale()})`,
         opacity: opacity(),
+        transition: transitionStyle(),
         "background-color": styles().fill,
         "border-color": styles().borderColor,
         "backdrop-filter": isGlass() ? "blur(12px)" : undefined,

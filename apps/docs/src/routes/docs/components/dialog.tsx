@@ -43,22 +43,26 @@ export default function DialogPage() {
           code: `import {
   Dialog, DialogContent, DialogDescription,
   DialogFooter, DialogTitle, DialogTrigger,
-} from "~/components/ui/dialog";
-import { Button } from "~/components/ui/button";
+} from "~/components/ui/dialog"
+import { Button } from "~/components/ui/button"
 
-<Dialog>
-  <DialogTrigger as={Button}>Open Dialog</DialogTrigger>
-  <DialogContent>
-    <DialogTitle>Edit Profile</DialogTitle>
-    <DialogDescription>
-      Make changes to your profile here. Click save when done.
-    </DialogDescription>
-    <DialogFooter>
-      <Button variant="outline">Cancel</Button>
-      <Button>Save changes</Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`,
+export function DialogDefault() {
+  return (
+    <Dialog>
+      <DialogTrigger as={Button}>Open Dialog</DialogTrigger>
+      <DialogContent>
+        <DialogTitle>Edit Profile</DialogTitle>
+        <DialogDescription>
+          Make changes to your profile here. Click save when done.
+        </DialogDescription>
+        <DialogFooter>
+          <Button variant="outline">Cancel</Button>
+          <Button>Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
+}`,
         },
       ]}
       props={[

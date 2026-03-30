@@ -20,13 +20,17 @@ export default function SeparatorPage() {
               <p class="text-sm">Below the line</p>
             </div>
           ),
-          code: `import { Separator } from "~/components/ui/separator";
+          code: `import { Separator } from "~/components/ui/separator"
 
-<div class="space-y-3">
-  <p>Above the line</p>
-  <Separator />
-  <p>Below the line</p>
-</div>`,
+export function SeparatorHorizontal() {
+  return (
+    <div class="space-y-3">
+      <p>Above the line</p>
+      <Separator />
+      <p>Below the line</p>
+    </div>
+  )
+}`,
         },
         {
           title: "Vertical",
@@ -39,13 +43,19 @@ export default function SeparatorPage() {
               <span>Source</span>
             </div>
           ),
-          code: `<div class="flex h-8 items-center gap-3">
-  <span>Blog</span>
-  <Separator orientation="vertical" />
-  <span>Docs</span>
-  <Separator orientation="vertical" />
-  <span>Source</span>
-</div>`,
+          code: `import { Separator } from "~/components/ui/separator"
+
+export function SeparatorVertical() {
+  return (
+    <div class="flex h-8 items-center gap-3">
+      <span>Blog</span>
+      <Separator orientation="vertical" />
+      <span>Docs</span>
+      <Separator orientation="vertical" />
+      <span>Source</span>
+    </div>
+  )
+}`,
         },
       ]}
       props={[

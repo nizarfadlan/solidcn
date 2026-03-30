@@ -154,12 +154,12 @@ const MenubarRadioItem: Component<ComponentProps<typeof KobalteMenubar.RadioItem
   );
 };
 
-const MenubarLabel: Component<
-  ComponentProps<typeof KobalteMenubar.GroupLabel> & { inset?: boolean }
-> = (props) => {
+const MenubarLabel: Component<JSX.HTMLAttributes<HTMLDivElement> & { inset?: boolean }> = (
+  props,
+) => {
   const [local, rest] = splitProps(props, ["class", "inset"]);
   return (
-    <KobalteMenubar.GroupLabel
+    <div
       class={cn("px-2 py-1.5 text-sm font-semibold", local.inset && "pl-8", local.class)}
       {...rest}
     />

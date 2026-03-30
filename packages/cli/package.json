@@ -5,6 +5,11 @@
   "description": "CLI for solidcn — add SolidJS components to your project",
   "keywords": ["solidjs", "cli", "ui", "components", "registry"],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nizarfadlan/solidcn",
+    "directory": "packages/cli"
+  },
   "bin": {
     "solidcn": "./dist/index.js"
   },

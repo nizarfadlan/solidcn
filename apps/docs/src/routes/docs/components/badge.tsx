@@ -14,9 +14,13 @@ export default function BadgePage() {
         {
           title: "Default",
           preview: <Badge>Badge</Badge>,
-          code: `import { Badge } from "~/components/ui/badge";
+          code: `import { Badge } from "~/components/ui/badge"
 
-<Badge>Badge</Badge>`,
+export function BadgeDefault() {
+  return (
+    <Badge>Badge</Badge>
+  )
+}`,
         },
         {
           title: "Variants",
@@ -28,10 +32,18 @@ export default function BadgePage() {
               <Badge variant="outline">Outline</Badge>
             </div>
           ),
-          code: `<Badge variant="default">Default</Badge>
-<Badge variant="secondary">Secondary</Badge>
-<Badge variant="destructive">Destructive</Badge>
-<Badge variant="outline">Outline</Badge>`,
+          code: `import { Badge } from "~/components/ui/badge"
+
+export function BadgeVariants() {
+  return (
+    <div class="flex flex-wrap gap-2">
+      <Badge variant="default">Default</Badge>
+      <Badge variant="secondary">Secondary</Badge>
+      <Badge variant="destructive">Destructive</Badge>
+      <Badge variant="outline">Outline</Badge>
+    </div>
+  )
+}`,
         },
       ]}
       props={[

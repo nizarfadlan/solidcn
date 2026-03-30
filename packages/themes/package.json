@@ -1,8 +1,18 @@
 {
   "name": "@solidcn/themes",
   "version": "0.0.1",
-  "description": "Theming, design tokens, and ThemeProvider for solidcn",
   "type": "module",
+  "description": "Theming, design tokens, and ThemeProvider for solidcn",
+  "keywords": ["solidjs", "themes", "design-tokens", "tailwind", "dark-mode"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nizarfadlan/solidcn",
+    "directory": "packages/themes"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

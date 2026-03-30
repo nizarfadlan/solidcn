@@ -30,22 +30,26 @@ export default function SelectPage() {
           ),
           code: `import {
   Select, SelectContent, SelectItem, SelectTrigger,
-} from "~/components/ui/select";
+} from "~/components/ui/select"
 
-const frameworks = ["SolidJS", "React", "Vue", "Svelte"];
+const frameworks = ["SolidJS", "React", "Vue", "Svelte"]
 
-<Select<string>
-  options={frameworks}
-  placeholder="Select a framework"
-  itemComponent={(props) => (
-    <SelectItem item={props.item}>{props.item.rawValue}</SelectItem>
-  )}
->
-  <SelectTrigger class="w-48">
-    Select a framework...
-  </SelectTrigger>
-  <SelectContent />
-</Select>`,
+export function SelectDefault() {
+  return (
+    <Select<string>
+      options={frameworks}
+      placeholder="Select a framework"
+      itemComponent={(props) => (
+        <SelectItem item={props.item}>{props.item.rawValue}</SelectItem>
+      )}
+    >
+      <SelectTrigger class="w-48">
+        Select a framework...
+      </SelectTrigger>
+      <SelectContent />
+    </Select>
+  )
+}`,
         },
       ]}
       props={[

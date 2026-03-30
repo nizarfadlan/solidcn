@@ -8,39 +8,49 @@ interface CodeBlockProps {
   lang?: string;
   filename?: string;
   class?: string;
-  /** `figure` = flat demo panel (ui.shadcn.com-style); `card` = bordered doc blocks */
+  /** `figure` = flat demo panel (inside ComponentDemo); `card` = standalone code blocks in prose */
   variant?: "card" | "figure";
 }
 
-const copyBtnHeaderDark =
-  "shrink-0 rounded-md border border-zinc-600 bg-zinc-800/80 px-2 py-1 text-xs text-zinc-300 hover:border-zinc-500 hover:text-zinc-100 transition-colors";
+/** Map common file extensions to a short display label */
+function extLabel(filename: string): string {
+  const ext = filename.split(".").pop()?.toLowerCase() ?? "";
+  const map: Record<string, string> = {
+    tsx: "tsx",
+    ts: "ts",
+    jsx: "jsx",
+    js: "js",
+    css: "css",
+    json: "json",
+    bash: "sh",
+    sh: "sh",
+    md: "md",
+    mdx: "mdx",
+  };
+  return map[ext] ?? ext;
+}
 
-const copyBtnHeaderLight =
-  "shrink-0 rounded-md border border-border bg-background px-2 py-1 text-xs text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors";
-
-const copyBtnFloating =
-  "rounded-md border border-border bg-background px-2 py-1 text-xs text-muted-foreground shadow-sm hover:bg-accent hover:text-accent-foreground transition-colors";
-
-const copyBtnFigure =
-  "inline-flex size-8 items-center justify-center rounded-md border border-transparent text-muted-foreground transition-colors hover:bg-black/[0.06] dark:hover:bg-white/[0.08] dark:text-zinc-400 dark:hover:text-zinc-100";
-
-/** Shiki output: layout + horizontal scroll; background from panel in figure variant */
-const shikiPreCard =
-  "[&>pre]:m-0 [&>pre]:max-h-none [&>pre]:overflow-x-auto [&>pre]:overflow-y-hidden [&>pre]:rounded-none [&>pre]:p-4 [&>pre]:text-[13px] [&>pre]:leading-relaxed";
-
-const shikiPreFigure =
-  "[&>pre]:m-0 [&>pre]:max-h-none [&>pre]:overflow-x-auto [&>pre]:overflow-y-hidden [&>pre]:rounded-none [&>pre]:px-4 [&>pre]:pb-4 [&>pre]:pt-3 [&>pre]:text-[13px] [&>pre]:leading-relaxed";
+/** Icon pill for file type — small colored badge like vscode tabs */
+const ExtBadge: Component<{ filename: string }> = (props) => {
+  const label = () => extLabel(props.filename);
+  return (
+    <span class="shrink-0 rounded px-1 py-0.5 font-mono text-[10px] font-medium leading-none bg-muted text-muted-foreground">
+      {label()}
+    </span>
+  );
+};
 
 export const CodeBlock: Component<CodeBlockProps> = (props) => {
   const [html, setHtml] = createSignal<string>("");
   const [copied, setCopied] = createSignal(false);
 
   const variant = () => props.variant ?? "card";
+  const isDark = () => docsTheme() === "dark";
 
   createEffect(() => {
     const code = props.code;
     const lang = props.lang ?? "tsx";
-    const mode = docsTheme() === "dark" ? "dark" : "light";
+    const mode = isDark() ? "dark" : "light";
     void highlight(code, lang, mode).then(setHtml);
   });
 
@@ -50,136 +60,122 @@ export const CodeBlock: Component<CodeBlockProps> = (props) => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  /* ── Root wrapper classes ── */
   const rootClass = () => {
-    const extra = props.class ?? "";
+    const base = props.class ?? "";
     if (variant() === "figure") {
-      return [
-        "docs-code-figure group relative rounded-b-lg border-0 border-t border-border shadow-none",
-        "bg-[hsl(var(--docs-code))] text-[hsl(var(--docs-code-foreground))]",
-        extra,
-      ]
-        .filter(Boolean)
-        .join(" ");
+      return `docs-code-figure relative bg-[hsl(var(--docs-code))] text-[hsl(var(--docs-code-foreground))] ${base}`.trim();
     }
-    return [
-      "group relative rounded-lg border border-border shadow-sm",
-      props.filename ? "bg-card" : "",
-      !props.filename && docsTheme() === "dark" ? "bg-zinc-950" : "",
-      !props.filename && docsTheme() !== "dark" ? "bg-[#f6f8fa]" : "",
-      extra,
-    ]
-      .filter(Boolean)
-      .join(" ");
+    // card — standalone in prose
+    const bg = isDark() ? "bg-zinc-950" : "bg-[#f6f8fa]";
+    return `group relative overflow-hidden rounded-lg border border-border shadow-sm ${bg} ${base}`.trim();
   };
 
-  const innerShellClass = () => {
+  /* ── Pre inner class (applied via shiki wrapper) ── */
+  const preClass = () => {
+    const base =
+      "[&>pre]:m-0 [&>pre]:overflow-x-auto [&>pre]:overflow-y-hidden [&>pre]:text-[0.8125rem] [&>pre]:leading-[1.625]";
     if (variant() === "figure") {
-      return "relative min-h-0";
+      return `${base} [&>pre]:rounded-none [&>pre]:px-4 [&>pre]:pb-4 [&>pre]:pt-3`;
     }
-    return [
-      "relative min-h-0",
-      props.filename ? "bg-background" : "",
-      !props.filename && docsTheme() === "dark" ? "bg-zinc-950" : "",
-      !props.filename && docsTheme() !== "dark" ? "bg-[#f6f8fa]" : "",
-    ]
-      .filter(Boolean)
-      .join(" ");
+    return `${base} [&>pre]:rounded-none [&>pre]:p-4`;
   };
 
-  const filenameBarClass = () => {
+  /* ── figcaption / filename bar ── */
+  const barClass = () => {
     if (variant() === "figure") {
-      return [
-        "flex items-center justify-between gap-3 border-b px-4 py-2.5",
-        "border-black/[0.06] dark:border-white/[0.08]",
-        "bg-[hsl(var(--docs-code))]",
-      ].join(" ");
+      return "flex h-9 items-center gap-2 border-b border-black/[0.06] bg-[hsl(var(--docs-code))] px-4 dark:border-white/[0.08]";
     }
-    return [
-      "flex items-center justify-between gap-3 border-b px-4 py-2.5",
-      docsTheme() === "dark" ? "border-zinc-800 bg-zinc-950" : "border-border bg-muted/50",
-    ].join(" ");
+    return isDark()
+      ? "flex h-9 items-center gap-2 border-b border-zinc-800 bg-zinc-950 px-4"
+      : "flex h-9 items-center gap-2 border-b border-border bg-muted/40 px-4";
   };
 
-  const filenameTextClass = () => {
-    if (variant() === "figure") {
-      return "truncate font-mono text-xs text-muted-foreground dark:text-zinc-500";
-    }
-    return [
-      "truncate font-mono text-xs",
-      docsTheme() === "dark" ? "text-zinc-400" : "text-muted-foreground",
-    ].join(" ");
-  };
+  /* ── Copy button (in figcaption bar) ── */
+  const copyBarClass = () =>
+    "ml-auto inline-flex h-6 w-6 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-black/[0.06] hover:text-foreground dark:hover:bg-white/[0.08] dark:hover:text-zinc-100 shrink-0";
+
+  /* ── Floating copy (no filename, card variant) ── */
+  const copyFloatClass = () =>
+    isDark()
+      ? "absolute right-2.5 top-2.5 z-10 inline-flex h-7 w-7 items-center justify-center rounded-md border border-zinc-700 bg-zinc-800 text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-100"
+      : "absolute right-2.5 top-2.5 z-10 inline-flex h-7 w-7 items-center justify-center rounded-md border border-border bg-background text-muted-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground";
 
   return (
     <div class={rootClass()}>
+      {/* ── Filename bar (shown when filename provided) ── */}
       <Show when={props.filename}>
-        <div class={filenameBarClass()}>
-          <span class={filenameTextClass()}>{props.filename}</span>
-          <button
-            type="button"
-            onClick={copy}
-            class={
-              variant() === "figure"
-                ? docsTheme() === "dark"
-                  ? copyBtnHeaderDark
-                  : copyBtnHeaderLight
-                : docsTheme() === "dark"
-                  ? copyBtnHeaderDark
-                  : copyBtnHeaderLight
-            }
-            aria-label="Copy code"
-          >
-            {copied() ? "Copied!" : "Copy"}
-          </button>
-        </div>
+        {(fname) => (
+          <div class={barClass()}>
+            <ExtBadge filename={fname()} />
+            <span
+              class={`flex-1 truncate font-mono text-xs ${
+                isDark() ? "text-zinc-400" : "text-muted-foreground"
+              }`}
+            >
+              {fname()}
+            </span>
+            <button
+              type="button"
+              onClick={copy}
+              class={copyBarClass()}
+              aria-label={copied() ? "Copied" : "Copy code"}
+            >
+              <Show
+                when={copied()}
+                fallback={<Copy class="size-3.5" stroke-width={2} aria-hidden="true" />}
+              >
+                <Check
+                  class="size-3.5 text-green-600 dark:text-green-400"
+                  stroke-width={2}
+                  aria-hidden="true"
+                />
+              </Show>
+            </button>
+          </div>
+        )}
       </Show>
 
-      <div class={innerShellClass()}>
+      {/* ── Highlighted code ── */}
+      <div class="relative">
         <Show
           when={html()}
           fallback={
             <pre
               class={[
-                "m-0 overflow-x-auto overflow-y-hidden font-mono text-[13px] leading-relaxed",
+                "m-0 overflow-x-auto font-mono text-[0.8125rem] leading-[1.625]",
                 variant() === "figure"
                   ? "bg-transparent px-4 pb-4 pt-3 text-[hsl(var(--docs-code-foreground))]"
-                  : props.filename
-                    ? "bg-background p-4 text-foreground"
-                    : docsTheme() === "dark"
-                      ? "bg-zinc-950 p-4 text-zinc-200"
-                      : "bg-[#f6f8fa] p-4 text-foreground",
+                  : isDark()
+                    ? "bg-zinc-950 p-4 text-zinc-200"
+                    : "bg-[#f6f8fa] p-4 text-foreground",
               ].join(" ")}
             >
               <code>{props.code}</code>
             </pre>
           }
         >
-          <div class={variant() === "figure" ? shikiPreFigure : shikiPreCard} innerHTML={html()} />
+          <div class={preClass()} innerHTML={html()} />
         </Show>
 
+        {/* Floating copy button (no filename) */}
         <Show when={!props.filename}>
           <button
             type="button"
             onClick={copy}
-            class={[
-              "absolute right-2 top-2 z-10",
-              variant() === "figure" ? copyBtnFigure : copyBtnFloating,
-            ].join(" ")}
+            class={copyFloatClass()}
             aria-label={copied() ? "Copied" : "Copy code"}
           >
-            <Show when={variant() === "figure"}>
-              <Show
-                when={copied()}
-                fallback={<Copy class="size-3.5 shrink-0" stroke-width={2} aria-hidden="true" />}
-              >
-                <Check
-                  class="size-3.5 shrink-0 text-green-600 dark:text-green-400"
-                  stroke-width={2}
-                  aria-hidden="true"
-                />
-              </Show>
+            <Show
+              when={copied()}
+              fallback={<Copy class="size-3.5" stroke-width={2} aria-hidden="true" />}
+            >
+              <Check
+                class="size-3.5 text-green-600 dark:text-green-400"
+                stroke-width={2}
+                aria-hidden="true"
+              />
             </Show>
-            <Show when={variant() !== "figure"}>{copied() ? "Copied!" : "Copy"}</Show>
           </button>
         </Show>
       </div>

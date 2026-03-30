@@ -25,16 +25,20 @@ export default function SliderPage() {
               />
             </div>
           ),
-          code: `import { Slider } from "~/components/ui/slider";
+          code: `import { Slider } from "~/components/ui/slider"
 
-<Slider
-  defaultValue={[50]}
-  minValue={0}
-  maxValue={100}
-  step={1}
-  label="Volume"
-  class="w-full"
-/>`,
+export function SliderWithLabel() {
+  return (
+    <Slider
+      defaultValue={[50]}
+      minValue={0}
+      maxValue={100}
+      step={1}
+      label="Volume"
+      class="w-full"
+    />
+  )
+}`,
         },
         {
           title: "Range (two thumbs)",
@@ -50,13 +54,19 @@ export default function SliderPage() {
               />
             </div>
           ),
-          code: `<Slider
-  defaultValue={[20, 80]}
-  minValue={0}
-  maxValue={100}
-  label="Price range"
-  class="w-full"
-/>`,
+          code: `import { Slider } from "~/components/ui/slider"
+
+export function SliderRangeTwoThumbs() {
+  return (
+    <Slider
+      defaultValue={[20, 80]}
+      minValue={0}
+      maxValue={100}
+      label="Price range"
+      class="w-full"
+    />
+  )
+}`,
         },
       ]}
       props={[

@@ -14,19 +14,35 @@ export default function SwitchPage() {
         {
           title: "With label",
           preview: <Switch label="Airplane Mode" />,
-          code: `import { Switch } from "~/components/ui/switch";
+          code: `import { Switch } from "~/components/ui/switch"
 
-<Switch label="Airplane Mode" />`,
+export function SwitchWithLabel() {
+  return (
+    <Switch label="Airplane Mode" />
+  )
+}`,
         },
         {
           title: "Default checked",
           preview: <Switch label="Dark mode" defaultChecked />,
-          code: `<Switch label="Dark mode" defaultChecked />`,
+          code: `import { Switch } from "~/components/ui/switch"
+
+export function SwitchDefaultChecked() {
+  return (
+    <Switch label="Dark mode" defaultChecked />
+  )
+}`,
         },
         {
           title: "Disabled",
           preview: <Switch label="Notifications" disabled />,
-          code: `<Switch label="Notifications" disabled />`,
+          code: `import { Switch } from "~/components/ui/switch"
+
+export function SwitchDisabled() {
+  return (
+    <Switch label="Notifications" disabled />
+  )
+}`,
         },
       ]}
       props={[

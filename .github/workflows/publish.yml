@@ -1,0 +1,116 @@
+name: Publish to npm
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (no actual publish)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Build & Publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # for creating git tags
+      id-token: write   # for npm provenance
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Build in dependency order
+      - name: Build @solidcn/themes
+        run: pnpm --filter @solidcn/themes build
+
+      - name: Build @solidcn/core
+        run: pnpm --filter @solidcn/core build
+
+      - name: Build @solidcn/toast
+        run: pnpm --filter @solidcn/toast build
+
+      - name: Build solidcn (CLI)
+        run: pnpm --filter solidcn build
+
+      - name: Build create-solidcn-app
+        run: pnpm --filter create-solidcn-app build
+
+      - name: Typecheck all packages
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      # Dry run to validate package contents
+      - name: Dry run — @solidcn/themes
+        run: pnpm --filter @solidcn/themes exec npm pack --dry-run
+
+      - name: Dry run — @solidcn/core
+        run: pnpm --filter @solidcn/core exec npm pack --dry-run
+
+      - name: Dry run — @solidcn/toast
+        run: pnpm --filter @solidcn/toast exec npm pack --dry-run
+
+      - name: Dry run — solidcn (CLI)
+        run: pnpm --filter solidcn exec npm pack --dry-run
+
+      - name: Dry run — create-solidcn-app
+        run: pnpm --filter create-solidcn-app exec npm pack --dry-run
+
+      # Publish (skipped if dry_run is true)
+      - name: Publish @solidcn/themes
+        if: ${{ !inputs.dry_run }}
+        run: pnpm --filter @solidcn/themes exec npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish @solidcn/core
+        if: ${{ !inputs.dry_run }}
+        run: pnpm --filter @solidcn/core exec npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish @solidcn/toast
+        if: ${{ !inputs.dry_run }}
+        run: pnpm --filter @solidcn/toast exec npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish solidcn (CLI)
+        if: ${{ !inputs.dry_run }}
+        run: pnpm --filter solidcn exec npm publish --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish create-solidcn-app
+        if: ${{ !inputs.dry_run }}
+        run: pnpm --filter create-solidcn-app exec npm publish --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Tag release
+        if: ${{ !inputs.dry_run }}
+        run: |
+          VERSION=$(node -p "require('./packages/core/package.json').version")
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "v${VERSION}" -m "Release v${VERSION}"
+          git push origin "v${VERSION}"

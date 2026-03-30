@@ -8,7 +8,7 @@ export default function Home() {
       <div class="text-center space-y-3">
         <h1 class="text-4xl font-bold tracking-tight">
           Welcome to{" "}
-          <span class="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+          <span class="bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">
             solidcn
           </span>
         </h1>

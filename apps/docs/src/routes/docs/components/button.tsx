@@ -25,9 +25,13 @@ export default function App() {
         {
           title: "Default",
           preview: <Button>Click me</Button>,
-          code: `import { Button } from "~/components/ui/button";
+          code: `import { Button } from "~/components/ui/button"
 
-<Button>Click me</Button>`,
+export function ButtonDefault() {
+  return (
+    <Button>Click me</Button>
+  )
+}`,
         },
         {
           title: "Variants",
@@ -41,12 +45,20 @@ export default function App() {
               <Button variant="link">Link</Button>
             </div>
           ),
-          code: `<Button variant="default">Default</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="destructive">Destructive</Button>
-<Button variant="outline">Outline</Button>
-<Button variant="ghost">Ghost</Button>
-<Button variant="link">Link</Button>`,
+          code: `import { Button } from "~/components/ui/button"
+
+export function ButtonVariants() {
+  return (
+    <div class="flex flex-wrap gap-2">
+      <Button variant="default">Default</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="destructive">Destructive</Button>
+      <Button variant="outline">Outline</Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button variant="link">Link</Button>
+    </div>
+  )
+}`,
         },
         {
           title: "Sizes",
@@ -60,19 +72,32 @@ export default function App() {
               </Button>
             </div>
           ),
-          code: `import { Plus } from "lucide-solid";
+          code: `import { Plus } from "lucide-solid"
+import { Button } from "~/components/ui/button"
 
-<Button size="sm">Small</Button>
-<Button size="default">Default</Button>
-<Button size="lg">Large</Button>
-<Button size="icon" aria-label="Add">
-  <Plus class="h-4 w-4" stroke-width={2} />
-</Button>`,
+export function ButtonSizes() {
+  return (
+    <div class="flex items-center flex-wrap gap-2">
+      <Button size="sm">Small</Button>
+      <Button size="default">Default</Button>
+      <Button size="lg">Large</Button>
+      <Button size="icon" aria-label="Add">
+        <Plus class="h-4 w-4" stroke-width={2} />
+      </Button>
+    </div>
+  )
+}`,
         },
         {
           title: "Disabled",
           preview: <Button disabled>Disabled</Button>,
-          code: "<Button disabled>Disabled</Button>",
+          code: `import { Button } from "~/components/ui/button"
+
+export function ButtonDisabled() {
+  return (
+    <Button disabled>Disabled</Button>
+  )
+}`,
         },
       ]}
       props={[

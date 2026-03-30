@@ -47,20 +47,39 @@ export default function ToastPage() {
           title: "Variants",
           description: "Click to trigger toasts. Requires <Toaster /> in your layout.",
           preview: <ToastDemo />,
-          code: `import { toast } from "@solidcn/toast";
+          code: `import { toast } from "@solidcn/toast"
+import { Button } from "~/components/ui/button"
 
-toast.success("Saved successfully!");
-toast.error("Something went wrong.");
-toast.warning("Disk space low.");
-toast.info("Update available.");
-
-toast.success("Event created", {
-  description: "Sunday, Dec 03 at 9:00 AM",
-  action: {
-    label: "Undo",
-    onClick: () => {},
-  },
-});`,
+export function ToastVariants() {
+  return (
+    <div class="flex flex-wrap gap-2">
+      <Button variant="outline" size="sm" onClick={() => toast.success("Saved successfully!")}>
+        Success
+      </Button>
+      <Button variant="outline" size="sm" onClick={() => toast.error("Something went wrong.")}>
+        Error
+      </Button>
+      <Button variant="outline" size="sm" onClick={() => toast.warning("Disk space low.")}>
+        Warning
+      </Button>
+      <Button variant="outline" size="sm" onClick={() => toast.info("Update available.")}>
+        Info
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() =>
+          toast.success("Event created", {
+            description: "Sunday, Dec 03 at 9:00 AM",
+            action: { label: "Undo", onClick: () => {} },
+          })
+        }
+      >
+        With action
+      </Button>
+    </div>
+  )
+}`,
         },
       ]}
       notes={

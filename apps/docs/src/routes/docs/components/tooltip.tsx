@@ -25,17 +25,21 @@ export default function TooltipPage() {
           ),
           code: `import {
   Tooltip, TooltipContent, TooltipTrigger
-} from "~/components/ui/tooltip";
-import { Button } from "~/components/ui/button";
+} from "~/components/ui/tooltip"
+import { Button } from "~/components/ui/button"
 
-<Tooltip>
-  <TooltipTrigger as={Button} variant="outline">
-    Hover me
-  </TooltipTrigger>
-  <TooltipContent>
-    <p>This is the tooltip content</p>
-  </TooltipContent>
-</Tooltip>`,
+export function TooltipDefault() {
+  return (
+    <Tooltip>
+      <TooltipTrigger as={Button} variant="outline">
+        Hover me
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>This is the tooltip content</p>
+      </TooltipContent>
+    </Tooltip>
+  )
+}`,
         },
         {
           title: "Placement variants",
@@ -51,15 +55,26 @@ import { Button } from "~/components/ui/button";
               ))}
             </div>
           ),
-          code: `<Tooltip placement="top">
-  <TooltipTrigger as={Button}>Top</TooltipTrigger>
-  <TooltipContent>Tooltip on top</TooltipContent>
-</Tooltip>
+          code: `import {
+  Tooltip, TooltipContent, TooltipTrigger
+} from "~/components/ui/tooltip"
+import { Button } from "~/components/ui/button"
 
-<Tooltip placement="bottom">
-  <TooltipTrigger as={Button}>Bottom</TooltipTrigger>
-  <TooltipContent>Tooltip on bottom</TooltipContent>
-</Tooltip>`,
+export function TooltipPlacementVariants() {
+  return (
+    <div class="flex flex-wrap gap-3">
+      <Tooltip placement="top">
+        <TooltipTrigger as={Button}>Top</TooltipTrigger>
+        <TooltipContent>Tooltip on top</TooltipContent>
+      </Tooltip>
+
+      <Tooltip placement="bottom">
+        <TooltipTrigger as={Button}>Bottom</TooltipTrigger>
+        <TooltipContent>Tooltip on bottom</TooltipContent>
+      </Tooltip>
+    </div>
+  )
+}`,
         },
       ]}
       props={[

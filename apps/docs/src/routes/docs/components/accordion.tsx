@@ -42,22 +42,26 @@ export default function AccordionPage() {
           code: `import {
   Accordion, AccordionContent,
   AccordionItem, AccordionTrigger,
-} from "~/components/ui/accordion";
+} from "~/components/ui/accordion"
 
-<Accordion collapsible class="w-full">
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Is it accessible?</AccordionTrigger>
-    <AccordionContent>
-      Yes. WAI-ARIA compliant via @kobalte/core.
-    </AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="item-2">
-    <AccordionTrigger>Is it unstyled?</AccordionTrigger>
-    <AccordionContent>
-      Yes. Full control over styling.
-    </AccordionContent>
-  </AccordionItem>
-</Accordion>`,
+export function AccordionSingleCollapsible() {
+  return (
+    <Accordion collapsible class="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        <AccordionContent>
+          Yes. WAI-ARIA compliant via @kobalte/core.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Is it unstyled?</AccordionTrigger>
+        <AccordionContent>
+          Yes. Full control over styling.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  )
+}`,
         },
         {
           title: "Multiple open",
@@ -73,16 +77,25 @@ export default function AccordionPage() {
               </AccordionItem>
             </Accordion>
           ),
-          code: `<Accordion multiple class="w-full">
-  <AccordionItem value="a">
-    <AccordionTrigger>Section A</AccordionTrigger>
-    <AccordionContent>Content for section A.</AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="b">
-    <AccordionTrigger>Section B</AccordionTrigger>
-    <AccordionContent>Content for section B.</AccordionContent>
-  </AccordionItem>
-</Accordion>`,
+          code: `import {
+  Accordion, AccordionContent,
+  AccordionItem, AccordionTrigger,
+} from "~/components/ui/accordion"
+
+export function AccordionMultipleOpen() {
+  return (
+    <Accordion multiple class="w-full">
+      <AccordionItem value="a">
+        <AccordionTrigger>Section A</AccordionTrigger>
+        <AccordionContent>Content for section A.</AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="b">
+        <AccordionTrigger>Section B</AccordionTrigger>
+        <AccordionContent>Content for section B.</AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  )
+}`,
         },
       ]}
       props={[

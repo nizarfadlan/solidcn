@@ -78,7 +78,7 @@ export default function Home() {
 
           <h1 class="mt-6 text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl">
             <span class="block">Build faster with</span>
-            <span class="mt-1 block bg-gradient-to-br from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent">
+            <span class="mt-1 block bg-linear-to-br from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent">
               SolidJS UI
             </span>
           </h1>

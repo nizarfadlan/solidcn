@@ -1,4 +1,4 @@
-import { Label, StandaloneInput } from "@solidcn/core";
+import { Input, Label } from "@solidcn/core";
 import { DocPage } from "../../../components/ui/DocPage.js";
 
 export default function InputPage() {
@@ -13,31 +13,45 @@ export default function InputPage() {
       examples={[
         {
           title: "Default",
-          preview: <StandaloneInput placeholder="Enter text..." class="w-64" />,
-          code: `import { Input } from "~/components/ui/input";
+          preview: <Input placeholder="Enter text..." class="w-64" />,
+          code: `import { Input } from "~/components/ui/input"
 
-<Input placeholder="Enter text..." />`,
+export function InputDefault() {
+  return (
+    <Input placeholder="Enter text..." />
+  )
+}`,
         },
         {
           title: "With label",
           preview: (
             <div class="w-64 space-y-2">
               <Label>Email address</Label>
-              <StandaloneInput type="email" placeholder="you@example.com" />
+              <Input type="email" placeholder="you@example.com" />
             </div>
           ),
-          code: `import { Input } from "~/components/ui/input";
-import { Label } from "~/components/ui/label";
+          code: `import { Input } from "~/components/ui/input"
+import { Label } from "~/components/ui/label"
 
-<div class="space-y-2">
-  <Label>Email address</Label>
-  <Input type="email" placeholder="you@example.com" />
-</div>`,
+export function InputWithLabel() {
+  return (
+    <div class="space-y-2">
+      <Label>Email address</Label>
+      <Input type="email" placeholder="you@example.com" />
+    </div>
+  )
+}`,
         },
         {
           title: "Disabled",
-          preview: <StandaloneInput placeholder="Disabled input" disabled class="w-64" />,
-          code: `<Input placeholder="Disabled input" disabled />`,
+          preview: <Input placeholder="Disabled input" disabled class="w-64" />,
+          code: `import { Input } from "~/components/ui/input"
+
+export function InputDisabled() {
+  return (
+    <Input placeholder="Disabled input" disabled />
+  )
+}`,
         },
       ]}
       props={[

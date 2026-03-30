@@ -1,8 +1,15 @@
 {
   "name": "create-solidcn-app",
   "version": "0.0.1",
-  "description": "Create a new SolidJS app with solidcn pre-configured",
   "type": "module",
+  "description": "Create a new SolidJS app with solidcn pre-configured",
+  "keywords": ["solidjs", "create-app", "starter", "template"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nizarfadlan/solidcn",
+    "directory": "packages/create-solidcn-app"
+  },
   "main": "./dist/index.js",
   "bin": {
     "create-solidcn-app": "./dist/index.js"

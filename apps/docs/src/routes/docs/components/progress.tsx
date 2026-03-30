@@ -18,9 +18,13 @@ export default function ProgressPage() {
               <Progress value={60} label="Loading..." class="w-full" />
             </div>
           ),
-          code: `import { Progress } from "~/components/ui/progress";
+          code: `import { Progress } from "~/components/ui/progress"
 
-<Progress value={60} label="Loading..." class="w-full" />`,
+export function ProgressWithValue() {
+  return (
+    <Progress value={60} label="Loading..." class="w-full" />
+  )
+}`,
         },
         {
           title: "Different values",
@@ -32,10 +36,18 @@ export default function ProgressPage() {
               <Progress value={100} class="w-full" />
             </div>
           ),
-          code: `<Progress value={25} class="w-full" />
-<Progress value={50} class="w-full" />
-<Progress value={75} class="w-full" />
-<Progress value={100} class="w-full" />`,
+          code: `import { Progress } from "~/components/ui/progress"
+
+export function ProgressDifferentValues() {
+  return (
+    <div class="space-y-4">
+      <Progress value={25} class="w-full" />
+      <Progress value={50} class="w-full" />
+      <Progress value={75} class="w-full" />
+      <Progress value={100} class="w-full" />
+    </div>
+  )
+}`,
         },
       ]}
       props={[

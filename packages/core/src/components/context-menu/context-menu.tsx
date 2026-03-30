@@ -93,12 +93,12 @@ const ContextMenuRadioItem: Component<ComponentProps<typeof KobalteContextMenu.R
   );
 };
 
-const ContextMenuLabel: Component<
-  ComponentProps<typeof KobalteContextMenu.GroupLabel> & { inset?: boolean }
-> = (props) => {
+const ContextMenuLabel: Component<JSX.HTMLAttributes<HTMLDivElement> & { inset?: boolean }> = (
+  props,
+) => {
   const [local, rest] = splitProps(props, ["class", "inset"]);
   return (
-    <KobalteContextMenu.GroupLabel
+    <div
       class={cn(
         "px-2 py-1.5 text-sm font-semibold text-foreground",
         local.inset && "pl-8",

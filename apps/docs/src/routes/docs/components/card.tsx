@@ -45,23 +45,28 @@ export default function CardPage() {
           code: `import {
   Card, CardHeader, CardTitle, CardDescription,
   CardContent, CardFooter
-} from "~/components/ui/card";
+} from "~/components/ui/card"
+import { Button } from "~/components/ui/button"
 
-<Card class="w-72">
-  <CardHeader>
-    <CardTitle>Create project</CardTitle>
-    <CardDescription>Deploy your new project in one click.</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <p class="text-sm text-muted-foreground">
-      Deploy to Vercel, Netlify or Cloudflare Pages.
-    </p>
-  </CardContent>
-  <CardFooter class="gap-2">
-    <Button variant="outline" class="flex-1">Cancel</Button>
-    <Button class="flex-1">Deploy</Button>
-  </CardFooter>
-</Card>`,
+export function CardDefault() {
+  return (
+    <Card class="w-72">
+      <CardHeader>
+        <CardTitle>Create project</CardTitle>
+        <CardDescription>Deploy your new project in one click.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p class="text-sm text-muted-foreground">
+          Deploy to Vercel, Netlify or Cloudflare Pages.
+        </p>
+      </CardContent>
+      <CardFooter class="gap-2">
+        <Button variant="outline" class="flex-1">Cancel</Button>
+        <Button class="flex-1">Deploy</Button>
+      </CardFooter>
+    </Card>
+  )
+}`,
         },
       ]}
     />

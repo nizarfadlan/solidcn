@@ -14,19 +14,35 @@ export default function CheckboxPage() {
         {
           title: "With label",
           preview: <Checkbox label="Accept terms and conditions" />,
-          code: `import { Checkbox } from "~/components/ui/checkbox";
+          code: `import { Checkbox } from "~/components/ui/checkbox"
 
-<Checkbox label="Accept terms and conditions" />`,
+export function CheckboxWithLabel() {
+  return (
+    <Checkbox label="Accept terms and conditions" />
+  )
+}`,
         },
         {
           title: "Default checked",
           preview: <Checkbox label="Subscribed to newsletter" defaultChecked />,
-          code: `<Checkbox label="Subscribed to newsletter" defaultChecked />`,
+          code: `import { Checkbox } from "~/components/ui/checkbox"
+
+export function CheckboxDefaultChecked() {
+  return (
+    <Checkbox label="Subscribed to newsletter" defaultChecked />
+  )
+}`,
         },
         {
           title: "Disabled",
           preview: <Checkbox label="Disabled option" disabled />,
-          code: `<Checkbox label="Disabled option" disabled />`,
+          code: `import { Checkbox } from "~/components/ui/checkbox"
+
+export function CheckboxDisabled() {
+  return (
+    <Checkbox label="Disabled option" disabled />
+  )
+}`,
         },
       ]}
       props={[

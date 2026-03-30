@@ -1,16 +1,15 @@
-import { TextField as KobalteTextField } from "@kobalte/core/text-field";
 import type { Component, ComponentProps } from "solid-js";
 import { splitProps } from "solid-js";
 import { cn } from "~/lib/cn.js";
 
-export type TextareaProps = ComponentProps<typeof KobalteTextField.TextArea> & {
+export type TextareaProps = ComponentProps<"textarea"> & {
   class?: string;
 };
 
 export const Textarea: Component<TextareaProps> = (props) => {
   const [local, rest] = splitProps(props, ["class"]);
   return (
-    <KobalteTextField.TextArea
+    <textarea
       class={cn(
         "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm",
         "ring-offset-background placeholder:text-muted-foreground",

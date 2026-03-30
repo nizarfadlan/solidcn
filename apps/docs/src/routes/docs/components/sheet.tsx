@@ -39,22 +39,26 @@ export default function SheetPage() {
           code: `import {
   Sheet, SheetContent, SheetDescription,
   SheetHeader, SheetTitle, SheetTrigger,
-} from "~/components/ui/sheet";
-import { Button } from "~/components/ui/button";
+} from "~/components/ui/sheet"
+import { Button } from "~/components/ui/button"
 
-<Sheet>
-  <SheetTrigger as={Button} variant="outline">
-    Open Sheet
-  </SheetTrigger>
-  <SheetContent>
-    <SheetHeader>
-      <SheetTitle>Edit profile</SheetTitle>
-      <SheetDescription>
-        Make changes to your profile here.
-      </SheetDescription>
-    </SheetHeader>
-  </SheetContent>
-</Sheet>`,
+export function SheetRightSideDefault() {
+  return (
+    <Sheet>
+      <SheetTrigger as={Button} variant="outline">
+        Open Sheet
+      </SheetTrigger>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Edit profile</SheetTitle>
+          <SheetDescription>
+            Make changes to your profile here.
+          </SheetDescription>
+        </SheetHeader>
+      </SheetContent>
+    </Sheet>
+  )
+}`,
         },
         {
           title: "Left side",
@@ -70,16 +74,25 @@ import { Button } from "~/components/ui/button";
               </SheetContent>
             </Sheet>
           ),
-          code: `<Sheet>
-  <SheetTrigger as={Button} variant="outline">
-    Open Left
-  </SheetTrigger>
-  <SheetContent side="left">
-    <SheetHeader>
-      <SheetTitle>Navigation</SheetTitle>
-    </SheetHeader>
-  </SheetContent>
-</Sheet>`,
+          code: `import {
+  Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,
+} from "~/components/ui/sheet"
+import { Button } from "~/components/ui/button"
+
+export function SheetLeftSide() {
+  return (
+    <Sheet>
+      <SheetTrigger as={Button} variant="outline">
+        Open Left
+      </SheetTrigger>
+      <SheetContent side="left">
+        <SheetHeader>
+          <SheetTitle>Navigation</SheetTitle>
+        </SheetHeader>
+      </SheetContent>
+    </Sheet>
+  )
+}`,
         },
       ]}
       props={[

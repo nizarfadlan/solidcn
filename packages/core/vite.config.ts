@@ -12,7 +12,7 @@ const componentEntries = readdirSync(componentsDir, { withFileTypes: true })
   }, {});
 
 export default defineConfig({
-  plugins: [solid()],
+  plugins: [solid({ solid: { generate: "dom", hydratable: true } })],
   build: {
     lib: {
       entry: {
@@ -22,13 +22,19 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: [
-        "solid-js",
-        "solid-js/web",
-        "solid-js/store",
-        "@kobalte/core",
-        "tailwind-variants",
-      ],
+      external: (id) =>
+        [
+          "solid-js",
+          "solid-js/web",
+          "solid-js/store",
+          "@kobalte/core",
+          "tailwind-variants",
+          "@modular-forms/solid",
+          "corvu",
+        ].includes(id) ||
+        id.startsWith("@kobalte/core/") ||
+        id.startsWith("@modular-forms/solid/") ||
+        id.startsWith("corvu/"),
       output: {
         preserveModules: true,
         preserveModulesRoot: "src",

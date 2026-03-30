@@ -134,12 +134,12 @@ const DropdownMenuRadioItem: Component<ComponentProps<typeof KobalteDropdownMenu
   );
 };
 
-const DropdownMenuLabel: Component<
-  ComponentProps<typeof KobalteDropdownMenu.GroupLabel> & { inset?: boolean }
-> = (props) => {
+const DropdownMenuLabel: Component<JSX.HTMLAttributes<HTMLDivElement> & { inset?: boolean }> = (
+  props,
+) => {
   const [local, rest] = splitProps(props, ["class", "inset"]);
   return (
-    <KobalteDropdownMenu.GroupLabel
+    <div
       class={cn("px-2 py-1.5 text-sm font-semibold", local.inset && "pl-8", local.class)}
       {...rest}
     />

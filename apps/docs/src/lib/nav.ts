@@ -39,6 +39,7 @@ export const navigation: NavGroup[] = [
       { title: "CLI", href: "/docs/cli" },
       { title: "MCP Server", href: "/docs/mcp", badge: "AI" },
       { title: "Open Registry", href: "/docs/registry" },
+      { title: "Forms", href: "/docs/forms" },
     ],
   },
   {

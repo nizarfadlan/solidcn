@@ -10,9 +10,7 @@
       "Bash(pnpm exec:*)",
       "Bash(npx biome:*)",
       "Bash(ls:*)",
-      "Bash(cat:*)",
-      "WebSearch",
-      "WebFetch(domain:github.com)"
+      "Bash(cat:*)"
     ],
     "deny": []
   }

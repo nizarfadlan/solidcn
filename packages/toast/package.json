@@ -5,6 +5,14 @@
   "description": "Dual toast system for SolidJS — standard (shadcn-style) + sileo (physics-based)",
   "keywords": ["solidjs", "toast", "notification", "physics", "animation"],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nizarfadlan/solidcn",
+    "directory": "packages/toast"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -28,10 +36,10 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "solid-js": ">=1.9"
+    "solid-js": ">=1.9",
+    "tailwind-variants": ">=0.3"
   },
   "devDependencies": {
-    "@kobalte/core": "^0.13.10",
     "solid-js": "^1.9.4",
     "tailwind-variants": "^0.3.0",
     "vite": "^6.0.11",

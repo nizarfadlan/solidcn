@@ -5,6 +5,14 @@
   "description": "SolidJS UI components — a port of shadcn/ui",
   "keywords": ["solidjs", "ui", "components", "shadcn", "kobalte", "tailwind"],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nizarfadlan/solidcn",
+    "directory": "packages/core"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -32,7 +40,9 @@
   },
   "devDependencies": {
     "@kobalte/core": "^0.13.10",
+    "@modular-forms/solid": "^0.25.1",
     "clsx": "^2.1.1",
+    "corvu": "^0.7.2",
     "lucide-solid": "^0.479.0",
     "solid-js": "^1.9.4",
     "tailwind-merge": "^2.6.0",
@@ -40,9 +50,5 @@
     "typescript": "^5.7.3",
     "vite": "^6.0.11",
     "vite-plugin-solid": "^2.11.1"
-  },
-  "dependencies": {
-    "@modular-forms/solid": "^0.25.1",
-    "corvu": "^0.7.2"
   }
 }

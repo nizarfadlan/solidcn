@@ -12,6 +12,9 @@ apps/docs/.vinxi
 # Storybook
 apps/storybook/
 
+# Wrangler
+packages/mcp-cloudflare/.wrangler
+
 # env
 .env
 .env.local

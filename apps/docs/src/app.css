@@ -116,15 +116,75 @@
   background-color: transparent !important;
 }
 
+/* Dot grid background for component preview panes (shadcn-style) */
+.docs-preview-grid {
+  background-color: hsl(var(--background));
+  background-image: radial-gradient(hsl(var(--border)) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.dark .docs-preview-grid {
+  /* More visible dots on dark background */
+  background-image: radial-gradient(hsl(var(--muted-foreground) / 0.2) 1px, transparent 1px);
+}
+
 /* Docs reading column — shadcn-like rhythm */
 .docs-prose {
   max-width: 48rem;
 }
 
+.docs-prose :where(h1) {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  scroll-margin-top: 5rem;
+}
+
 .docs-prose :where(h2) {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  scroll-margin-top: 5rem;
+}
+
+.docs-prose :where(h3) {
+  font-size: 1rem;
+  font-weight: 600;
   scroll-margin-top: 5rem;
 }
 
 .docs-prose :where(p, li) {
+  font-size: 0.9375rem;
   line-height: 1.75;
+  color: hsl(var(--muted-foreground));
+}
+
+.docs-prose :where(p strong, li strong) {
+  color: hsl(var(--foreground));
+  font-weight: 500;
+}
+
+.docs-prose :where(a) {
+  color: hsl(var(--foreground));
+  text-underline-offset: 4px;
+}
+
+.docs-prose :where(a:hover) {
+  text-decoration: none;
+}
+
+.docs-prose :where(code):not(pre code) {
+  font-family: ui-monospace, “Cascadia Code”, “Source Code Pro”, Menlo, Consolas, monospace;
+  font-size: 0.8125rem;
+  background-color: hsl(var(--muted));
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.375rem;
+}
+
+/* Shiki code blocks — consistent 13px line height */
+.shiki {
+  font-size: 0.8125rem;
+  line-height: 1.625;
 }

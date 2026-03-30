@@ -33,20 +33,24 @@ export default function TabsPage() {
           preview: <TabsDemo />,
           code: `import {
   Tabs, TabsList, TabsTrigger, TabsContent
-} from "~/components/ui/tabs";
+} from "~/components/ui/tabs"
 
-<Tabs defaultValue="account" class="w-full">
-  <TabsList>
-    <TabsTrigger value="account">Account</TabsTrigger>
-    <TabsTrigger value="password">Password</TabsTrigger>
-  </TabsList>
-  <TabsContent value="account">
-    Change your account settings here.
-  </TabsContent>
-  <TabsContent value="password">
-    Change your password here.
-  </TabsContent>
-</Tabs>`,
+export function TabsDefault() {
+  return (
+    <Tabs defaultValue="account" class="w-full">
+      <TabsList>
+        <TabsTrigger value="account">Account</TabsTrigger>
+        <TabsTrigger value="password">Password</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">
+        Change your account settings here.
+      </TabsContent>
+      <TabsContent value="password">
+        Change your password here.
+      </TabsContent>
+    </Tabs>
+  )
+}`,
         },
       ]}
       props={[

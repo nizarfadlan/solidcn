@@ -26,8 +26,8 @@ export const SidebarContent: Component<SidebarProps> = (props) => {
                     class={[
                       "flex items-center justify-between rounded-md px-2.5 py-1.5 text-[13px] leading-snug transition-colors",
                       location.pathname === item.href
-                        ? "bg-muted font-medium text-foreground"
-                        : "text-muted-foreground hover:bg-muted/60 hover:text-foreground",
+                        ? "font-medium text-foreground bg-accent"
+                        : "text-muted-foreground hover:bg-accent/50 hover:text-foreground",
                     ].join(" ")}
                   >
                     <span>{item.title}</span>
