@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prepare": "husky",
     "build": "pnpm -r build",
     "dev": "pnpm -r --parallel dev",
     "typecheck": "pnpm -r typecheck",
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "husky": "^9.1.7",
     "typescript": "^5.7.3",
     "wrangler": "^3.99.0"
   },

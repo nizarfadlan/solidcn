@@ -3,7 +3,7 @@ import { createSignal } from "solid-js";
 import { DocPage } from "../../../components/ui/DocPage.js";
 
 function DatePickerDemo() {
-  const [date, setDate] = createSignal<Date | undefined>();
+  const [date, setDate] = createSignal<Date>(new Date());
   return <DatePicker selected={date()} onSelect={setDate} class="w-[280px]" />;
 }
 
@@ -54,7 +54,9 @@ export function DatePickerDefault() {
           preview: (
             <DatePicker
               placeholder="Pick a date"
-              format={(d: Date) => d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}
+              format={(d: Date) =>
+                d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
+              }
             />
           ),
           code: `import { DatePicker } from "~/components/ui/date-picker"

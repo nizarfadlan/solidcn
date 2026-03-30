@@ -61,9 +61,7 @@ export default function MenubarPage() {
                   <MenubarItem>
                     New Window <MenubarShortcut>⌘N</MenubarShortcut>
                   </MenubarItem>
-                  <MenubarItem disabled>
-                    New Incognito Window
-                  </MenubarItem>
+                  <MenubarItem disabled>New Incognito Window</MenubarItem>
                   <MenubarSeparator />
                   <MenubarSub>
                     <MenubarSubTrigger>Share</MenubarSubTrigger>

@@ -176,7 +176,7 @@
 }
 
 .docs-prose :where(code):not(pre code) {
-  font-family: ui-monospace, “Cascadia Code”, “Source Code Pro”, Menlo, Consolas, monospace;
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
   font-size: 0.8125rem;
   background-color: hsl(var(--muted));
   border-radius: 0.25rem;

@@ -4,8 +4,6 @@ import {
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuLabel,
-  ContextMenuRadioGroup,
-  ContextMenuRadioItem,
   ContextMenuSeparator,
   ContextMenuShortcut,
   ContextMenuSub,
@@ -69,9 +67,7 @@ export default function ContextMenuPage() {
                 </ContextMenuSub>
                 <ContextMenuSeparator />
                 <ContextMenuLabel>Settings</ContextMenuLabel>
-                <ContextMenuCheckboxItem checked>
-                  Show Bookmarks Bar
-                </ContextMenuCheckboxItem>
+                <ContextMenuCheckboxItem checked>Show Bookmarks Bar</ContextMenuCheckboxItem>
                 <ContextMenuCheckboxItem>Show Full URLs</ContextMenuCheckboxItem>
               </ContextMenuContent>
             </ContextMenu>

@@ -1,4 +1,12 @@
-import { Card, CardContent, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@solidcn/core";
+import {
+  Card,
+  CardContent,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@solidcn/core";
 import { For } from "solid-js";
 import { DocPage } from "../../../components/ui/DocPage.js";
 
@@ -86,10 +94,7 @@ export function CarouselDefault() {
         {
           title: "Multiple items",
           preview: (
-            <Carousel
-              class="w-full max-w-sm"
-              opts={{ loop: true }}
-            >
+            <Carousel class="w-full max-w-sm" opts={{ loop: true }}>
               <CarouselContent class="-ml-1">
                 <For each={Array.from({ length: 5 }, (_, i) => i + 1)}>
                   {(item) => (

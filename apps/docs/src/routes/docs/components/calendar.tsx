@@ -3,14 +3,10 @@ import { createSignal } from "solid-js";
 import { DocPage } from "../../../components/ui/DocPage.js";
 
 function CalendarDemo() {
-  const [date, setDate] = createSignal<Date | undefined>(new Date());
+  const [date, setDate] = createSignal<Date>(new Date());
   return (
     <div class="flex flex-col items-center gap-4">
-      <Calendar
-        selected={date()}
-        onSelect={setDate}
-        class="rounded-md border border-border"
-      />
+      <Calendar selected={date()} onSelect={setDate} class="rounded-md border border-border" />
       <p class="text-sm text-muted-foreground">
         Selected: {date()?.toLocaleDateString() ?? "None"}
       </p>

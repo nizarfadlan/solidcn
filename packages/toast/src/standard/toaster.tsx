@@ -1,4 +1,4 @@
-import { type Component, For, createSignal, onMount, onCleanup } from "solid-js";
+import { type Component, For, createSignal } from "solid-js";
 import { Portal } from "solid-js/web";
 import type { StandardToasterProps } from "../types.js";
 import { toastStore } from "./store.js";
@@ -38,9 +38,7 @@ export const StandardToaster: Component<StandardToasterProps> = (props) => {
   const themeClass = () => resolveThemeClass(props.theme);
 
   const isBottom = () =>
-    position() === "bottom-left" ||
-    position() === "bottom-center" ||
-    position() === "bottom-right";
+    position() === "bottom-left" || position() === "bottom-center" || position() === "bottom-right";
 
   // most recent toast is last in array → front of stack
   const visibleToasts = () => {
@@ -80,8 +78,7 @@ export const StandardToaster: Component<StandardToasterProps> = (props) => {
               const dir = isBottom() ? -1 : 1;
               return `${dir * si() * STACK_OFFSET_PX}px`;
             };
-            const stackScale = () =>
-              isExpanded() ? 1 : Math.max(0, 1 - si() * STACK_SCALE_STEP);
+            const stackScale = () => (isExpanded() ? 1 : Math.max(0, 1 - si() * STACK_SCALE_STEP));
             const stackOpacity = () =>
               isExpanded() ? 1 : si() < MAX_STACK_VISIBLE ? 1 - si() * 0.1 : 0;
             const stackZIndex = () => maxToasts() - si();
@@ -96,7 +93,11 @@ export const StandardToaster: Component<StandardToasterProps> = (props) => {
                   transition:
                     "transform 300ms cubic-bezier(0.32,0.72,0,1), opacity 200ms ease, scale 200ms ease",
                   // When stacked, pull older toasts up so they peek behind the front one
-                  "margin-bottom": isExpanded() ? "0" : si() > 0 ? `-${STACK_OFFSET_PX * 2}px` : "0",
+                  "margin-bottom": isExpanded()
+                    ? "0"
+                    : si() > 0
+                      ? `-${STACK_OFFSET_PX * 2}px`
+                      : "0",
                 }}
               >
                 <ToastItem

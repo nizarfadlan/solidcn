@@ -397,10 +397,7 @@ pnpm add valibot @tanstack/valibot-form-adapter`}
             Pass <code class="text-xs bg-muted px-1 rounded">validatorAdapter: zodValidator()</code>{" "}
             and a <code class="text-xs bg-muted px-1 rounded">validators.onChange</code> schema.
             Errors surface in{" "}
-            <code class="text-xs bg-muted px-1 rounded">
-              field().state.meta.errors
-            </code>
-            .
+            <code class="text-xs bg-muted px-1 rounded">field().state.meta.errors</code>.
           </p>
           <CodeBlock code={zodValidationExample} lang="tsx" filename="signup-form.tsx" />
         </section>
@@ -424,10 +421,9 @@ pnpm add valibot @tanstack/valibot-form-adapter`}
         <section class="space-y-4" id="checkbox-fields">
           <h2 class="text-xl font-semibold">Checkbox fields</h2>
           <p class="text-sm text-muted-foreground">
-            Use the solidcn{" "}
-            <code class="text-xs bg-muted px-1 rounded">Checkbox</code> component. The{" "}
-            <code class="text-xs bg-muted px-1 rounded">onChange</code> callback receives the new{" "}
-            boolean value — pass it directly to{" "}
+            Use the solidcn <code class="text-xs bg-muted px-1 rounded">Checkbox</code> component.
+            The <code class="text-xs bg-muted px-1 rounded">onChange</code> callback receives the
+            new boolean value — pass it directly to{" "}
             <code class="text-xs bg-muted px-1 rounded">field().handleChange</code>.
           </p>
           <CodeBlock code={checkboxExample} lang="tsx" filename="notification-form.tsx" />
@@ -446,9 +442,7 @@ pnpm add valibot @tanstack/valibot-form-adapter`}
                 <tr class="border-b bg-muted/50">
                   <th class="px-4 py-2 text-left font-medium text-muted-foreground">Option</th>
                   <th class="px-4 py-2 text-left font-medium text-muted-foreground">Type</th>
-                  <th class="px-4 py-2 text-left font-medium text-muted-foreground">
-                    Description
-                  </th>
+                  <th class="px-4 py-2 text-left font-medium text-muted-foreground">Description</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-border">
@@ -473,11 +467,7 @@ pnpm add valibot @tanstack/valibot-form-adapter`}
                     "ZodSchema | ValibotSchema",
                     "Schema validated on every change.",
                   ],
-                  [
-                    "validators.onBlur",
-                    "ZodSchema | ValibotSchema",
-                    "Schema validated on blur.",
-                  ],
+                  ["validators.onBlur", "ZodSchema | ValibotSchema", "Schema validated on blur."],
                   [
                     "validators.onSubmit",
                     "ZodSchema | ValibotSchema",
@@ -501,9 +491,7 @@ pnpm add valibot @tanstack/valibot-form-adapter`}
                 <tr class="border-b bg-muted/50">
                   <th class="px-4 py-2 text-left font-medium text-muted-foreground">Property</th>
                   <th class="px-4 py-2 text-left font-medium text-muted-foreground">Type</th>
-                  <th class="px-4 py-2 text-left font-medium text-muted-foreground">
-                    Description
-                  </th>
+                  <th class="px-4 py-2 text-left font-medium text-muted-foreground">Description</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-border">
@@ -511,11 +499,7 @@ pnpm add valibot @tanstack/valibot-form-adapter`}
                   ["field().name", "string", "Field name — use as HTML id / name."],
                   ["field().state.value", "TFieldValue", "Current field value."],
                   ["field().state.meta.errors", "ValidationError[]", "Array of validation errors."],
-                  [
-                    "field().state.meta.isTouched",
-                    "boolean",
-                    "True after first blur.",
-                  ],
+                  ["field().state.meta.isTouched", "boolean", "True after first blur."],
                   [
                     "field().state.meta.isDirty",
                     "boolean",

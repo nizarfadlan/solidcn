@@ -1,9 +1,4 @@
-import {
-  RadioGroup,
-  RadioGroupItem,
-  RadioGroupItemLabel,
-  RadioGroupLabel,
-} from "@solidcn/core";
+import { RadioGroup, RadioGroupItem, RadioGroupItemLabel, RadioGroupLabel } from "@solidcn/core";
 import { DocPage } from "../../../components/ui/DocPage.js";
 
 export default function RadioGroupPage() {

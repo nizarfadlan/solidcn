@@ -1,4 +1,4 @@
-import { Check, ChevronLeft, ChevronRight, Clipboard } from "lucide-solid";
+import { Check, Clipboard } from "lucide-solid";
 import type { Component, JSX } from "solid-js";
 import { For, Show, createMemo, createSignal } from "solid-js";
 import { buildDocPageMarkdown } from "../../lib/build-doc-markdown.js";
@@ -197,7 +197,11 @@ export const DocPage: Component<DocPageProps> = (props) => {
                   when={pageCopied()}
                   fallback={<Clipboard class="h-3 w-3" stroke-width={2} aria-hidden="true" />}
                 >
-                  <Check class="h-3 w-3 text-green-600 dark:text-green-400" stroke-width={2} aria-hidden="true" />
+                  <Check
+                    class="h-3 w-3 text-green-600 dark:text-green-400"
+                    stroke-width={2}
+                    aria-hidden="true"
+                  />
                 </Show>
                 {pageCopied() ? "Copied!" : "Copy page"}
               </button>
@@ -254,10 +258,7 @@ export const DocPage: Component<DocPageProps> = (props) => {
 
             {/* Tab content */}
             <Show when={installTab() === "command"}>
-              <CodeBlock
-                code={`npx solidcn@latest add ${props.componentName ?? ""}`}
-                lang="bash"
-              />
+              <CodeBlock code={`npx solidcn@latest add ${props.componentName ?? ""}`} lang="bash" />
             </Show>
 
             <Show when={installTab() === "manual" && props.manualInstall}>

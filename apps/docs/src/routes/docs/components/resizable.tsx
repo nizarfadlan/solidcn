@@ -17,9 +17,9 @@ export default function ResizablePage() {
 } from "~/components/ui/resizable";
 
 <ResizablePanelGroup direction="horizontal">
-  <ResizablePanel defaultSize={50}>One</ResizablePanel>
+  <ResizablePanel>One</ResizablePanel>
   <ResizableHandle />
-  <ResizablePanel defaultSize={50}>Two</ResizablePanel>
+  <ResizablePanel>Two</ResizablePanel>
 </ResizablePanelGroup>`}
       examples={[
         {
@@ -29,13 +29,13 @@ export default function ResizablePage() {
               direction="horizontal"
               class="max-w-md rounded-lg border border-border"
             >
-              <ResizablePanel defaultSize={50}>
+              <ResizablePanel>
                 <div class="flex h-[200px] items-center justify-center p-6">
                   <span class="font-semibold">One</span>
                 </div>
               </ResizablePanel>
               <ResizableHandle withHandle />
-              <ResizablePanel defaultSize={50}>
+              <ResizablePanel>
                 <div class="flex h-[200px] items-center justify-center p-6">
                   <span class="font-semibold">Two</span>
                 </div>
@@ -54,13 +54,13 @@ export function ResizableHorizontal() {
       direction="horizontal"
       class="max-w-md rounded-lg border"
     >
-      <ResizablePanel defaultSize={50}>
+      <ResizablePanel>
         <div class="flex h-[200px] items-center justify-center p-6">
           <span class="font-semibold">One</span>
         </div>
       </ResizablePanel>
       <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={50}>
+      <ResizablePanel>
         <div class="flex h-[200px] items-center justify-center p-6">
           <span class="font-semibold">Two</span>
         </div>
@@ -76,13 +76,13 @@ export function ResizableHorizontal() {
               direction="vertical"
               class="min-h-[200px] max-w-md rounded-lg border border-border"
             >
-              <ResizablePanel defaultSize={25}>
+              <ResizablePanel>
                 <div class="flex h-full items-center justify-center p-6">
                   <span class="font-semibold">Header</span>
                 </div>
               </ResizablePanel>
               <ResizableHandle withHandle />
-              <ResizablePanel defaultSize={75}>
+              <ResizablePanel>
                 <div class="flex h-full items-center justify-center p-6">
                   <span class="font-semibold">Content</span>
                 </div>
@@ -98,13 +98,13 @@ export function ResizableHorizontal() {
 export function ResizableVertical() {
   return (
     <ResizablePanelGroup direction="vertical" class="min-h-[200px] rounded-lg border">
-      <ResizablePanel defaultSize={25}>
+      <ResizablePanel>
         <div class="flex h-full items-center justify-center p-6">
           <span class="font-semibold">Header</span>
         </div>
       </ResizablePanel>
       <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={75}>
+      <ResizablePanel>
         <div class="flex h-full items-center justify-center p-6">
           <span class="font-semibold">Content</span>
         </div>
@@ -120,11 +120,6 @@ export function ResizableVertical() {
           type: '"horizontal" | "vertical"',
           required: true,
           description: "Direction of resizable panels (on ResizablePanelGroup)",
-        },
-        {
-          name: "defaultSize",
-          type: "number",
-          description: "Initial size as a percentage (on ResizablePanel)",
         },
         {
           name: "minSize",

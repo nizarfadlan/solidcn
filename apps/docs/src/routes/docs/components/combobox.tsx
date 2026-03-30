@@ -36,11 +36,12 @@ const frameworks = [
   optionLabel="label"
   optionTextValue="label"
   placeholder="Select a framework..."
+  itemComponent={(props) => (
+    <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
+  )}
 >
   <ComboboxTrigger />
-  <ComboboxContent>
-    {(item) => <ComboboxItem item={item}>{item.label}</ComboboxItem>}
-  </ComboboxContent>
+  <ComboboxContent />
 </Combobox>`}
       examples={[
         {
@@ -53,11 +54,12 @@ const frameworks = [
               optionTextValue="label"
               placeholder="Select a framework..."
               class="w-[220px]"
+              itemComponent={(props) => (
+                <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
+              )}
             >
               <ComboboxTrigger />
-              <ComboboxContent>
-                {(item: typeof frameworks[0]) => <ComboboxItem item={item}>{item.label}</ComboboxItem>}
-              </ComboboxContent>
+              <ComboboxContent />
             </Combobox>
           ),
           code: `import {
@@ -83,11 +85,12 @@ export function ComboboxDefault() {
       optionLabel="label"
       optionTextValue="label"
       placeholder="Select a framework..."
+      itemComponent={(props) => (
+        <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
+      )}
     >
       <ComboboxTrigger />
-      <ComboboxContent>
-        {(item) => <ComboboxItem item={item}>{item.label}</ComboboxItem>}
-      </ComboboxContent>
+      <ComboboxContent />
     </Combobox>
   )
 }`,

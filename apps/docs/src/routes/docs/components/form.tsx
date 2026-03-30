@@ -51,18 +51,14 @@ import { Button } from "~/components/ui/button";
                 <FormControl>
                   <Input id="username" placeholder="solidcn" />
                 </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
+                <FormDescription>This is your public display name.</FormDescription>
               </FormField>
               <FormField name="email">
                 <FormLabel for="email">Email</FormLabel>
                 <FormControl>
                   <Input id="email" type="email" placeholder="m@example.com" />
                 </FormControl>
-                <FormDescription>
-                  We&apos;ll never share your email.
-                </FormDescription>
+                <FormDescription>We&apos;ll never share your email.</FormDescription>
               </FormField>
               <Button type="submit">Submit</Button>
             </form>
@@ -134,8 +130,8 @@ export function FormWithError() {
             <div class="w-[400px] rounded-lg border border-border p-4 bg-muted/30">
               <p class="text-sm text-muted-foreground">
                 For full form validation, combine Form components with{" "}
-                <code class="text-xs bg-muted px-1 py-0.5 rounded">@modular-forms/solid</code>.
-                See the{" "}
+                <code class="text-xs bg-muted px-1 py-0.5 rounded">@modular-forms/solid</code>. See
+                the{" "}
                 <a href="/docs/forms" class="underline underline-offset-4 text-foreground">
                   Forms guide
                 </a>{" "}

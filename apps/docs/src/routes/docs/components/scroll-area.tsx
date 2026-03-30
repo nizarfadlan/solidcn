@@ -62,7 +62,10 @@ export function ScrollAreaVertical() {
         {
           title: "Horizontal",
           preview: (
-            <ScrollArea class="w-96 whitespace-nowrap rounded-md border border-border" orientation="horizontal">
+            <ScrollArea
+              class="w-96 whitespace-nowrap rounded-md border border-border"
+              orientation="horizontal"
+            >
               <div class="flex w-max space-x-4 p-4">
                 <For each={Array.from({ length: 20 }, (_, i) => `Item ${i + 1}`)}>
                   {(item) => (

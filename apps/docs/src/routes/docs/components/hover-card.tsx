@@ -1,4 +1,11 @@
-import { Avatar, AvatarFallback, AvatarImage, HoverCard, HoverCardContent, HoverCardTrigger } from "@solidcn/core";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@solidcn/core";
 import { CalendarDays } from "lucide-solid";
 import { DocPage } from "../../../components/ui/DocPage.js";
 
@@ -40,7 +47,8 @@ export default function HoverCardPage() {
                   <div class="space-y-1">
                     <h4 class="text-sm font-semibold">@solidcn</h4>
                     <p class="text-sm text-muted-foreground">
-                      SolidJS port of shadcn/ui — beautiful components built with SolidJS and Tailwind CSS.
+                      SolidJS port of shadcn/ui — beautiful components built with SolidJS and
+                      Tailwind CSS.
                     </p>
                     <div class="flex items-center pt-2">
                       <CalendarDays class="mr-2 h-4 w-4 text-muted-foreground" stroke-width={2} />

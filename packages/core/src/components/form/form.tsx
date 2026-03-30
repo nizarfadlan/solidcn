@@ -44,7 +44,6 @@ export type FormLabelProps = JSX.LabelHTMLAttributes<HTMLLabelElement> & {
 export const FormLabel: Component<FormLabelProps> = (props) => {
   const [local, rest] = splitProps(props, ["class", "error"]);
   return (
-    // biome-ignore lint/a11y/noLabelWithoutControl: consumers pass `for` as a prop or wrap the control
     <label
       class={cn(
         "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",

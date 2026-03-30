@@ -5,23 +5,40 @@ import { DocPage } from "../../../components/ui/DocPage.js";
 function SileoDemo() {
   return (
     <div class="flex flex-wrap gap-2">
-      <Button variant="outline" size="sm" onClick={() => sileo.success("Saved successfully!")}>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => sileo.success({ title: "Saved successfully!" })}
+      >
         Success
       </Button>
-      <Button variant="outline" size="sm" onClick={() => sileo.error("Something went wrong.")}>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => sileo.error({ title: "Something went wrong." })}
+      >
         Error
       </Button>
-      <Button variant="outline" size="sm" onClick={() => sileo.warning("Disk space low.")}>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => sileo.warning({ title: "Disk space low." })}
+      >
         Warning
       </Button>
-      <Button variant="outline" size="sm" onClick={() => sileo.info("Update available.")}>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => sileo.info({ title: "Update available." })}
+      >
         Info
       </Button>
       <Button
         variant="outline"
         size="sm"
         onClick={() =>
-          sileo.success("Event created", {
+          sileo.success({
+            title: "Event created",
             description: "Sunday, December 03, 2023 at 9:00 AM",
             preset: "glass",
           })
@@ -32,9 +49,7 @@ function SileoDemo() {
       <Button
         variant="outline"
         size="sm"
-        onClick={() =>
-          sileo.success("Bounced!", { animation: "bounce" })
-        }
+        onClick={() => sileo.success({ title: "Bounced!", animation: "bounce" })}
       >
         Bounce
       </Button>
@@ -54,13 +69,14 @@ export default function ToastSileoPage() {
       usage={`import { sileo } from "@solidcn/toast";
 
 // Trigger a physics-based toast:
-sileo.success("Saved!");
-sileo.error("Failed.");
-sileo.warning("Heads up.");
-sileo.info("FYI.");
+sileo.success({ title: "Saved!" });
+sileo.error({ title: "Failed." });
+sileo.warning({ title: "Heads up." });
+sileo.info({ title: "FYI." });
 
 // With options:
-sileo.success("Event created", {
+sileo.success({
+  title: "Event created",
   description: "Sunday, December 03 at 9:00 AM",
   preset: "glass",
   animation: "spring",
@@ -68,7 +84,8 @@ sileo.success("Event created", {
       examples={[
         {
           title: "Variants",
-          description: "Click to trigger physics-based toasts. Requires <Toaster mode=\"sileo\" /> in your layout.",
+          description:
+            'Click to trigger physics-based toasts. Requires <Toaster mode="sileo" /> in your layout.',
           preview: <SileoDemo />,
           code: `import { sileo } from "@solidcn/toast"
 import { Button } from "~/components/ui/button"
@@ -76,23 +93,28 @@ import { Button } from "~/components/ui/button"
 export function ToastSileoVariants() {
   return (
     <div class="flex flex-wrap gap-2">
-      <Button variant="outline" size="sm" onClick={() => sileo.success("Saved successfully!")}>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => sileo.success({ title: "Saved successfully!" })}
+      >
         Success
       </Button>
-      <Button variant="outline" size="sm" onClick={() => sileo.error("Something went wrong.")}>
+      <Button variant="outline" size="sm" onClick={() => sileo.error({ title: "Something went wrong." })}>
         Error
       </Button>
-      <Button variant="outline" size="sm" onClick={() => sileo.warning("Disk space low.")}>
+      <Button variant="outline" size="sm" onClick={() => sileo.warning({ title: "Disk space low." })}>
         Warning
       </Button>
-      <Button variant="outline" size="sm" onClick={() => sileo.info("Update available.")}>
+      <Button variant="outline" size="sm" onClick={() => sileo.info({ title: "Update available." })}>
         Info
       </Button>
       <Button
         variant="outline"
         size="sm"
         onClick={() =>
-          sileo.success("Event created", {
+          sileo.success({
+            title: "Event created",
             description: "Sunday, Dec 03 at 9:00 AM",
             preset: "glass",
           })
@@ -103,7 +125,7 @@ export function ToastSileoVariants() {
       <Button
         variant="outline"
         size="sm"
-        onClick={() => sileo.success("Bounced!", { animation: "bounce" })}
+        onClick={() => sileo.success({ title: "Bounced!", animation: "bounce" })}
       >
         Bounce
       </Button>
@@ -117,10 +139,7 @@ export function ToastSileoVariants() {
           <div class="rounded-lg border bg-muted/30 p-5 space-y-3">
             <h3 class="font-semibold text-sm">Setup</h3>
             <p class="text-sm text-muted-foreground">
-              Add{" "}
-              <code class="bg-muted px-1 rounded text-xs">
-                {'<Toaster mode="sileo" />'}
-              </code>{" "}
+              Add <code class="bg-muted px-1 rounded text-xs">{'<Toaster mode="sileo" />'}</code>{" "}
               once in your app root:
             </p>
             <div class="rounded-lg overflow-hidden border border-zinc-800 bg-zinc-950">
@@ -133,9 +152,7 @@ export function ToastSileoVariants() {
 
           <div class="rounded-lg border bg-muted/30 p-5 space-y-3">
             <h3 class="font-semibold text-sm">Presets</h3>
-            <p class="text-sm text-muted-foreground">
-              Sileo ships with 6 built-in presets:
-            </p>
+            <p class="text-sm text-muted-foreground">Sileo ships with 6 built-in presets:</p>
             <div class="grid grid-cols-2 gap-2 text-sm">
               {(["default", "flat", "outlined", "glass", "dark", "minimal"] as const).map((p) => (
                 <div class="flex items-center gap-2">

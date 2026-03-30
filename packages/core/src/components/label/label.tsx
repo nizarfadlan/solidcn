@@ -7,7 +7,7 @@ export type LabelProps = JSX.LabelHTMLAttributes<HTMLLabelElement> & {
 };
 
 export const Label: Component<LabelProps> = (props) => {
-  const [local, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class", "children"]);
   return (
     <label
       class={cn(
@@ -15,6 +15,8 @@ export const Label: Component<LabelProps> = (props) => {
         local.class,
       )}
       {...rest}
-    />
+    >
+      {local.children}
+    </label>
   );
 };

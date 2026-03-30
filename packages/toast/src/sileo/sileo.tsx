@@ -31,7 +31,6 @@ export const SileoItem: Component<SileoItemProps> = (props) => {
     if (prefersReducedMotion()) return "none" as ToastAnimation;
     return props.toast.animation ?? props.globalAnimation;
   };
-  const isPhysics = () => animation() === "spring" || animation() === "bounce";
 
   onMount(() => {
     if (animation() === "none") {

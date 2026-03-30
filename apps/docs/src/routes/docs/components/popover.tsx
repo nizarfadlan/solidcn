@@ -32,10 +32,7 @@ import { Button } from "~/components/ui/button";
           title: "Default",
           preview: (
             <Popover>
-              <Popover.Trigger
-                as={Button}
-                variant="outline"
-              >
+              <Popover.Trigger as={Button} variant="outline">
                 Open popover
               </Popover.Trigger>
               <PopoverContent>
@@ -44,16 +41,22 @@ import { Button } from "~/components/ui/button";
                 </PopoverHeader>
                 <div class="grid gap-4 pt-2">
                   <div class="grid grid-cols-3 items-center gap-4">
-                    <label class="text-sm font-medium">Width</label>
-                    <Input class="col-span-2 h-8" value="100%" />
+                    <label for="popover-width" class="text-sm font-medium">
+                      Width
+                    </label>
+                    <Input id="popover-width" class="col-span-2 h-8" value="100%" />
                   </div>
                   <div class="grid grid-cols-3 items-center gap-4">
-                    <label class="text-sm font-medium">Max. width</label>
-                    <Input class="col-span-2 h-8" value="300px" />
+                    <label for="popover-max-width" class="text-sm font-medium">
+                      Max. width
+                    </label>
+                    <Input id="popover-max-width" class="col-span-2 h-8" value="300px" />
                   </div>
                   <div class="grid grid-cols-3 items-center gap-4">
-                    <label class="text-sm font-medium">Height</label>
-                    <Input class="col-span-2 h-8" value="25px" />
+                    <label for="popover-height" class="text-sm font-medium">
+                      Height
+                    </label>
+                    <Input id="popover-height" class="col-span-2 h-8" value="25px" />
                   </div>
                 </div>
               </PopoverContent>
