@@ -33,7 +33,7 @@ Built on top of:
 - **[Kobalte](https://kobalte.dev)** — headless, accessible UI primitives
 - **[corvu](https://corvu.dev)** — advanced SolidJS UI primitives (Drawer, Resizable, etc.)
 - **[Tailwind CSS v4](https://tailwindcss.com)** — utility-first styling
-- **[tailwind-variants](https://tailwind-variants.org)** — type-safe variant management
+- **[class-variance-authority](https://cva.style)** — type-safe variant management
 - **[@modular-forms/solid](https://modularforms.dev)** — form handling
 
 ---

@@ -36,7 +36,7 @@
     "@modular-forms/solid": ">=0.25",
     "corvu": ">=0.7",
     "solid-js": ">=1.9",
-    "tailwind-variants": ">=0.3"
+    "class-variance-authority": ">=0.7"
   },
   "devDependencies": {
     "@kobalte/core": "^0.13.10",
@@ -46,7 +46,7 @@
     "lucide-solid": "^0.479.0",
     "solid-js": "^1.9.4",
     "tailwind-merge": "^2.6.0",
-    "tailwind-variants": "^0.3.0",
+    "class-variance-authority": "^0.7.1",
     "typescript": "^5.7.3",
     "vite": "^6.0.11",
     "vite-plugin-solid": "^2.11.1"

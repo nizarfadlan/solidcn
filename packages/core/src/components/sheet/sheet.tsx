@@ -1,8 +1,8 @@
+import { type VariantProps, cva } from "class-variance-authority";
 import Drawer from "corvu/drawer";
 import { X } from "lucide-solid";
 import type { Component, ComponentProps, JSX } from "solid-js";
 import { splitProps } from "solid-js";
-import { type VariantProps, tv } from "tailwind-variants";
 import { cn } from "~/lib/cn.js";
 
 // Sheet is a Drawer that slides from a side edge
@@ -27,25 +27,28 @@ const SheetOverlay: Component<ComponentProps<typeof Drawer.Overlay>> = (props) =
   );
 };
 
-export const sheetVariants = tv({
-  base: [
+export const sheetVariants = cva(
+  [
     "fixed z-50 gap-4 bg-background p-6 shadow-lg",
     "transition ease-in-out",
     "corvu-transitioning:duration-300",
   ],
-  variants: {
-    side: {
-      top: "inset-x-0 top-0 border-b corvu-open:translate-y-0 corvu-closed:-translate-y-full",
-      bottom: "inset-x-0 bottom-0 border-t corvu-open:translate-y-0 corvu-closed:translate-y-full",
-      left: "inset-y-0 left-0 h-full w-3/4 border-r corvu-open:translate-x-0 corvu-closed:-translate-x-full sm:max-w-sm",
-      right:
-        "inset-y-0 right-0 h-full w-3/4 border-l corvu-open:translate-x-0 corvu-closed:translate-x-full sm:max-w-sm",
+  {
+    variants: {
+      side: {
+        top: "inset-x-0 top-0 border-b corvu-open:translate-y-0 corvu-closed:-translate-y-full",
+        bottom:
+          "inset-x-0 bottom-0 border-t corvu-open:translate-y-0 corvu-closed:translate-y-full",
+        left: "inset-y-0 left-0 h-full w-3/4 border-r corvu-open:translate-x-0 corvu-closed:-translate-x-full sm:max-w-sm",
+        right:
+          "inset-y-0 right-0 h-full w-3/4 border-l corvu-open:translate-x-0 corvu-closed:translate-x-full sm:max-w-sm",
+      },
+    },
+    defaultVariants: {
+      side: "right",
     },
   },
-  defaultVariants: {
-    side: "right",
-  },
-});
+);
 
 export type SheetContentProps = ComponentProps<typeof Drawer.Content> &
   VariantProps<typeof sheetVariants> & {

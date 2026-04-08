@@ -51,7 +51,7 @@ export default function DocsIntroduction() {
             {[
               { name: "@kobalte/core", desc: "Headless WAI-ARIA primitives for SolidJS" },
               { name: "corvu", desc: "Advanced UI primitives (Drawer, Resizable)" },
-              { name: "tailwind-variants", desc: "Type-safe variant management" },
+              { name: "class-variance-authority", desc: "Type-safe variant management" },
               { name: "Tailwind CSS v4", desc: "Utility-first CSS with CSS variables" },
             ].map((t) => (
               <div class="rounded-lg border bg-card p-4">

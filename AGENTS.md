@@ -11,7 +11,7 @@ solidcn is a shadcn/ui-style ecosystem for SolidJS: copy-paste components, not a
 - SolidJS + SolidStart (`apps/docs`)
 - `@kobalte/core` for accessible primitives
 - `corvu` for advanced primitives (Drawer, Resizable, etc.)
-- Tailwind CSS v4 + tailwind-variants
+- Tailwind CSS v4 + class-variance-authority
 - Biome for lint + format
 - pnpm workspaces
 

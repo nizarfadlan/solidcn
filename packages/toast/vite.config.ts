@@ -19,7 +19,7 @@ export default defineConfig({
         "solid-js/web",
         "solid-js/store",
         "@kobalte/core",
-        "tailwind-variants",
+        "class-variance-authority",
       ],
       output: {
         preserveModules: true,

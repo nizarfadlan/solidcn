@@ -108,7 +108,7 @@ export default function App() {
             If you prefer the distributed package over copy-paste:
           </p>
           <CodeBlock
-            code={`npm install @solidcn/core @kobalte/core corvu tailwind-variants
+            code={`npm install @solidcn/core @kobalte/core corvu class-variance-authority
 npm install @solidcn/toast        # optional — toast system
 npm install @solidcn/themes       # optional — theming`}
             lang="bash"

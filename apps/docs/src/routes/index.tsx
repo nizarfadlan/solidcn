@@ -48,7 +48,7 @@ const stack = [
   { name: "@kobalte/core", href: "https://kobalte.dev" },
   { name: "corvu", href: "https://corvu.dev" },
   { name: "Tailwind v4", href: "https://tailwindcss.com" },
-  { name: "tailwind-variants", href: "https://www.tailwind-variants.org" },
+  { name: "class-variance-authority", href: "https://cva.style" },
 ];
 
 export default function Home() {

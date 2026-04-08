@@ -28,7 +28,7 @@ export default defineConfig({
           "solid-js/web",
           "solid-js/store",
           "@kobalte/core",
-          "tailwind-variants",
+          "class-variance-authority",
           "@modular-forms/solid",
           "corvu",
         ].includes(id) ||
