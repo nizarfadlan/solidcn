@@ -9,9 +9,6 @@ apps/docs/.solid
 apps/docs/.output
 apps/docs/.vinxi
 
-# Storybook
-apps/storybook/
-
 # Wrangler
 packages/mcp-cloudflare/.wrangler
 
@@ -27,8 +24,5 @@ Thumbs.db
 # Editor
 .idea/
 
-# Cursor — commit `.cursor/rules` (like shadcn/ui); ignore other local files
+# Cursor — ignore local editor files
 .cursor/*
-!.cursor/rules/
-!.cursor/rules/**
-!.cursor/rules/

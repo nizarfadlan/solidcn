@@ -187,8 +187,7 @@ solidcn/
 │   ├── create-solidcn-app/   → npm create solidcn-app
 │   └── mcp-cloudflare/       → @solidcn/mcp-cloudflare (HTTP MCP Worker)
 ├── apps/
-│   ├── docs/                 → Documentation site (SolidStart)
-│   └── storybook/            → Visual testing (Storybook)
+│   └── docs/                 → Documentation site (SolidStart)
 ├── biome.json
 ├── pnpm-workspace.yaml
 └── package.json
@@ -211,9 +210,6 @@ pnpm build
 
 # Start docs site
 pnpm --filter @solidcn/docs dev
-
-# Start Storybook
-pnpm --filter @solidcn/storybook dev
 
 # Typecheck everything
 pnpm typecheck

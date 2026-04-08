@@ -42,8 +42,6 @@ jobs:
 
       - name: Build docs
         run: pnpm --filter @solidcn/docs build
-        env:
-          VITE_STORYBOOK_URL: ${{ vars.STORYBOOK_URL || 'https://storybook.solidcn.nizarfadlan.dev' }}
 
       - name: Deploy to Cloudflare Pages
         run: pnpm exec wrangler pages deploy apps/docs/.output/public --project-name="${{ vars.CF_PAGES_PROJECT || 'solidcn' }}"

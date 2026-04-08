@@ -16,7 +16,6 @@ export default function ButtonPage() {
 export default function App() {
   return <Button>Click me</Button>;
 }`}
-      storybookPath="/?path=/story/button--default"
       playground={{
         embedSrc:
           "https://stackblitz.com/github/solidjs/templates/tree/main/ts?embed=1&file=src%2Findex.tsx",

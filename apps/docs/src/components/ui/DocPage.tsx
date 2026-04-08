@@ -13,35 +13,6 @@ import type { DocPagerProps } from "./DocPager.js";
 import type { PropDef } from "./PropsTable.js";
 import { PropsTable } from "./PropsTable.js";
 
-const ExternalLinkIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="11"
-    height="11"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    aria-hidden="true"
-    class="shrink-0"
-  >
-    <path d="M15 3h6v6" />
-    <path d="M10 14 21 3" />
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-  </svg>
-);
-
-const StorybookIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 256 319" fill="currentColor" aria-hidden="true">
-    <path
-      fill-rule="evenodd"
-      d="M188.806 0L194.805 66.456C196.986 68.369 199.304 70.4 201.752 72.548L201.785 72.576C210.083 79.69 219.747 87.985 226.938 100.478C232.624 110.43 232.93 121.075 232.93 128C232.93 134.925 232.624 145.57 226.938 155.522C219.747 168.015 210.083 176.31 201.785 183.424L201.752 183.452C199.304 185.6 196.986 187.631 194.805 189.544L188.806 256H67.194L61.195 189.544C59.014 187.631 56.696 185.6 54.248 183.452L54.215 183.424C45.917 176.31 36.253 168.015 29.062 155.522C23.376 145.57 23.07 134.925 23.07 128C23.07 121.075 23.376 110.43 29.062 100.478C36.253 87.985 45.917 79.69 54.215 72.576L54.248 72.548C56.696 70.4 59.014 68.369 61.195 66.456L67.194 0H188.806ZM128 82.778C101.49 82.778 80 104.268 80 130.778C80 157.288 101.49 178.778 128 178.778C154.51 178.778 176 157.288 176 130.778C176 104.268 154.51 82.778 128 82.778Z"
-    />
-  </svg>
-);
-
 export interface DocExample {
   title: string;
   description?: string;
@@ -64,10 +35,6 @@ export interface DocPageProps {
   examples: DocExample[];
   props?: PropDef[];
   notes?: JSX.Element;
-  /** Link to Storybook story, e.g. "/?path=/story/button--default" */
-  storybookPath?: string;
-  /** URL of deployed Storybook */
-  storybookUrl?: string;
   /** Enables Copy page, Prev/Next, and SEO canonical/OG for this path */
   docPath?: string;
   /** Optional embedded playground (StackBlitz `?embed=1`, etc.) */
@@ -101,10 +68,6 @@ const TabButton: Component<{
 export const DocPage: Component<DocPageProps> = (props) => {
   const [installTab, setInstallTab] = createSignal<"command" | "manual">("command");
   const [pageCopied, setPageCopied] = createSignal(false);
-
-  const storybookBase = () => props.storybookUrl ?? "http://localhost:6006";
-  const storybookLink = () =>
-    props.storybookPath ? `${storybookBase()}${props.storybookPath}` : null;
 
   const neighbors = createMemo(() =>
     props.docPath ? getDocNeighbors(props.docPath) : { prev: undefined, next: undefined },
@@ -205,21 +168,6 @@ export const DocPage: Component<DocPageProps> = (props) => {
                 </Show>
                 {pageCopied() ? "Copied!" : "Copy page"}
               </button>
-            </Show>
-
-            <Show when={storybookLink()}>
-              {(link) => (
-                <a
-                  href={link()}
-                  target="_blank"
-                  rel="noreferrer"
-                  class="inline-flex items-center gap-1.5 rounded-md border border-border px-2 py-0.5 text-[11px] font-medium text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
-                >
-                  <StorybookIcon />
-                  Storybook
-                  <ExternalLinkIcon />
-                </a>
-              )}
             </Show>
           </div>
 
