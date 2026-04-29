@@ -159,9 +159,9 @@ jobs:
 
             for tag in "${TAGS[@]}"; do
               gh release create "$tag" \
+                --target main \
                 --title "$tag" \
-                --generate-notes \
-                "${GITHUB_SHA}"
+                --generate-notes
             done
           else
             echo "No new packages to tag."
