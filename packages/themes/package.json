@@ -1,6 +1,6 @@
 {
   "name": "@solidcn/themes",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "description": "Theming, design tokens, and ThemeProvider for solidcn",
   "keywords": ["solidjs", "themes", "design-tokens", "tailwind", "dark-mode"],

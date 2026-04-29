@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://solidcn.dev/schema/registry.json",
+  "$id": "https://solidcn.nizarfadlan.dev/schema/registry.json",
   "title": "solidcn Registry Index",
   "description": "Schema for a registry index file (registry.json). Lists all available items in the registry.",
   "type": "object",

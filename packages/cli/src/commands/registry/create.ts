@@ -31,7 +31,7 @@ export const registryCreateCommand = new Command("create")
       `${dir}/registry.json`,
       `${JSON.stringify(
         {
-          $schema: "https://solidcn.dev/schema/registry.json",
+          $schema: "https://solidcn.nizarfadlan.dev/schema/registry.json",
           name,
           homepage: "",
           items: [],

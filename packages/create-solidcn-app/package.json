@@ -1,6 +1,6 @@
 {
   "name": "create-solidcn-app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "description": "Create a new SolidJS app with solidcn pre-configured",
   "keywords": ["solidjs", "create-app", "starter", "template"],

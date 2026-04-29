@@ -84,6 +84,7 @@ jobs:
             local pkg_version=$(node -p "require('./packages/$2/package.json').version")
             local published=$(npm view $name version 2>/dev/null || echo "none")
             echo "PUBLISHED_${3}=$([ "$published" = "$pkg_version" ] && echo "true" || echo "false")" >> $GITHUB_OUTPUT
+            echo "VERSION_${3}=${pkg_version}" >> $GITHUB_OUTPUT
           }
           check_published "@solidcn/themes" themes THEMES
           check_published "@solidcn/core" core CORE
@@ -122,11 +123,46 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Tag release
+      - name: Tag & Release
         if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          VERSION=$(node -p "require('./packages/core/package.json').version")
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag "v${VERSION}" -m "Release v${VERSION}"
-          git push origin "v${VERSION}"
+
+          # Collect published packages and their versions
+          declare -a TAGS=()
+
+          tag_if_published() {
+            local name=$1
+            local pkg_path=$2
+            local published=$3
+            local version=$4
+
+            if [ "$published" != "true" ]; then
+              local tag="${name}@${version}"
+              TAGS+=("$tag")
+              git tag "$tag" -m "Release ${name}@${version}"
+              echo "Tagged: $tag"
+            fi
+          }
+
+          tag_if_published "@solidcn/themes" "${{ steps.check.outputs.VERSION_THEMES }}" "${{ steps.check.outputs.PUBLISHED_THEMES }}" "${{ steps.check.outputs.VERSION_THEMES }}"
+          tag_if_published "@solidcn/core" "${{ steps.check.outputs.VERSION_CORE }}" "${{ steps.check.outputs.PUBLISHED_CORE }}" "${{ steps.check.outputs.VERSION_CORE }}"
+          tag_if_published "@solidcn/toast" "${{ steps.check.outputs.VERSION_TOAST }}" "${{ steps.check.outputs.PUBLISHED_TOAST }}" "${{ steps.check.outputs.VERSION_TOAST }}"
+          tag_if_published "solidcn" "${{ steps.check.outputs.VERSION_CLI }}" "${{ steps.check.outputs.PUBLISHED_CLI }}" "${{ steps.check.outputs.VERSION_CLI }}"
+          tag_if_published "create-solidcn-app" "${{ steps.check.outputs.VERSION_CREATE_APP }}" "${{ steps.check.outputs.PUBLISHED_CREATE_APP }}" "${{ steps.check.outputs.VERSION_CREATE_APP }}"
+
+          if [ ${#TAGS[@]} -gt 0 ]; then
+            git push origin "${TAGS[@]}"
+
+            for tag in "${TAGS[@]}"; do
+              gh release create "$tag" \
+                --title "$tag" \
+                --generate-notes \
+                "${GITHUB_SHA}"
+            done
+          else
+            echo "No new packages to tag."
+          fi

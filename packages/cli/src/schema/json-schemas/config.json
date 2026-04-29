@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://solidcn.dev/schema/config.json",
+  "$id": "https://solidcn.nizarfadlan.dev/schema/config.json",
   "title": "solidcn Config",
   "description": "Schema for solidcn.json project configuration file",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "name": "solidcn",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "description": "CLI for solidcn — add SolidJS components to your project",
   "keywords": ["solidjs", "cli", "ui", "components", "registry"],

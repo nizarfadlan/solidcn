@@ -1,6 +1,6 @@
 {
   "name": "@solidcn/toast",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "description": "Dual toast system for SolidJS — standard (shadcn-style) + sileo (physics-based)",
   "keywords": ["solidjs", "toast", "notification", "physics", "animation"],

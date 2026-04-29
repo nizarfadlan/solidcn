@@ -110,7 +110,7 @@ export const ${toPascalCase(name)}: Component<${toPascalCase(name)}Props> = (pro
         homepage: string;
         items: Array<{ name: string; type: string }>;
       } = {
-        $schema: "https://solidcn.dev/schema/registry.json",
+        $schema: "https://solidcn.nizarfadlan.dev/schema/registry.json",
         name: basename(cwd),
         homepage: "",
         items: [],
