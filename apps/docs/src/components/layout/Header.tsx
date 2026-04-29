@@ -220,7 +220,7 @@ export const Header: Component<HeaderProps> = (props) => {
             </button>
 
             <a
-              href="https://github.com/nizarfadlan/solidcn"
+              href="https://github.com/solidcn-ui/solidcn"
               target="_blank"
               rel="noreferrer"
               class="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"

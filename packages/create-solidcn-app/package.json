@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nizarfadlan/solidcn",
+    "url": "https://github.com/solidcn-ui/solidcn",
     "directory": "packages/create-solidcn-app"
   },
   "main": "./dist/index.js",

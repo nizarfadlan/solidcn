@@ -123,7 +123,7 @@ export default function RegistryPage() {
 
             {/* Submit placeholder */}
             <a
-              href="https://github.com/nizarfadlan/solidcn/issues/new?template=blank.yml&title=Registry%20submission%3A%20%40your-namespace"
+              href="https://github.com/solidcn-ui/solidcn/issues/new?template=blank.yml&title=Registry%20submission%3A%20%40your-namespace"
               target="_blank"
               rel="noreferrer"
               class="flex items-center justify-center gap-2 rounded-xl border border-dashed p-5 text-sm text-muted-foreground hover:border-primary/40 hover:text-foreground transition-colors"
