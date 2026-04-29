@@ -18,7 +18,7 @@
   // REGISTRY_NAME  — registry namespace (default: "solidcn")
   // API_TOKEN      — optional auth token to protect the /mcp endpoint
   "vars": {
-    "REGISTRY_URL": "https://solidcn.dev/r",
+    "REGISTRY_URL": "https://solidcn.nizarfadlan.dev/r",
     "REGISTRY_NAME": "solidcn"
   }
 }

@@ -44,8 +44,8 @@ export const DEFAULT_CONFIG: SolidcnConfig = {
   registries: {},
 };
 
-const DEFAULT_REGISTRY_URL = "https://solidcn.dev/r/{name}.json";
-const DEFAULT_INDEX_URL = "https://solidcn.dev/r/registry.json";
+const DEFAULT_REGISTRY_URL = "https://solidcn.nizarfadlan.dev/r/{name}.json";
+const DEFAULT_INDEX_URL = "https://solidcn.nizarfadlan.dev/r/registry.json";
 
 export async function loadConfig(cwd: string): Promise<SolidcnConfig> {
   const configPath = resolve(cwd, "solidcn.json");
