@@ -75,34 +75,50 @@ jobs:
       - name: Dry run — create-solidcn-app
         run: pnpm --filter create-solidcn-app exec npm pack --dry-run
 
+      # Check if package is already published
+      - name: Check published status
+        id: check
+        run: |
+          check_published() {
+            local name=$1
+            local pkg_version=$(node -p "require('./packages/$2/package.json').version")
+            local published=$(npm view $name version 2>/dev/null || echo "none")
+            echo "PUBLISHED_${3}=$([ "$published" = "$pkg_version" ] && echo "true" || echo "false")" >> $GITHUB_OUTPUT
+          }
+          check_published "@solidcn/themes" themes THEMES
+          check_published "@solidcn/core" core CORE
+          check_published "@solidcn/toast" toast TOAST
+          check_published "solidcn" cli CLI
+          check_published "create-solidcn-app" create-solidcn-app CREATE_APP
+
       # Publish (skipped if dry_run is true)
       - name: Publish @solidcn/themes
-        if: ${{ !inputs.dry_run }}
+        if: ${{ !inputs.dry_run && steps.check.outputs.PUBLISHED_THEMES != 'true' }}
         run: pnpm --filter @solidcn/themes exec npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @solidcn/core
-        if: ${{ !inputs.dry_run }}
+        if: ${{ !inputs.dry_run && steps.check.outputs.PUBLISHED_CORE != 'true' }}
         run: pnpm --filter @solidcn/core exec npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @solidcn/toast
-        if: ${{ !inputs.dry_run }}
+        if: ${{ !inputs.dry_run && steps.check.outputs.PUBLISHED_TOAST != 'true' }}
         run: pnpm --filter @solidcn/toast exec npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish solidcn (CLI)
-        if: ${{ !inputs.dry_run }}
-        run: pnpm --filter solidcn exec npm publish --provenance
+        if: ${{ !inputs.dry_run && steps.check.outputs.PUBLISHED_CLI != 'true' }}
+        run: pnpm --filter solidcn exec npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish create-solidcn-app
-        if: ${{ !inputs.dry_run }}
-        run: pnpm --filter create-solidcn-app exec npm publish --provenance
+        if: ${{ !inputs.dry_run && steps.check.outputs.PUBLISHED_CREATE_APP != 'true' }}
+        run: pnpm --filter create-solidcn-app exec npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
