@@ -90,7 +90,7 @@ async function main() {
   await outputJSON(
     resolve(targetDir, "solidcn.json"),
     {
-      $schema: "https://solidcn.nizarfadlan.dev/schema/config.json",
+      $schema: "https://solidcn.dev/schema/config.json",
       style: "default",
       tailwind: { css: "src/app.css", baseColor },
       aliases: { components: "~/components/ui", utils: "~/lib/utils" },

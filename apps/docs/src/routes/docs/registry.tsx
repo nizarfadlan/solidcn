@@ -6,8 +6,8 @@ const communityRegistries = [
   {
     name: "solidcn (official)",
     namespace: "@solidcn",
-    url: "https://solidcn.nizarfadlan.dev/r",
-    homepage: "https://solidcn.nizarfadlan.dev",
+    url: "https://solidcn.dev/r",
+    homepage: "https://solidcn.dev",
     description: "Official solidcn components — 42+ components ported from shadcn/ui.",
     items: 42,
     badge: "official",

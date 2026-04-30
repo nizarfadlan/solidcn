@@ -9,12 +9,7 @@
   "registryDependencies": ["utils"],
   "files": [
     {
-      "path": "components/ui/tooltip/index.ts",
-      "type": "registry:ui",
-      "content": "export { Tooltip, TooltipTrigger, TooltipContent } from \"./tooltip\";\n"
-    },
-    {
-      "path": "components/ui/tooltip/tooltip.tsx",
+      "path": "components/ui/tooltip.tsx",
       "type": "registry:ui",
       "content": "import { Tooltip as KobalteTooltip } from \"@kobalte/core/tooltip\";\nimport type { Component, ComponentProps } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nconst Tooltip = KobalteTooltip;\nconst TooltipTrigger = KobalteTooltip.Trigger;\n\nconst TooltipContent: Component<ComponentProps<typeof KobalteTooltip.Content>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <KobalteTooltip.Portal>\n      <KobalteTooltip.Content\n        class={cn(\n          \"z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md\",\n          \"animate-in fade-in-0 zoom-in-95\",\n          \"data-[closed]:animate-out data-[closed]:fade-out-0 data-[closed]:zoom-out-95\",\n          local.class,\n        )}\n        {...rest}\n      />\n    </KobalteTooltip.Portal>\n  );\n};\n\nexport { Tooltip, TooltipTrigger, TooltipContent };\n"
     }

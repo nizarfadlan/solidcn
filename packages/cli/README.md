@@ -89,7 +89,7 @@ npx solidcn@latest add dialog card tooltip
 
 ```json
 {
-  "$schema": "https://solidcn.nizarfadlan.dev/schema/config.json",
+  "$schema": "https://solidcn.dev/schema/config.json",
   "style": "default",
   "tailwind": {
     "css": "src/app.css",

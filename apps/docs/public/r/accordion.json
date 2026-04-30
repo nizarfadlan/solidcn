@@ -9,14 +9,9 @@
   "registryDependencies": ["utils"],
   "files": [
     {
-      "path": "components/ui/accordion/accordion.tsx",
+      "path": "components/ui/accordion.tsx",
       "type": "registry:ui",
       "content": "import { Accordion as KobalteAccordion } from \"@kobalte/core/accordion\";\nimport { ChevronDown } from \"lucide-solid\";\nimport type { Component, ComponentProps, JSX } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nconst Accordion = KobalteAccordion;\n\nconst AccordionItem: Component<ComponentProps<typeof KobalteAccordion.Item>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return <KobalteAccordion.Item class={cn(\"border-b\", local.class)} {...rest} />;\n};\n\nconst AccordionTrigger: Component<\n  ComponentProps<typeof KobalteAccordion.Trigger> & { children?: JSX.Element }\n> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\", \"children\"]);\n  return (\n    <KobalteAccordion.Header class=\"flex\">\n      <KobalteAccordion.Trigger\n        class={cn(\n          \"flex flex-1 items-center justify-between py-4 font-medium transition-all\",\n          \"hover:underline [&[data-expanded]>svg]:rotate-180\",\n          local.class,\n        )}\n        {...rest}\n      >\n        {local.children}\n        <ChevronDown class=\"h-4 w-4 shrink-0 transition-transform duration-200\" />\n      </KobalteAccordion.Trigger>\n    </KobalteAccordion.Header>\n  );\n};\n\nconst AccordionContent: Component<ComponentProps<typeof KobalteAccordion.Content>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\", \"children\"]);\n  return (\n    <KobalteAccordion.Content\n      class={cn(\n        \"overflow-hidden text-sm transition-all\",\n        \"data-[expanded]:animate-accordion-down data-[closed]:animate-accordion-up\",\n        local.class,\n      )}\n      {...rest}\n    >\n      <div class=\"pb-4 pt-0\">{local.children}</div>\n    </KobalteAccordion.Content>\n  );\n};\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent };\n"
-    },
-    {
-      "path": "components/ui/accordion/index.ts",
-      "type": "registry:ui",
-      "content": "export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from \"./accordion\";\n"
     }
   ]
 }

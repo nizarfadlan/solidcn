@@ -2,7 +2,7 @@ import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-solid";
 import type { Component, JSX } from "solid-js";
 import { splitProps } from "solid-js";
 import { cn } from "~/lib/cn.js";
-import { buttonVariants } from "../button/button.js";
+import { buttonVariants } from "./button.js";
 
 const Pagination: Component<JSX.HTMLAttributes<HTMLElement>> = (props) => {
   const [local, rest] = splitProps(props, ["class"]);

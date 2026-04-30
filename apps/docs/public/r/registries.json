@@ -1,0 +1,8 @@
+[
+  {
+    "name": "@solidcn",
+    "homepage": "https://solidcn.dev",
+    "url": "https://solidcn.dev/r/{name}.json",
+    "description": "Beautifully designed SolidJS components. Copy, paste, own."
+  }
+]

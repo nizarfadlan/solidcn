@@ -2,7 +2,7 @@ import { ChevronLeft, ChevronRight } from "lucide-solid";
 import type { Component } from "solid-js";
 import { For, createMemo, createSignal, splitProps } from "solid-js";
 import { cn } from "~/lib/cn.js";
-import { buttonVariants } from "../button/button.js";
+import { buttonVariants } from "./button.js";
 
 const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"] as const;
 const MONTHS = [

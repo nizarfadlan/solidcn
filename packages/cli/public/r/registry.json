@@ -1,5 +1,5 @@
 {
-  "$schema": "https://solidcn.nizarfadlan.dev/schema/registry.json",
+  "$schema": "https://solidcn.dev/schema/registry.json",
   "name": "cli",
   "homepage": "",
   "items": []

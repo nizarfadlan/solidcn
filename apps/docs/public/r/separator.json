@@ -9,12 +9,7 @@
   "registryDependencies": ["utils"],
   "files": [
     {
-      "path": "components/ui/separator/index.ts",
-      "type": "registry:ui",
-      "content": "export { Separator } from \"./separator\";\nexport type { SeparatorProps } from \"./separator\";\n"
-    },
-    {
-      "path": "components/ui/separator/separator.tsx",
+      "path": "components/ui/separator.tsx",
       "type": "registry:ui",
       "content": "import { Separator as KobalteSeparator } from \"@kobalte/core/separator\";\nimport type { Component } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nexport type SeparatorProps = {\n  orientation?: \"horizontal\" | \"vertical\";\n  class?: string;\n};\n\nexport const Separator: Component<SeparatorProps> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\", \"orientation\"]);\n\n  return (\n    <KobalteSeparator\n      orientation={local.orientation ?? \"horizontal\"}\n      class={cn(\n        \"shrink-0 bg-border\",\n        local.orientation === \"vertical\" ? \"h-full w-px\" : \"h-px w-full\",\n        local.class,\n      )}\n      {...rest}\n    />\n  );\n};\n"
     }

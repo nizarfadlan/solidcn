@@ -9,14 +9,9 @@
   "registryDependencies": ["utils"],
   "files": [
     {
-      "path": "components/ui/checkbox/checkbox.tsx",
+      "path": "components/ui/checkbox.tsx",
       "type": "registry:ui",
       "content": "import { Checkbox as KobalteCheckbox } from \"@kobalte/core/checkbox\";\nimport { Check } from \"lucide-solid\";\nimport type { Component, ComponentProps } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nexport type CheckboxProps = ComponentProps<typeof KobalteCheckbox> & {\n  label?: string;\n  class?: string;\n};\n\nexport const Checkbox: Component<CheckboxProps> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\", \"label\"]);\n\n  return (\n    <KobalteCheckbox class={cn(\"flex items-center gap-2\", local.class)} {...rest}>\n      <KobalteCheckbox.Input class=\"sr-only\" />\n      <KobalteCheckbox.Control\n        class={cn(\n          \"peer h-4 w-4 shrink-0 rounded-sm border border-primary\",\n          \"ring-offset-background focus-visible:outline-none focus-visible:ring-2\",\n          \"focus-visible:ring-ring focus-visible:ring-offset-2\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          \"data-[checked]:bg-primary data-[checked]:text-primary-foreground\",\n        )}\n      >\n        <KobalteCheckbox.Indicator class=\"flex items-center justify-center text-current\">\n          <Check class=\"h-3.5 w-3.5\" />\n        </KobalteCheckbox.Indicator>\n      </KobalteCheckbox.Control>\n      {local.label && (\n        <KobalteCheckbox.Label class=\"text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70\">\n          {local.label}\n        </KobalteCheckbox.Label>\n      )}\n    </KobalteCheckbox>\n  );\n};\n"
-    },
-    {
-      "path": "components/ui/checkbox/index.ts",
-      "type": "registry:ui",
-      "content": "export { Checkbox } from \"./checkbox\";\nexport type { CheckboxProps } from \"./checkbox\";\n"
     }
   ]
 }

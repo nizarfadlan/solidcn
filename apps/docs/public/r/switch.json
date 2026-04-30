@@ -9,12 +9,7 @@
   "registryDependencies": ["utils"],
   "files": [
     {
-      "path": "components/ui/switch/index.ts",
-      "type": "registry:ui",
-      "content": "export { Switch } from \"./switch\";\nexport type { SwitchProps } from \"./switch\";\n"
-    },
-    {
-      "path": "components/ui/switch/switch.tsx",
+      "path": "components/ui/switch.tsx",
       "type": "registry:ui",
       "content": "import { Switch as KobalteSwitch } from \"@kobalte/core/switch\";\nimport type { Component, ComponentProps } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nexport type SwitchProps = ComponentProps<typeof KobalteSwitch> & {\n  label?: string;\n  class?: string;\n};\n\nexport const Switch: Component<SwitchProps> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\", \"label\"]);\n\n  return (\n    <KobalteSwitch class={cn(\"flex items-center gap-2\", local.class)} {...rest}>\n      <KobalteSwitch.Input class=\"sr-only\" />\n      <KobalteSwitch.Control\n        class={cn(\n          \"inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent\",\n          \"transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          \"bg-input data-[checked]:bg-primary\",\n        )}\n      >\n        <KobalteSwitch.Thumb\n          class={cn(\n            \"pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform\",\n            \"translate-x-0 data-[checked]:translate-x-5\",\n          )}\n        />\n      </KobalteSwitch.Control>\n      {local.label && (\n        <KobalteSwitch.Label class=\"text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70\">\n          {local.label}\n        </KobalteSwitch.Label>\n      )}\n    </KobalteSwitch>\n  );\n};\n"
     }

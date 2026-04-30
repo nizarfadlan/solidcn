@@ -2,9 +2,9 @@ import { CalendarIcon } from "lucide-solid";
 import type { Component } from "solid-js";
 import { createSignal, splitProps } from "solid-js";
 import { cn } from "~/lib/cn.js";
-import { Button } from "../button/button.js";
-import { Calendar } from "../calendar/calendar.js";
-import { Popover, PopoverContent, PopoverTrigger } from "../popover/popover.js";
+import { Button } from "./button.js";
+import { Calendar } from "./calendar.js";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover.js";
 
 export type DatePickerProps = {
   class?: string;

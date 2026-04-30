@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://solidcn.nizarfadlan.dev/schema/registry-item.json",
+  "$id": "https://solidcn.dev/schema/registry-item.json",
   "title": "solidcn Registry Item",
   "description": "Schema for a single registry item (component, block, hook, or utility)",
   "type": "object",

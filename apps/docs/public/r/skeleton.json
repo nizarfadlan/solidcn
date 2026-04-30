@@ -9,12 +9,7 @@
   "registryDependencies": ["utils"],
   "files": [
     {
-      "path": "components/ui/skeleton/index.ts",
-      "type": "registry:ui",
-      "content": "export { Skeleton } from \"./skeleton\";\n"
-    },
-    {
-      "path": "components/ui/skeleton/skeleton.tsx",
+      "path": "components/ui/skeleton.tsx",
       "type": "registry:ui",
       "content": "import type { Component, JSX } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nexport const Skeleton: Component<JSX.HTMLAttributes<HTMLDivElement>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return <div class={cn(\"animate-pulse rounded-md bg-muted\", local.class)} {...rest} />;\n};\n"
     }

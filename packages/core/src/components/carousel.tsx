@@ -2,7 +2,7 @@ import { ChevronLeft, ChevronRight } from "lucide-solid";
 import type { Component, JSX } from "solid-js";
 import { createContext, createSignal, onCleanup, onMount, splitProps, useContext } from "solid-js";
 import { cn } from "~/lib/cn.js";
-import { Button } from "../button/button.js";
+import { Button } from "./button.js";
 
 type CarouselOrientation = "horizontal" | "vertical";
 

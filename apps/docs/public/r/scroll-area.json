@@ -9,12 +9,7 @@
   "registryDependencies": ["utils"],
   "files": [
     {
-      "path": "components/ui/scroll-area/index.ts",
-      "type": "registry:ui",
-      "content": "export { ScrollArea, ScrollBar } from \"./scroll-area\";\n"
-    },
-    {
-      "path": "components/ui/scroll-area/scroll-area.tsx",
+      "path": "components/ui/scroll-area.tsx",
       "type": "registry:ui",
       "content": "import type { Component, JSX } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\n// Scroll Area — lightweight native implementation with custom scrollbar styling\n\nconst ScrollArea: Component<\n  JSX.HTMLAttributes<HTMLDivElement> & { orientation?: \"vertical\" | \"horizontal\" | \"both\" }\n> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\", \"children\", \"orientation\"]);\n  const orientation = () => local.orientation ?? \"vertical\";\n\n  return (\n    <div class={cn(\"relative overflow-hidden\", local.class)} {...rest}>\n      <div\n        class={cn(\n          \"h-full w-full rounded-[inherit]\",\n          orientation() === \"vertical\" && \"overflow-y-auto overflow-x-hidden\",\n          orientation() === \"horizontal\" && \"overflow-x-auto overflow-y-hidden\",\n          orientation() === \"both\" && \"overflow-auto\",\n          // Custom scrollbar via Tailwind / CSS vars\n          \"[&::-webkit-scrollbar]:w-2.5 [&::-webkit-scrollbar-track]:bg-transparent\",\n          \"[&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border\",\n          \"[&::-webkit-scrollbar-thumb:hover]:bg-muted-foreground/40\",\n        )}\n      >\n        {local.children}\n      </div>\n    </div>\n  );\n};\n\nconst ScrollBar: Component<\n  JSX.HTMLAttributes<HTMLDivElement> & { orientation?: \"vertical\" | \"horizontal\" }\n> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\", \"orientation\"]);\n  const isHorizontal = () => local.orientation === \"horizontal\";\n  return (\n    <div\n      class={cn(\n        \"flex touch-none select-none transition-colors\",\n        isHorizontal()\n          ? \"h-2.5 flex-col border-t border-t-transparent p-[1px]\"\n          : \"h-full w-2.5 border-l border-l-transparent p-[1px]\",\n        local.class,\n      )}\n      {...rest}\n    >\n      <div class=\"relative flex-1 rounded-full bg-border\" />\n    </div>\n  );\n};\n\nexport { ScrollArea, ScrollBar };\n"
     }

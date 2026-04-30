@@ -9,12 +9,7 @@
   "registryDependencies": ["utils"],
   "files": [
     {
-      "path": "components/ui/tabs/index.ts",
-      "type": "registry:ui",
-      "content": "export { Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator } from \"./tabs\";\n"
-    },
-    {
-      "path": "components/ui/tabs/tabs.tsx",
+      "path": "components/ui/tabs.tsx",
       "type": "registry:ui",
       "content": "import { Tabs as KobalteTabs } from \"@kobalte/core/tabs\";\nimport type { Component, ComponentProps } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nconst Tabs = KobalteTabs;\n\nconst TabsList: Component<ComponentProps<typeof KobalteTabs.List>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <KobalteTabs.List\n      class={cn(\n        \"inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground\",\n        local.class,\n      )}\n      {...rest}\n    />\n  );\n};\n\nconst TabsTrigger: Component<ComponentProps<typeof KobalteTabs.Trigger>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <KobalteTabs.Trigger\n      class={cn(\n        \"inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium\",\n        \"ring-offset-background transition-all\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n        \"disabled:pointer-events-none disabled:opacity-50\",\n        \"data-[selected]:bg-background data-[selected]:text-foreground data-[selected]:shadow-sm\",\n        local.class,\n      )}\n      {...rest}\n    />\n  );\n};\n\nconst TabsContent: Component<ComponentProps<typeof KobalteTabs.Content>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <KobalteTabs.Content\n      class={cn(\n        \"mt-2 ring-offset-background\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n        local.class,\n      )}\n      {...rest}\n    />\n  );\n};\n\nconst TabsIndicator: Component<ComponentProps<typeof KobalteTabs.Indicator>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <KobalteTabs.Indicator\n      class={cn(\"absolute transition-all duration-200\", local.class)}\n      {...rest}\n    />\n  );\n};\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator };\n"
     }

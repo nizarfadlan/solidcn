@@ -3,13 +3,13 @@
   <p>Beautifully designed components for SolidJS. Copy, paste, own.</p>
 
   <p>
-    <a href="https://solidcn.nizarfadlan.dev">Documentation</a>
+    <a href="https://solidcn.dev">Documentation</a>
     ·
-    <a href="https://solidcn.nizarfadlan.dev/docs/components/button">Components</a>
+    <a href="https://solidcn.dev/docs/components/button">Components</a>
     ·
-    <a href="https://solidcn.nizarfadlan.dev/docs/registry">Registry</a>
+    <a href="https://solidcn.dev/docs/registry">Registry</a>
     ·
-    <a href="https://solidcn.nizarfadlan.dev/docs/cli">CLI</a>
+    <a href="https://solidcn.dev/docs/cli">CLI</a>
   </p>
 
   <p>
@@ -229,7 +229,7 @@ No. solidcn is an independent port inspired by shadcn/ui's approach (copy-paste,
 No. When you run `npx solidcn@latest add button`, the component source is copied directly into your project under `src/components/ui/`. You own the code.
 
 **Can I use solidcn without the CLI?**
-Yes. Every component can be manually copied from the [documentation](https://solidcn.nizarfadlan.dev).
+Yes. Every component can be manually copied from the [documentation](https://solidcn.dev).
 
 **Is dark mode supported?**
 Yes. All components use CSS variables. Dark mode works via the `.dark` class strategy or `prefers-color-scheme` media query, configurable per project.
@@ -238,7 +238,7 @@ Yes. All components use CSS variables. Dark mode works via the `.dark` class str
 
 ## License
 
-MIT © [Nizar Izzuddin Yatim Fadlan](https://nizarfadlan.dev)
+MIT © [SolidCn Community](https://solidcn.dev)
 
 ---
 

@@ -137,6 +137,19 @@ export class Installer {
         if (specifier.startsWith("../") || specifier.startsWith("./")) {
           const resolved = posix.normalize(posix.join(sourceDir, specifier));
 
+          const getComponentDir = (p: string) => {
+            const dir = p.split("/").slice(0, -1).join("/");
+            const parts = dir.split("/");
+            if (parts[0] === "components" && parts[1] === "ui") {
+              return parts.slice(0, 3).join("/");
+            }
+            return parts.slice(0, 1).join("/");
+          };
+
+          if (getComponentDir(resolved) === getComponentDir(sourcePosix)) {
+            return `${prefix}${specifier}${suffix}`;
+          }
+
           if (resolved.startsWith("components/ui/")) {
             const tail = resolved.slice("components/ui/".length);
             const noExt = tail.replace(/\.(ts|tsx|js|jsx)$/, "");

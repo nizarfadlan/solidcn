@@ -9,14 +9,9 @@
   "registryDependencies": ["utils"],
   "files": [
     {
-      "path": "components/ui/avatar/avatar.tsx",
+      "path": "components/ui/avatar.tsx",
       "type": "registry:ui",
       "content": "import type { Component, JSX } from \"solid-js\";\nimport { Show, createSignal, splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nconst Avatar: Component<JSX.HTMLAttributes<HTMLSpanElement>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <span\n      class={cn(\"relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full\", local.class)}\n      {...rest}\n    />\n  );\n};\n\ntype AvatarImageProps = JSX.ImgHTMLAttributes<HTMLImageElement>;\n\nconst AvatarImage: Component<AvatarImageProps> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\", \"src\", \"alt\", \"onError\"]);\n  const [error, setError] = createSignal(false);\n\n  return (\n    <Show when={!error()}>\n      {/* biome-ignore lint/a11y/useAltText: alt forwarded via local.alt — callers provide meaningful text */}\n      <img\n        class={cn(\"aspect-square h-full w-full object-cover\", local.class)}\n        src={local.src}\n        alt={local.alt ?? \"\"}\n        onError={(e) => {\n          setError(true);\n          if (typeof local.onError === \"function\") {\n            local.onError(e);\n          }\n        }}\n        {...rest}\n      />\n    </Show>\n  );\n};\n\nconst AvatarFallback: Component<JSX.HTMLAttributes<HTMLSpanElement>> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\"]);\n  return (\n    <span\n      class={cn(\n        \"flex h-full w-full items-center justify-center rounded-full bg-muted text-sm font-medium\",\n        local.class,\n      )}\n      {...rest}\n    />\n  );\n};\n\nexport { Avatar, AvatarImage, AvatarFallback };\n"
-    },
-    {
-      "path": "components/ui/avatar/index.ts",
-      "type": "registry:ui",
-      "content": "export { Avatar, AvatarImage, AvatarFallback } from \"./avatar\";\n"
     }
   ]
 }

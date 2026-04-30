@@ -237,7 +237,7 @@ export const registryBuildCommand = new Command("build")
 
       const buckets = collectDependencyBuckets([content], name, new Set());
       const item: RegistryItem = {
-        $schema: "https://solidcn.nizarfadlan.dev/schema/registry-item.json",
+        $schema: "https://solidcn.dev/schema/registry-item.json",
         name,
         type: "registry:ui",
         title: name.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
@@ -335,7 +335,7 @@ export const registryBuildCommand = new Command("build")
       );
 
       const item: RegistryItem = {
-        $schema: "https://solidcn.nizarfadlan.dev/schema/registry-item.json",
+        $schema: "https://solidcn.dev/schema/registry-item.json",
         name,
         type: itemType,
         title: itemTitle,
@@ -360,7 +360,7 @@ export const registryBuildCommand = new Command("build")
       const rawCnContent = await fsExtra.readFile(cnPath, "utf-8");
       const cnContent = transformRegistryContent(rawCnContent);
       const utilsItem: RegistryItem = {
-        $schema: "https://solidcn.nizarfadlan.dev/schema/registry-item.json",
+        $schema: "https://solidcn.dev/schema/registry-item.json",
         name: "utils",
         type: "registry:lib",
         title: "Utils",
@@ -387,7 +387,7 @@ export const registryBuildCommand = new Command("build")
     generatedItems.sort((a, b) => a.name.localeCompare(b.name));
 
     const outputRegistry = {
-      $schema: "https://solidcn.nizarfadlan.dev/schema/registry.json",
+      $schema: "https://solidcn.dev/schema/registry.json",
       ...registryMeta,
       items: generatedItems,
     };

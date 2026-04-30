@@ -2,8 +2,8 @@ import { PanelLeft } from "lucide-solid";
 import type { Component, JSX } from "solid-js";
 import { createContext, createSignal, splitProps, useContext } from "solid-js";
 import { cn } from "~/lib/cn.js";
-import { Button } from "../button/button.js";
-import { Sheet, SheetContent } from "../sheet/sheet.js";
+import { Button } from "./button.js";
+import { Sheet, SheetContent } from "./sheet.js";
 
 // ---------------------------------------------------------------------------
 // Sidebar — responsive sidebar that collapses to Sheet on mobile

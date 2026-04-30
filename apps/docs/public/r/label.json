@@ -9,12 +9,7 @@
   "registryDependencies": ["utils"],
   "files": [
     {
-      "path": "components/ui/label/index.ts",
-      "type": "registry:ui",
-      "content": "export { Label } from \"./label\";\nexport type { LabelProps } from \"./label\";\n"
-    },
-    {
-      "path": "components/ui/label/label.tsx",
+      "path": "components/ui/label.tsx",
       "type": "registry:ui",
       "content": "import type { Component, JSX } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\nexport type LabelProps = JSX.LabelHTMLAttributes<HTMLLabelElement> & {\n  class?: string;\n};\n\nexport const Label: Component<LabelProps> = (props) => {\n  const [local, rest] = splitProps(props, [\"class\", \"children\"]);\n  return (\n    <label\n      class={cn(\n        \"text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70\",\n        local.class,\n      )}\n      {...rest}\n    >\n      {local.children}\n    </label>\n  );\n};\n"
     }

@@ -2,7 +2,7 @@ import { Search } from "lucide-solid";
 import type { Component, JSX } from "solid-js";
 import { For, Show, createMemo, createSignal, splitProps } from "solid-js";
 import { cn } from "~/lib/cn.js";
-import { Dialog, DialogContent } from "../dialog/dialog.js";
+import { Dialog, DialogContent } from "./dialog.js";
 
 // ---------------------------------------------------------------------------
 // Command — a searchable command palette built on Dialog + native list
