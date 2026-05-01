@@ -3,11 +3,10 @@ import { cancel, confirm, intro, outro, select, spinner, text } from "@clack/pro
 import { Command } from "commander";
 import fsExtra from "fs-extra";
 import pc from "picocolors";
+import { Installer } from "../registry/installer.js";
 import type { SolidcnConfig } from "../schema/config.js";
 import { DEFAULT_CONFIG, loadConfig } from "../schema/config.js";
-import { Fetcher } from "../registry/fetcher.js";
-import { Installer } from "../registry/installer.js";
-import { Resolver } from "../registry/resolver.js";
+import { runProjectSetup } from "../setup/preflight.js";
 
 export const initCommand = new Command("init")
   .description("Initialize solidcn in your project")
@@ -89,67 +88,51 @@ export const initCommand = new Command("init")
     await fsExtra.writeFile(configPath, `${JSON.stringify(config, null, 2)}\n`);
     s.stop("solidcn.json created");
 
-    if (!opts.skipInstall) {
-      let resolveSpinner: ReturnType<typeof spinner> | null = null;
-      try {
-        const loadedConfig = await loadConfig(cwd);
-        const fetcher = new Fetcher(loadedConfig);
-        const resolver = new Resolver(fetcher, loadedConfig);
-        const installer = new Installer(cwd, loadedConfig, false, opts.dryRun, false);
+    try {
+      const loadedConfig = await loadConfig(cwd);
+      const installer = new Installer(cwd, loadedConfig, false, opts.dryRun, false);
 
-        resolveSpinner = spinner();
-        resolveSpinner.start("Resolving required packages");
+      if (!opts.skipInstall && !opts.yes) {
+        const ok = await confirm({
+          message:
+            "Install and setup Tailwind baseline now?\n  packages: tailwindcss, postcss, autoprefixer, clsx, tailwind-merge, class-variance-authority, lucide-solid",
+          initialValue: true,
+        });
 
-        const items = await resolver.resolve("tailwind-base");
-        resolveSpinner.stop(`Resolved ${items.length} item(s)`);
-
-        if (!opts.yes) {
-          const allDeps = items.flatMap((i) => [...(i.dependencies ?? []), ...(i.devDependencies ?? [])]);
-          const uniqueDeps = Array.from(new Set(allDeps));
-
-          const ok = await confirm({
-            message: `Install required packages?\n  packages: ${uniqueDeps.join(", ")}`,
-            initialValue: true,
-          });
-
-          if (!ok) {
-            outro(pc.yellow("Skipped package installation"));
-            return;
-          }
+        if (!ok) {
+          outro(pc.yellow("Skipped package installation and setup"));
+          return;
         }
-
-        const installSpinner = spinner();
-        installSpinner.start(`${opts.dryRun ? "Planning" : "Installing"} packages`);
-        for (const item of items) {
-          await installer.install(item);
-        }
-        installSpinner.stop(`${opts.dryRun ? "Planned" : "Installed"} packages`);
-
-        outro(pc.green("Done! You can now run `solidcn add <component>` to add components."));
-      } catch (error) {
-        if (resolveSpinner) {
-          resolveSpinner.stop("Installation skipped");
-        }
-        const errorMessage = error instanceof Error ? error.message : String(error);
-        console.log("");
-        console.log(pc.yellow("⚠  Warning: Could not install packages automatically"));
-
-        if (errorMessage.includes("not valid JSON") || errorMessage.includes("404") || errorMessage.includes("ECONNREFUSED")) {
-          console.log("The registry is currently unavailable. This may happen if:");
-          console.log("  • You're using a development build (use --skip-install for now)");
-          console.log("  • Network connectivity issues");
-        }
-
-        console.log(
-          "\nYou can manually install required packages by running:\n" +
-            pc.dim(
-              "  pnpm add -D tailwindcss postcss autoprefixer\n" +
-              "  pnpm add clsx tailwind-merge class-variance-authority lucide-solid\n",
-            ),
-        );
-        console.log(pc.dim("Then run: solidcn add <component>\n"));
       }
-    } else {
-      outro("Done! You can now run `solidcn add <component>` to add components.");
+
+      const setupSpinner = spinner();
+      setupSpinner.start(`${opts.dryRun ? "Planning" : "Applying"} project setup`);
+      const setup = await runProjectSetup(
+        cwd,
+        loadedConfig,
+        installer,
+        opts.dryRun,
+        opts.skipInstall,
+      );
+      setupSpinner.stop(`${opts.dryRun ? "Planned" : "Applied"} project setup`);
+
+      if (setup.pluginManualStep) {
+        console.log(pc.yellow(`\n⚠ ${setup.pluginManualStep}\n`));
+      }
+
+      outro(pc.green("Done! You can now run `solidcn add <component>` to add components."));
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.log("");
+      console.log(pc.yellow("⚠  Warning: Could not complete full setup automatically"));
+      console.log(pc.dim(errorMessage));
+      console.log(
+        "\nYou can manually install required packages by running:\n" +
+          pc.dim(
+            "  pnpm add -D tailwindcss postcss autoprefixer\n" +
+              "  pnpm add clsx tailwind-merge class-variance-authority lucide-solid\n",
+          ),
+      );
+      console.log(pc.dim("Then run: solidcn add <component>\n"));
     }
   });

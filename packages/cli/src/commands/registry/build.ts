@@ -397,10 +397,7 @@ export const registryBuildCommand = new Command("build")
       files: [],
     };
 
-    await fsExtra.writeFile(
-      tailwindBasePath,
-      `${JSON.stringify(tailwindBaseItem, null, 2)}\n`,
-    );
+    await fsExtra.writeFile(tailwindBasePath, `${JSON.stringify(tailwindBaseItem, null, 2)}\n`);
     generatedItems.push({ name: "tailwind-base", type: "registry:base" });
 
     generatedItems.sort((a, b) => a.name.localeCompare(b.name));

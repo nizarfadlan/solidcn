@@ -2,6 +2,7 @@ import type { SolidcnConfig } from "../schema/config.js";
 import { DEFAULT_REGISTRIES_URL, resolveRegistryUrl } from "../schema/config.js";
 import type { RegistryEntry, RegistryIndex, RegistryItem } from "../schema/registry.js";
 import { RegistriesSchema, RegistryIndexSchema, RegistryItemSchema } from "../schema/registry.js";
+import { getBuiltinRegistryItem, isPlainRegistryName } from "./builtin.js";
 
 export class Fetcher {
   private registriesCache: RegistryEntry[] | null = null;
@@ -9,15 +10,29 @@ export class Fetcher {
   constructor(private readonly config: SolidcnConfig) {}
 
   async fetchItem(nameOrUrl: string): Promise<RegistryItem> {
-    const { itemUrl, headers } = await this.resolveItemUrl(nameOrUrl);
-
-    const res = await fetch(itemUrl, { headers });
-    if (!res.ok) {
-      throw new Error(`Failed to fetch ${itemUrl}: ${res.status} ${res.statusText}`);
+    if (isPlainRegistryName(nameOrUrl)) {
+      const builtin = getBuiltinRegistryItem(nameOrUrl, this.config);
+      if (builtin) return builtin;
     }
 
-    const json = await res.json();
-    return RegistryItemSchema.parse(json);
+    const { itemUrl, headers } = await this.resolveItemUrl(nameOrUrl);
+
+    try {
+      const res = await fetch(itemUrl, { headers });
+      if (!res.ok) {
+        throw new Error(`Failed to fetch ${itemUrl}: ${res.status} ${res.statusText}`);
+      }
+
+      const json = await res.json();
+      return RegistryItemSchema.parse(json);
+    } catch (error) {
+      if (isPlainRegistryName(nameOrUrl)) {
+        const builtin = getBuiltinRegistryItem(nameOrUrl, this.config);
+        if (builtin) return builtin;
+      }
+
+      throw error;
+    }
   }
 
   async fetchIndex(registryNs?: string): Promise<RegistryIndex> {
