@@ -141,9 +141,7 @@ jobs:
 
             if [ "$published" != "true" ]; then
               local tag="${name}@${version}"
-              TAGS+=("$tag")
-              git tag "$tag" -m "Release ${name}@${version}"
-              echo "Tagged: $tag"
+              echo "Processing: $tag"
 
               # Extract changelog section for this version from CHANGELOG.md
               local changelog="${pkg_dir}/CHANGELOG.md"
@@ -187,8 +185,6 @@ jobs:
           tag_and_release "solidcn" "packages/cli" "${{ steps.check.outputs.PUBLISHED_CLI }}" "${{ steps.check.outputs.VERSION_CLI }}"
           tag_and_release "create-solidcn-app" "packages/create-solidcn-app" "${{ steps.check.outputs.PUBLISHED_CREATE_APP }}" "${{ steps.check.outputs.VERSION_CREATE_APP }}"
 
-          if [ ${#TAGS[@]} -gt 0 ]; then
-            git push origin "${TAGS[@]}"
-          else
+          if [ ${#TAGS[@]} -eq 0 ]; then
             echo "No new packages to tag."
           fi
