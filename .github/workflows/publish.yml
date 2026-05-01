@@ -17,8 +17,8 @@ jobs:
     name: Build & Publish
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # for creating git tags
-      id-token: write   # for npm provenance
+      contents: write # for creating git tags
+      id-token: write # for npm provenance
 
     steps:
       - name: Checkout
@@ -131,12 +131,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Collect published packages and their versions
           declare -a TAGS=()
 
-          tag_if_published() {
+          tag_and_release() {
             local name=$1
-            local pkg_path=$2
+            local pkg_dir=$2
             local published=$3
             local version=$4
 
@@ -145,24 +144,51 @@ jobs:
               TAGS+=("$tag")
               git tag "$tag" -m "Release ${name}@${version}"
               echo "Tagged: $tag"
+
+              # Extract changelog section for this version from CHANGELOG.md
+              local changelog="${pkg_dir}/CHANGELOG.md"
+              local safe_name="${name//\//@}"
+              local notes_file="/tmp/release-notes-${safe_name}.md"
+
+              if [ -f "$changelog" ]; then
+                # Extract content between "## <version>" and next "## " heading
+                awk -v ver="$version" '
+                  $0 ~ "^## "ver" " { found=1; next }
+                  found && $0 ~ "^## " { exit }
+                  found { print }
+                ' "$changelog" > "$notes_file"
+
+                if [ -s "$notes_file" ]; then
+                  echo "Using CHANGELOG.md notes for ${name}@${version}"
+                  gh release create "$tag" \
+                    --target main \
+                    --title "$tag" \
+                    --notes-file "$notes_file"
+                else
+                  echo "Changelog section empty for ${name}@${version}, falling back to auto-generated notes"
+                  gh release create "$tag" \
+                    --target main \
+                    --title "$tag" \
+                    --generate-notes
+                fi
+              else
+                echo "No CHANGELOG.md for ${name}, falling back to auto-generated notes"
+                gh release create "$tag" \
+                  --target main \
+                  --title "$tag" \
+                  --generate-notes
+              fi
             fi
           }
 
-          tag_if_published "@solidcn/themes" "${{ steps.check.outputs.VERSION_THEMES }}" "${{ steps.check.outputs.PUBLISHED_THEMES }}" "${{ steps.check.outputs.VERSION_THEMES }}"
-          tag_if_published "@solidcn/core" "${{ steps.check.outputs.VERSION_CORE }}" "${{ steps.check.outputs.PUBLISHED_CORE }}" "${{ steps.check.outputs.VERSION_CORE }}"
-          tag_if_published "@solidcn/toast" "${{ steps.check.outputs.VERSION_TOAST }}" "${{ steps.check.outputs.PUBLISHED_TOAST }}" "${{ steps.check.outputs.VERSION_TOAST }}"
-          tag_if_published "solidcn" "${{ steps.check.outputs.VERSION_CLI }}" "${{ steps.check.outputs.PUBLISHED_CLI }}" "${{ steps.check.outputs.VERSION_CLI }}"
-          tag_if_published "create-solidcn-app" "${{ steps.check.outputs.VERSION_CREATE_APP }}" "${{ steps.check.outputs.PUBLISHED_CREATE_APP }}" "${{ steps.check.outputs.VERSION_CREATE_APP }}"
+          tag_and_release "@solidcn/themes" "packages/themes" "${{ steps.check.outputs.PUBLISHED_THEMES }}" "${{ steps.check.outputs.VERSION_THEMES }}"
+          tag_and_release "@solidcn/core" "packages/core" "${{ steps.check.outputs.PUBLISHED_CORE }}" "${{ steps.check.outputs.VERSION_CORE }}"
+          tag_and_release "@solidcn/toast" "packages/toast" "${{ steps.check.outputs.PUBLISHED_TOAST }}" "${{ steps.check.outputs.VERSION_TOAST }}"
+          tag_and_release "solidcn" "packages/cli" "${{ steps.check.outputs.PUBLISHED_CLI }}" "${{ steps.check.outputs.VERSION_CLI }}"
+          tag_and_release "create-solidcn-app" "packages/create-solidcn-app" "${{ steps.check.outputs.PUBLISHED_CREATE_APP }}" "${{ steps.check.outputs.VERSION_CREATE_APP }}"
 
           if [ ${#TAGS[@]} -gt 0 ]; then
             git push origin "${TAGS[@]}"
-
-            for tag in "${TAGS[@]}"; do
-              gh release create "$tag" \
-                --target main \
-                --title "$tag" \
-                --generate-notes
-            done
           else
             echo "No new packages to tag."
           fi
