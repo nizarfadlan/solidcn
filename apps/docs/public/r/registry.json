@@ -160,6 +160,10 @@
       "type": "registry:ui"
     },
     {
+      "name": "tailwind-base",
+      "type": "registry:base"
+    },
+    {
       "name": "textarea",
       "type": "registry:ui"
     },

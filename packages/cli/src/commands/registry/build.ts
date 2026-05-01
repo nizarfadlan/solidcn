@@ -384,6 +384,25 @@ export const registryBuildCommand = new Command("build")
       generatedItems.push({ name: "utils", type: "registry:lib" });
     }
 
+    const tailwindBasePath = resolve(outputDir, "tailwind-base.json");
+    const tailwindBaseItem: RegistryItem = {
+      $schema: "https://solidcn.dev/schema/registry-item.json",
+      name: "tailwind-base",
+      type: "registry:base",
+      title: "Tailwind Base Setup",
+      description: "Core Tailwind CSS packages and utilities required for solidcn",
+      dependencies: [],
+      devDependencies: ["tailwindcss", "postcss", "autoprefixer"],
+      registryDependencies: ["utils"],
+      files: [],
+    };
+
+    await fsExtra.writeFile(
+      tailwindBasePath,
+      `${JSON.stringify(tailwindBaseItem, null, 2)}\n`,
+    );
+    generatedItems.push({ name: "tailwind-base", type: "registry:base" });
+
     generatedItems.sort((a, b) => a.name.localeCompare(b.name));
 
     const outputRegistry = {

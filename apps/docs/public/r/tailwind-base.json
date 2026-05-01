@@ -1,0 +1,11 @@
+{
+  "$schema": "https://solidcn.dev/schema/registry-item.json",
+  "name": "tailwind-base",
+  "type": "registry:base",
+  "title": "Tailwind Base Setup",
+  "description": "Core Tailwind CSS packages and utilities required for solidcn",
+  "dependencies": [],
+  "devDependencies": ["tailwindcss", "postcss", "autoprefixer"],
+  "registryDependencies": ["utils"],
+  "files": []
+}
