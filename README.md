@@ -44,15 +44,19 @@ Built on top of:
 # Scaffold a new project
 npm create solidcn-app@latest my-app
 
-# Or add to an existing SolidStart project
+# Or add to an existing SolidStart/Vite project
 npx solidcn@latest init
 ```
+
+`init` now writes `solidcn.json` and performs setup bootstrap (Tailwind CSS entry, solidcn token block, `@tailwindcss/vite` plugin check, and `~/*` tsconfig alias).
 
 Then add your first component:
 
 ```bash
 npx solidcn@latest add button
 ```
+
+`add` now runs preflight checks and can auto-fix missing setup in fresh projects before component install.
 
 Use it in your app:
 

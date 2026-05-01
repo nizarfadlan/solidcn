@@ -56,12 +56,14 @@ cd my-app
 npm run dev
 ```
 
-Add components with the CLI:
+Add components with CLI:
 
 ```bash
 npx solidcn@latest add button dialog card
 npx solidcn@latest add form input label
 ```
+
+If setup drift happens later, `solidcn add` now runs preflight checks and can auto-fix Tailwind/plugin/alias gaps before install.
 
 Update existing components when the registry changes:
 

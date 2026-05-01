@@ -1,6 +1,6 @@
 {
   "name": "@solidcn/mcp-cloudflare",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "description": "Deploy a solidcn-compatible MCP server as a Cloudflare Worker",
   "type": "module",

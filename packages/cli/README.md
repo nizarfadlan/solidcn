@@ -4,6 +4,9 @@ CLI for managing SolidJS UI components from any shadcn-compatible registry.
 
 ## Features
 
+- **Init bootstrap** — `init` sets up `solidcn.json`, Tailwind CSS entry/token block, plugin checks, and TS alias for `~/*`
+- **Fresh-project preflight** — `add` detects missing setup and offers auto-fix before installing components
+- **Offline-safe baseline** — built-in `tailwind-base` fallback when default registry unavailable
 - **Add components** — fetch from any HTTP registry, resolve dependencies, install with import rewriting
 - **Update safely** — preview diffs, apply patches, skip unmodified files
 - **Multi-registry support** — configure named registries with custom headers and env variable interpolation
@@ -23,11 +26,19 @@ Requires Node.js ≥ 20.
 
 ## Quick Start
 
-Initialize a SolidStart or Vite project:
+Initialize SolidStart or Vite project:
 
 ```bash
 npx solidcn@latest init
 ```
+
+What `init` does now:
+
+- writes `solidcn.json`
+- ensures Tailwind CSS entrypoint import exists in configured CSS file
+- injects solidcn base token block idempotently
+- checks/patches Tailwind Vite plugin setup (`app.config.*` or `vite.config.*`)
+- ensures TS alias `~/*` points to `./src/*`
 
 Add components:
 
@@ -42,8 +53,8 @@ npx solidcn@latest add dialog card tooltip
 
 | Command | Description |
 |---|---|
-| `init` | Generate `solidcn.json` config with prompts |
-| `add <components...>` | Install components from the registry |
+| `init` | Generate `solidcn.json` + run setup bootstrap for Tailwind/plugin/alias |
+| `add <components...>` | Install components from registry with preflight setup checks |
 | `update <components...>` | Update installed components to latest registry version |
 | `diff <component>` | Preview changes between installed and remote versions |
 | `search <query>` | Search all configured registries by name or description |
@@ -68,6 +79,7 @@ npx solidcn@latest add dialog card tooltip
 |---|---|
 | `-y, --yes` | Skip confirmation prompts |
 | `--overwrite` | Overwrite existing files without prompting |
+| `--skip-preflight` | Skip setup preflight checks before install |
 | `--dry-run` | Show what would be written without modifying files |
 
 **diff**

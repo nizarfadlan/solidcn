@@ -1,6 +1,6 @@
 {
   "name": "@solidcn/core",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "type": "module",
   "description": "SolidJS UI components — a port of shadcn/ui",
   "keywords": ["solidjs", "ui", "components", "shadcn", "kobalte", "tailwind"],
