@@ -33,9 +33,6 @@ export const addCommand = new Command("add")
 
       const hasConfig = await fsExtra.pathExists(resolve(cwd, "solidcn.json"));
       const config = hasConfig ? await loadConfig(cwd) : DEFAULT_CONFIG;
-      const fetcher = new Fetcher(config);
-      const resolver = new Resolver(fetcher, config);
-      const installer = new Installer(cwd, config, opts.overwrite, opts.dryRun, false);
 
       if (!opts.skipPreflight) {
         const state = await getPreflightState(cwd, config);

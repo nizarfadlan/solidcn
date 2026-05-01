@@ -127,11 +127,11 @@ export const initCommand = new Command("init")
       console.log(pc.yellow("⚠  Warning: Could not complete full setup automatically"));
       console.log(pc.dim(errorMessage));
       console.log(
-        "\nYou can manually install required packages by running:\n" +
-          pc.dim(
+        `\nYou can manually install required packages by running:\n
+          ${pc.dim(
             "  pnpm add -D tailwindcss postcss autoprefixer\n" +
               "  pnpm add clsx tailwind-merge class-variance-authority lucide-solid\n",
-          ),
+          )}`,
       );
       console.log(pc.dim("Then run: solidcn add <component>\n"));
     }

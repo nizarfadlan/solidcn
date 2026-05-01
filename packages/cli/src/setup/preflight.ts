@@ -1,9 +1,6 @@
 import { resolve } from "node:path";
 import fsExtra from "fs-extra";
-import {
-  createBuiltinTailwindBaseItem,
-  type ProjectFramework,
-} from "../registry/builtin.js";
+import { type ProjectFramework, createBuiltinTailwindBaseItem } from "../registry/builtin.js";
 import type { Installer } from "../registry/installer.js";
 import type { SolidcnConfig } from "../schema/config.js";
 import { DEFAULT_CONFIG } from "../schema/config.js";

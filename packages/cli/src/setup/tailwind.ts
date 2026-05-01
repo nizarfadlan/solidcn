@@ -155,7 +155,7 @@ export async function ensureTailwindPluginSetup(
     let changed = false;
 
     if (!content.includes("@tailwindcss/vite")) {
-      const importStatement = "import tailwindcss from \"@tailwindcss/vite\";\n";
+      const importStatement = 'import tailwindcss from "@tailwindcss/vite";\n';
       const defineConfigImport = content.match(
         /import\s+\{?\s*defineConfig\s*\}?\s+from\s+["'][^"']+["'];\n?/,
       );
@@ -180,7 +180,7 @@ export async function ensureTailwindPluginSetup(
         changed = true;
       } else {
         const viteBlockMatch = content.match(/vite\s*:\s*\{([\s\S]*?)\}/m);
-        if (viteBlockMatch && viteBlockMatch[0]) {
+        if (viteBlockMatch?.[0]) {
           const withPlugins = viteBlockMatch[0].replace(
             /\{\s*/,
             "{\n    plugins: [tailwindcss()],\n",
