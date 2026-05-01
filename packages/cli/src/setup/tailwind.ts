@@ -155,7 +155,16 @@ export async function ensureTailwindPluginSetup(
     let changed = false;
 
     if (!content.includes("@tailwindcss/vite")) {
-      content = `import tailwindcss from "@tailwindcss/vite";\n${content}`;
+      const importStatement = "import tailwindcss from \"@tailwindcss/vite\";\n";
+      const defineConfigImport = content.match(
+        /import\s+\{?\s*defineConfig\s*\}?\s+from\s+["'][^"']+["'];\n?/,
+      );
+      if (defineConfigImport && defineConfigImport.index !== undefined) {
+        const insertAt = defineConfigImport.index + defineConfigImport[0].length;
+        content = `${content.slice(0, insertAt)}${importStatement}${content.slice(insertAt)}`;
+      } else {
+        content = `${importStatement}${content}`;
+      }
       changed = true;
     }
 
@@ -170,11 +179,21 @@ export async function ensureTailwindPluginSetup(
         content = content.replace(whole, replacement);
         changed = true;
       } else {
-        return {
-          changed,
-          configPath: path,
-          manualStep: `Could not patch ${candidate} automatically. Add import \"@tailwindcss/vite\" and tailwindcss() in plugins manually.`,
-        };
+        const viteBlockMatch = content.match(/vite\s*:\s*\{([\s\S]*?)\}/m);
+        if (viteBlockMatch && viteBlockMatch[0]) {
+          const withPlugins = viteBlockMatch[0].replace(
+            /\{\s*/,
+            "{\n    plugins: [tailwindcss()],\n",
+          );
+          content = content.replace(viteBlockMatch[0], withPlugins);
+          changed = true;
+        } else {
+          return {
+            changed,
+            configPath: path,
+            manualStep: `Could not patch ${candidate} automatically. Add import \"@tailwindcss/vite\" and tailwindcss() in plugins manually.`,
+          };
+        }
       }
     }
 
