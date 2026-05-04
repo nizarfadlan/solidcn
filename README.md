@@ -17,6 +17,9 @@
     <img src="https://img.shields.io/badge/Tailwind_CSS-v4-38bdf8?logo=tailwindcss" alt="Tailwind CSS v4" />
     <img src="https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript" alt="TypeScript" />
     <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License" />
+    <a href="https://www.npmjs.com/package/solidcn">
+      <img src="https://img.shields.io/npm/v/solidcn?color=cb3837&logo=npm&label=solidcn" alt="NPM Version" />
+    </a>
   </p>
 </div>
 
