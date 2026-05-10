@@ -36,7 +36,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "solid-js": ">=1.9",
+    "solid-js": ">=1.9.11",
     "class-variance-authority": ">=0.7"
   },
   "devDependencies": {
