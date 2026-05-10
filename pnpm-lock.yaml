@@ -42,7 +42,7 @@ importers:
         specifier: ^4.0.2
         version: 4.0.2
       solid-js:
-        specifier: ^1.9.4
+        specifier: ^1.9.11
         version: 1.9.11
     devDependencies:
       '@kobalte/core':
