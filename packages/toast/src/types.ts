@@ -6,7 +6,7 @@ export type ToastPosition =
   | "top-right"
   | "bottom-left"
   | "bottom-center"
-  | "top-center";
+  | "bottom-right";
 
 export type ToastType = "success" | "error" | "warning" | "info" | "loading" | "default";
 
