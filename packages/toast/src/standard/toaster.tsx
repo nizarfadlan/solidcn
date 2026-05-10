@@ -16,7 +16,7 @@ const positionClasses: Record<string, string> = {
   "top-right": "top-0 right-0",
   "bottom-left": "bottom-0 left-0",
   "bottom-center": "bottom-0 left-1/2 -translate-x-1/2",
-  "top-center": "bottom-0 right-0",
+  "bottom-right": "bottom-0 right-0",
 };
 
 /** Stacked offset/scale for non-frontmost toasts (shadcn/sonner style). */
