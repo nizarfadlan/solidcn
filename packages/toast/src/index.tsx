@@ -16,6 +16,7 @@ export { toast } from "./standard/store.js";
 export { sileo } from "./sileo/store.js";
 export { StandardToaster } from "./standard/toaster.js";
 export { SileoToaster } from "./sileo/toaster.js";
+export { SileoToast } from "./sileo/sileo.js";
 
 // Types
 export type {
@@ -24,6 +25,7 @@ export type {
   SileoToasterProps,
   StandardToastOptions,
   SileoToastOptions,
+  SileoToastProps,
   SileoPreset,
   SileoStyles,
   ToastPosition,

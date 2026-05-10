@@ -25,7 +25,7 @@ const STACK_SCALE_STEP = 0.05;
 const MAX_STACK_VISIBLE = 3;
 
 export const StandardToaster: Component<StandardToasterProps> = (props) => {
-  const position = () => props.position ?? "bottom-right";
+  const position = () => props.position ?? "top-center";
   const maxToasts = () => props.maxToasts ?? 5;
   const offsetX = () => props.offset?.x ?? 16;
   const offsetY = () => props.offset?.y ?? 16;
@@ -38,7 +38,7 @@ export const StandardToaster: Component<StandardToasterProps> = (props) => {
   const themeClass = () => resolveThemeClass(props.theme);
 
   const isBottom = () =>
-    position() === "bottom-left" || position() === "bottom-center" || position() === "bottom-right";
+    position() === "bottom-left" || position() === "bottom-center" || position() === "top-center";
 
   // most recent toast is last in array → front of stack
   const visibleToasts = () => {

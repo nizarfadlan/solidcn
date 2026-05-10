@@ -1,5 +1,5 @@
 import { type Component, Show, createEffect, createSignal, onCleanup, onMount } from "solid-js";
-import type { SileoPreset, SileoToastItem, ToastAnimation } from "../types.js";
+import type { SileoToastProps, ToastAnimation } from "../types.js";
 import { SPRING_CONFIGS, isSettled, springTick } from "./animations.js";
 import { resolveStyles } from "./presets.js";
 import { sileo } from "./store.js";
@@ -9,14 +9,10 @@ function prefersReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-interface SileoItemProps {
-  toast: SileoToastItem;
-  preset: SileoPreset;
-  globalAnimation: ToastAnimation;
-}
+export const SileoToast: Component<SileoToastProps> = (props) => {
+  const getStartOffset = () => (props.position?.startsWith("top") ? -40 : 40);
 
-export const SileoItem: Component<SileoItemProps> = (props) => {
-  const [translateY, setTranslateY] = createSignal(40);
+  const [translateY, setTranslateY] = createSignal(getStartOffset());
   const [opacity, setOpacity] = createSignal(0);
   const [scale, setScale] = createSignal(0.92);
 
@@ -24,15 +20,21 @@ export const SileoItem: Component<SileoItemProps> = (props) => {
   let timer: ReturnType<typeof setTimeout> | undefined;
 
   const styles = () =>
-    resolveStyles(props.toast.preset ?? props.preset, props.toast.type, props.toast.styles);
+    resolveStyles(
+      props.toast.preset ?? props.preset ?? "default",
+      props.toast.type,
+      props.toast.styles,
+    );
 
   const animation = () => {
     // prefers-reduced-motion: auto-fallback ke "none"
     if (prefersReducedMotion()) return "none" as ToastAnimation;
-    return props.toast.animation ?? props.globalAnimation;
+    return props.toast.animation ?? props.animation ?? "spring";
   };
 
   onMount(() => {
+    const startOffset = getStartOffset();
+
     if (animation() === "none") {
       setTranslateY(0);
       setOpacity(1);
@@ -42,6 +44,7 @@ export const SileoItem: Component<SileoItemProps> = (props) => {
 
     // fade: CSS opacity transition via rAF double-frame trick
     if (animation() === "fade") {
+      setTranslateY(startOffset);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           setOpacity(1);
@@ -54,6 +57,7 @@ export const SileoItem: Component<SileoItemProps> = (props) => {
 
     // slide: CSS translateY transition via rAF double-frame trick
     if (animation() === "slide") {
+      setTranslateY(startOffset);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           setTranslateY(0);
@@ -66,7 +70,7 @@ export const SileoItem: Component<SileoItemProps> = (props) => {
 
     const config = SPRING_CONFIGS[animation()] ??
       SPRING_CONFIGS.spring ?? { stiffness: 280, damping: 20, mass: 1 };
-    let yState = { value: 40, velocity: 0 };
+    let yState = { value: startOffset, velocity: 0 };
     let opState = { value: 0, velocity: 0 };
     let scaleState = { value: 0.92, velocity: 0 };
     let lastTime: number | null = null;
@@ -103,8 +107,12 @@ export const SileoItem: Component<SileoItemProps> = (props) => {
 
     const ms = duration ?? 4000;
     timer = setTimeout(() => {
-      props.toast.onDismiss?.(props.toast.id);
-      sileo.dismiss(props.toast.id);
+      if (props.onDismiss) {
+        props.onDismiss(props.toast.id);
+      } else {
+        props.toast.onDismiss?.(props.toast.id);
+        sileo.dismiss(props.toast.id);
+      }
     }, ms);
   });
 
@@ -126,6 +134,7 @@ export const SileoItem: Component<SileoItemProps> = (props) => {
     <div
       aria-live="polite"
       aria-atomic="true"
+      class={`relative flex w-full items-start gap-3 rounded-2xl border p-4 shadow-lg ${props.class ?? ""}`}
       style={{
         transform: `translateY(${translateY()}px) scale(${scale()})`,
         opacity: opacity(),
@@ -135,7 +144,6 @@ export const SileoItem: Component<SileoItemProps> = (props) => {
         "backdrop-filter": isGlass() ? "blur(12px)" : undefined,
         "-webkit-backdrop-filter": isGlass() ? "blur(12px)" : undefined,
       }}
-      class="relative flex w-full items-start gap-3 rounded-2xl border p-4 shadow-lg"
     >
       <Show when={props.toast.icon}>
         <span style={{ color: styles().iconColor }} class="mt-0.5 shrink-0 text-lg">
@@ -173,7 +181,14 @@ export const SileoItem: Component<SileoItemProps> = (props) => {
         type="button"
         style={{ color: styles().descriptionColor }}
         class="shrink-0 rounded-full p-0.5 opacity-60 hover:opacity-100 transition-opacity focus:outline-none focus:ring-2"
-        onClick={() => sileo.dismiss(props.toast.id)}
+        onClick={() => {
+          if (props.onDismiss) {
+            props.onDismiss(props.toast.id);
+          } else {
+            props.toast.onDismiss?.(props.toast.id);
+            sileo.dismiss(props.toast.id);
+          }
+        }}
         aria-label="Dismiss"
       >
         <svg

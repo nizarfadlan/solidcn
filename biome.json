@@ -44,6 +44,7 @@
       ".pnpm-store",
       "dist",
       ".turbo",
+      "packages/mcp-cloudflare/.wrangler",
       "apps/docs/.solid",
       "apps/docs/.output",
       "apps/docs/.vinxi",

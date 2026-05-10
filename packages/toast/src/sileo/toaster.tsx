@@ -1,8 +1,8 @@
 import { type Component, For } from "solid-js";
 import { Portal } from "solid-js/web";
 import type { SileoToasterProps } from "../types.js";
-import { SileoItem } from "./sileo.js";
-import { sileoStore } from "./store.js";
+import { SileoToast } from "./sileo.js";
+import { sileo, sileoStore } from "./store.js";
 
 const positionClasses: Record<string, string> = {
   "top-left": "top-0 left-0",
@@ -10,11 +10,10 @@ const positionClasses: Record<string, string> = {
   "top-right": "top-0 right-0",
   "bottom-left": "bottom-0 left-0",
   "bottom-center": "bottom-0 left-1/2 -translate-x-1/2",
-  "bottom-right": "bottom-0 right-0",
 };
 
 export const SileoToaster: Component<SileoToasterProps> = (props) => {
-  const position = () => props.position ?? "bottom-right";
+  const position = () => props.position ?? "top-center";
   const maxToasts = () => props.maxToasts ?? 5;
   const offsetX = () => props.offset?.x ?? 16;
   const offsetY = () => props.offset?.y ?? 16;
@@ -26,7 +25,7 @@ export const SileoToaster: Component<SileoToasterProps> = (props) => {
   return (
     <Portal>
       <ol
-        class={`fixed z-[100] flex flex-col gap-2 ${positionClasses[position()] ?? ""}`}
+        class={`fixed z-50 flex flex-col gap-2 ${positionClasses[position()] ?? ""}`}
         style={{
           padding: `${offsetY()}px ${offsetX()}px`,
           width: "clamp(280px, 380px, 100vw)",
@@ -38,7 +37,13 @@ export const SileoToaster: Component<SileoToasterProps> = (props) => {
         <For each={visibleToasts()}>
           {(t) => (
             <li>
-              <SileoItem toast={t} preset={preset()} globalAnimation={animation()} />
+              <SileoToast
+                toast={t}
+                position={position()}
+                preset={preset()}
+                animation={animation()}
+                onDismiss={sileo.dismiss}
+              />
             </li>
           )}
         </For>

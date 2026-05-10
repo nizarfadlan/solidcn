@@ -6,7 +6,7 @@ export type ToastPosition =
   | "top-right"
   | "bottom-left"
   | "bottom-center"
-  | "bottom-right";
+  | "top-center";
 
 export type ToastType = "success" | "error" | "warning" | "info" | "loading" | "default";
 
@@ -92,6 +92,15 @@ export interface SileoToastItem extends SileoToastOptions {
   id: string;
   type: ToastType;
   createdAt: number;
+}
+
+export interface SileoToastProps {
+  toast: SileoToastItem;
+  position?: ToastPosition;
+  preset?: SileoPreset;
+  animation?: ToastAnimation;
+  onDismiss?: (id: string) => void;
+  class?: string;
 }
 
 export interface SileoToasterProps {

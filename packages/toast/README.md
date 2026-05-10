@@ -68,6 +68,24 @@ export default function App() {
 }
 ```
 
+If you need to render a single toast card manually, you can also use the standalone `SileoToast` component:
+
+```tsx
+import { SileoToast } from "@solidcn/toast";
+
+<SileoToast
+  toast={{
+    id: "demo",
+    type: "success",
+    title: "Saved successfully!",
+    createdAt: Date.now(),
+  }}
+  onDismiss={() => {
+    /* remove the toast from your own state */
+  }}
+/>
+```
+
 ```ts
 // Sileo toast types
 sileo.success({ title: "Success", description? });
@@ -96,7 +114,7 @@ toast.promise(submitForm(), {
 
 ```tsx
 interface StandardToasterProps {
-  position?: "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right";
+  position?: "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "top-center";
   mode?: "standard";
   theme?: "light" | "dark" | "system";
   richColors?: boolean;
@@ -111,7 +129,7 @@ interface StandardToasterProps {
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `position` | See above | `"bottom-right"` | Toast placement |
+| `position` | See above | `"top-center"` | Toast placement |
 | `theme` | `"light" \| "dark" \| "system"` | `"system"` | Toast theme override |
 | `richColors` | `boolean` | `false` | When enabled, toast color reflects type (success=green, error=red, etc.) |
 | `closeButton` | `boolean` | `false` | Show dismiss button on each toast |
@@ -141,7 +159,7 @@ interface SileoToasterProps {
 
 ### ToastPosition (Sileo)
 
-`"top-left" | "top-right" | "bottom-left" | "bottom-right" | "center"`
+`"top-left" | "top-right" | "bottom-left" | "top-center" | "center"`
 
 ## Toast Options
 
@@ -217,13 +235,14 @@ sileo.dismiss();
 export { Toaster, toast, sileo };
 
 // Mode-specific
-export { StandardToaster, SileoToaster };
+export { StandardToaster, SileoToaster, SileoToast };
 
 // Types
 export type {
   ToasterProps,
   StandardToasterProps,
   SileoToasterProps,
+  SileoToastProps,
   StandardToastOptions,
   SileoToastOptions,
   SileoPreset,
