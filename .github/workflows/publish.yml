@@ -16,6 +16,7 @@ jobs:
   publish:
     name: Build & Publish
     runs-on: ubuntu-latest
+    environment: production
     permissions:
       contents: write # for creating git tags
       id-token: write # for npm provenance

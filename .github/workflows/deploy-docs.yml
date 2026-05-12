@@ -15,6 +15,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    environment: production
     permissions:
       contents: read
       deployments: write
